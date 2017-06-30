@@ -1,5 +1,10 @@
 <template>
   <div id="app" class="ui container">
+    <div class="ui top inverted fixed menu">
+      <div class="ui item">
+        ProgressBook
+      </div>
+    </div>
     <router-view></router-view>
   </div>
 </template>
