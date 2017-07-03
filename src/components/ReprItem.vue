@@ -5,11 +5,13 @@
         </div>
         <div class="ui eight wide column">
           <div class="description">
-            <div class="name" >
-                <router-link to="/reprDetail">{{repr.name}}</router-link>
+            <div class="name">
+                <router-link v-if="!isReprDetail" to="/reprDetail">{{repr.name}}</router-link>
+                <span v-else>{{repr.name}}</span>
             </div>
             <div class="district">
-                <router-link to="/reprDetail">{{repr.district}}</router-link>
+                <router-link v-if="!isReprDetail" to="/reprDetail">{{repr.district}}</router-link>
+                <span v-else>{{repr.district}}</span>
             </div>
             <div class="updateDate">
               17/05/31
@@ -26,6 +28,11 @@ export default {
     methods: {
         showDetails: function () {
             this.$route.push('reprDetail')
+        }
+    },
+    computed: {
+        isReprDetail: function () {
+            return (this.$route.name === 'reprDetail')
         }
     }
 }

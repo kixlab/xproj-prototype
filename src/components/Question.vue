@@ -8,7 +8,7 @@
       <a @click="showPromiseDetail">자세히</a>
     </div>
     <div v-if="questionNum != 3" class="ui buttons">
-      <button class="ui button" :class="score == i ? 'active' : ''" @click="score = i" v-for="i in 5">
+      <button class="ui button" :class="score == i ? 'active' : ''" @click="score = i" v-for="i in 5" :key="i">
         {{i}}
       </button>
     </div>
@@ -16,7 +16,7 @@
       <textarea rows="3"></textarea>
     </div>
     <div class="navButtons">
-      <button class="ui button">
+      <button class="ui button" @click="stopIntro">
         Stop
       </button>
       <button class="ui button" @click="incrementQuestionNum">
@@ -24,19 +24,27 @@
       </button>
     </div>
     <div class="ui modal">
-      <div class="header">{{promise}}</div>
+      <div class="header">{{promise.title}}</div>
       <div class="content">
         <div class="ui top attached tabular menu">
-          <a class="item" :class="isPurposeActive ? 'active' : ''" @click="isPurposeActive = true">공약 내용</a>
-          <a class="item" :class="isPurposeActive ? '' : 'active'" @click="isPurposeActive = false">이행 계획</a>
+          <a class="item" :class="curTabStatus === 'purpose' ? 'active' : ''" @click="curTabStatus = 'purpose'">공약 내용</a>
+          <a class="item" :class="curTabStatus === 'plan' ? 'active' : ''" @click="curTabStatus = 'plan'">이행 계획</a>
+          <a class="item" :class="curTabStatus === 'progress'? 'active' : ''" @click="curTabStatus = 'progress'">진행 상황</a>
         </div>
-        <div v-if="isPurposeActive" class="ui bottom attached segment">
-          purpose
+        <div v-if="curTabStatus === 'purpose'" class="ui bottom attached segment">
+          {{promise.purpose}}
         </div>
-        <div v-else class="ui bottom attached segment">
-          plan
+        <div v-else-if="curTabStatus === 'plan'" class="ui bottom attached segment">
+          {{promise.plan}}
         </div>
-        <div class="ui fluid button">
+        <div v-else-if="curTabStatus === 'progress'" class="ui bottom attached segment">
+          TBD
+        </div>
+        <div v-if="isRequestActive">
+          <textarea placeholder="의견을 남겨주세요"></textarea>
+          <button class="ui button" @click="isRequestActive=false">의견 보내기</button>
+        </div>
+        <div v-else class="ui fluid button" @click="isRequestActive=true">
           자세한 정보를 알려주세요!!
           <br>
           (1,241명이 요청합니다.)
@@ -103,6 +111,9 @@
       },
       showPromiseDetail: function () {
         $('.ui.modal').modal('show')
+      },
+      stopIntro: function () {
+        this.$route.push('myReprs')
       }
     }
   }

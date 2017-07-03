@@ -2,7 +2,7 @@
   <div id="app" class="ui container">
     <div class="ui top inverted fixed menu">
       <div class="ui item">
-        ProgressBook
+        <router-link to="/myReprs">ProgressBook</router-link>
       </div>
     </div>
     <router-view></router-view>

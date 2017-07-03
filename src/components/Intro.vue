@@ -8,9 +8,9 @@
       다음은 시민 분께서 선출하신 공직자입니다.
     </div>
     <div class="ui buttons">
-      <button class="ui button">{{reprCho.name}}</button>
-      <button class="ui button">{{reprKwon.name}}</button>
-      <button class="ui button">{{reprMoon.name}}</button>
+      <button class="ui button" :class="reprIdx == 0 ? 'blue' : ''" >{{reprCho.name}}</button>
+      <button class="ui button" :class="reprIdx == 1 ? 'blue' : ''">{{reprKwon.name}}</button>
+      <button class="ui button" :class="reprIdx == 2 ? 'blue' : ''">{{reprMoon.name}}</button>
     </div>
     <repr-question :repr="curRepr">
     </repr-question>
