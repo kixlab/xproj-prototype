@@ -4,7 +4,7 @@
       {{question}}
     </div>
     <div v-if="questionNum == 1" class="promise">
-      {{promise}}
+      {{promise.title}}
       <a @click="showPromiseDetail">자세히</a>
     </div>
     <div v-if="questionNum != 3" class="ui buttons">
@@ -16,6 +16,9 @@
       <textarea rows="3"></textarea>
     </div>
     <div class="navButtons">
+      <button class="ui button" @click="decrementQuestionNum">
+        Prev
+      </button>
       <button class="ui button" @click="stopIntro">
         Stop
       </button>
@@ -32,17 +35,19 @@
           <a class="item" :class="curTabStatus === 'progress'? 'active' : ''" @click="curTabStatus = 'progress'">진행 상황</a>
         </div>
         <div v-if="curTabStatus === 'purpose'" class="ui bottom attached segment">
-          {{promise.purpose}}
+          <p v-for="pps in promise.purpose" :key="pps">{{pps}}</p>
         </div>
         <div v-else-if="curTabStatus === 'plan'" class="ui bottom attached segment">
-          {{promise.plan}}
+          <p v-for="pln in promise.plan" :key="pln">{{pln}}</p>
         </div>
         <div v-else-if="curTabStatus === 'progress'" class="ui bottom attached segment">
           TBD
         </div>
         <div v-if="isRequestActive">
-          <textarea placeholder="의견을 남겨주세요"></textarea>
-          <button class="ui button" @click="isRequestActive=false">의견 보내기</button>
+          <form class="ui form">
+            <textarea placeholder="의견을 남겨주세요"></textarea>
+            <button class="ui button" @click="isRequestActive=false">의견 보내기</button>
+          </form>
         </div>
         <div v-else class="ui fluid button" @click="isRequestActive=true">
           자세한 정보를 알려주세요!!
@@ -62,25 +67,25 @@
 <script>
   export default {
     name: 'question',
-    props: ['repr'],
+    props: ['repr', 'promise'],
     computed: {
       name: function () {
         return this.repr.name
       },
-      promise: function () {
-        return this.repr.promise
-      },
       title: function () {
         return this.repr.title
+      },
+      job: function () {
+        return this.repr.job
       },
       question: function () {
         switch (this.questionNum) {
           case 0:
-            return this.name + ' ' + this.title + '의 ' + this.questions[0]
+            return this.name + ' ' + this.job + '의 ' + this.questions[0]
           case 1:
-            return this.name + ' ' + this.title + '의 ' + this.questions[1]
+            return this.name + ' ' + this.job + '의 ' + this.questions[1]
           case 2:
-            return this.name + ' ' + this.title + '을 ' + this.questions[2]
+            return this.name + ' ' + this.job + '을 ' + this.questions[2]
           case 3:
             return this.questions[3]
         }
@@ -96,7 +101,8 @@
           '지지하십니까?',
           '그 이유는 무엇입니까?'
         ],
-        isPurposeActive: true
+        curTabStatus: 'purpose',
+        isRequestActive: false
       }
     },
     methods: {
@@ -108,12 +114,23 @@
           this.questionNum = 0
         }
         this.score = 0
+        this.curTabStatus = 'purpose'
+        this.isRequestActive = false
+      },
+      decrementQuestionNum: function () {
+        if(this.questionNum > 0){
+          this.questionNum -= 1
+        } else {
+          this.$emit('prevRepr')
+          this.questionNum = 3
+        }
+        this.score = 0
       },
       showPromiseDetail: function () {
         $('.ui.modal').modal('show')
       },
       stopIntro: function () {
-        this.$route.push('myReprs')
+        this.$router.push('myReprs')
       }
     }
   }

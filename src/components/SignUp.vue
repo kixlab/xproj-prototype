@@ -43,22 +43,25 @@
       <div class="two fields">
         <div class="field">
           <label>Address</label>
-          <select class="ui fluid dropdown">
-            <option value="daejeon">대전광역시</option>
+          <select class="ui fluid dropdown" :value="city" @change="onCityChanged($event.target.value)">
             <option value="seoul">서울특별시</option>
+            <option value="daejeon">대전광역시</option>
             <option value="busan">부산광역시</option>
             <option value="daegu">대구광역시</option>
             <option value="gwangju">광주광역시</option>
             <option value="ulsan">울산광역시</option>
+            <option value="gyeonggi">경기도</option>
+            <option value="jeju">제주특별자치도</option>
           </select>
         </div>
         <div class="field">
-          <select class="ui fluid dropdown">
-            <option value="dong">동구</option>
+          <select class="ui fluid dropdown" :value="district" @change="onDistrictChanged($event.target.value)">
+            <option v-for="(dist, idx) in districts" :key="dist" :value="idx">{{dist}}</option>
+            <!--<option value="dong">동구</option>
             <option value="jung">중구</option>
             <option value="seo">서구</option>
             <option value="yuseong">유성구</option>
-            <option value="daedeok">대덕구</option>
+            <option value="daedeok">대덕구</option>-->
           </select>
         </div>
       </div>
@@ -71,21 +74,44 @@
           <option value="selfemployment">자영업자</option>
         </select>
       </div>
-      <button class="ui button" @click="onSubmit">Submit</button>
     </form>
+    <br>
+    <button class="ui button" @click="onSubmit">Submit</button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'signUp',
+  data: function () {
+    return {
+      
+    }
+  },
+  computed: {
+    city: function () { return this.$store.state.city },
+    district: function () { return this.$store.state.district },
+    districts: function () { 
+      return this.$store.state.districts[this.city] 
+    }
+  },
   methods: {
     onSubmit: function () {
-      this.$router.push('intro')
+      console.log('onSubmit!!')
+      this.$router.push('walkThrough')
+    },
+    onCityChanged: function (value) {
+      this.$store.commit('setCity', value)
+      this.$store.commit('setDistrict', 0)
+      // $('select.dropdown').dropdown('clear')
+
+    },
+    onDistrictChanged: function (value) {
+      this.$store.commit('setDistrict', value)
     }
   },
   mounted: function () {
-    $('select.dropdown').dropdown()
+    // $('select.dropdown').dropdown()
   }
 }
 </script>

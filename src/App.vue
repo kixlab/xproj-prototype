@@ -10,6 +10,8 @@
 </template>
 
 <script>
+let reprs = []
+let promises = []
 export default {
   name: 'app'
 }

@@ -1,35 +1,41 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
+import walkThrough from '@/components/WalkThrough'
+import myReprs from '@/components/MyReprs'
+import reprDetail from '@/components/ReprDetail'
+import signUp from '@/components/SignUp'
+import promiseDetail from '@/components/PromiseDetail'
 import intro from '@/components/Intro'
-import MyReprs from '@/components/MyReprs'
-import ReprDetail from '@/components/ReprDetail'
-import SignUp from '@/components/SignUp'
-import promiseDetail from '@/components/promiseDetail'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/intro',
+      path: '/',
       name: 'intro',
       component: intro
     },
     {
+      path: '/walkThrough',
+      name: 'walkThrough',
+      component: walkThrough
+    },
+    {
       path: '/signup',
       name: 'signup',
-      component: SignUp
+      component: signUp
     },
     {
       path: '/myReprs',
       name: 'myReprs',
-      component: MyReprs
+      component: myReprs
     },
     {
-      path: '/reprDetail',
+      path: '/reprDetail/:type/:name',
       name: 'reprDetail',
-      component: ReprDetail
+      component: reprDetail
     },
     {
       path: '/Hello',
@@ -37,7 +43,7 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/promiseDetail',
+      path: '/promiseDetail/:type/:city/:district/:key',
       name: 'promiseDetail',
       component: promiseDetail
     }

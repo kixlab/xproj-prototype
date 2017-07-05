@@ -1,7 +1,7 @@
 <template>
     <div class="ui grid">
         <div class="ui eight wide column">
-            <img :src="repr.img" class="profilePic" />
+            <img :src="repr.img" class="profilePic"></img>
         </div>
         <div class="ui eight wide column">
             <div class="description">
@@ -9,7 +9,7 @@
                     {{repr.name}}
                 </div>
                 <div class="district">
-                    {{repr.district}}
+                    {{repr.title}}
                 </div>
             </div>
         </div>
