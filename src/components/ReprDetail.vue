@@ -1,7 +1,7 @@
 <template>
   <div>
     <repr-item :repr="repr"></repr-item>
-    <promise-list :promises="promises" :type="$route.params.type" :name="repr.name" :job="repr.job"></promise-list>
+    <promise-list id="promiseList" :promises="promises" :type="$route.params.type" :name="repr.name" :job="repr.job"></promise-list>
   </div>
 </template>
 
@@ -66,5 +66,7 @@ export default {
 </script>
 
 <style scoped>
-
+#promiseList {
+  margin-top: 1em;
+}
 </style>
