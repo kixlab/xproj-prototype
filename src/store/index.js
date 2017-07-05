@@ -37,7 +37,32 @@ export default new Vuex.Store({
         popularGroup: ['20대', '30대'],
         category: '일자리',
         key: 0,
-        comments: [],
+        comments: [
+	{
+             key: 0,
+             author: '유지애',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '우와! 참 좋은 공약이에요'
+	},
+	{
+             key: 1,
+             author: '김아무개',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '지금까지 일자리 공약 많이 나왔었는데 다른게 무엇인지 잘 모르겠어요.'
+	},
+	{
+             key: 2,
+             author: '김태우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '최저 임금 1만원 인상이 가능한가요? 돈 받는 사람도 그렇지만 주는 사람도 생각해야...'
+	},
+	{
+             key: 3,
+             author: '김현우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '노동 시간 단축 찬성합니다. 야근을 너무 물먹듯이 하네요.'
+	}
+	],
         progresses: []
       },
       {
@@ -54,7 +79,32 @@ export default new Vuex.Store({
         popularGroup: ['20대', '30대', '40대'],
         category: '정치행정',
         key: 1,
-        comments: [],
+        comments: [
+	{
+             key: 0,
+             author: '유지애',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '더 이상 최순실 사태와 비슷한 일이 생겨선 안됩니다.'
+	},
+	{
+             key: 1,
+             author: '김아무개',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '좋은 말은 다 써져 있는데 실제로 실현 가능 한것인가요 ?'
+	},
+	{
+             key: 2,
+             author: '김태우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '대통령 권력이 국민에게 이양이 됩니까?'
+	},
+	{
+             key: 3,
+             author: '김현우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '감사원 독립성 강화 해야합니다. 찬성합니다.'
+	}
+	],
         progresses: []
       },
       {
@@ -72,7 +122,32 @@ export default new Vuex.Store({
         popularGroup: ['20대', '30대', '40대'],
         category: '정치행정',
         key: 2,
-        comments: [],
+        comments: [
+	{
+             key: 0,
+             author: '유지애',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '공정한 대한민국 찬성합니다.'
+	},
+	{
+             key: 1,
+             author: '김아무개',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '고위공직자 원천 배제가 가능합니까?'
+	},
+	{
+             key: 2,
+             author: '김태우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '반부패 단체 지금도 많은데 더 설치한다구요?'
+	},
+	{
+             key: 3,
+             author: '김현우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '부정 축재 재산 몰수 추진 찬성합니다.'
+	}
+	],
         progresses: []
       },
       {
@@ -90,7 +165,32 @@ export default new Vuex.Store({
         popularGroup: ['50대', '30대', '40대'],
         category: '외교안보',
         key: 3,
-        comments: [],
+        comments: [
+	{
+             key: 0,
+             author: '유지애',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '북한에 제대로 대응해야 합니다.'
+	},
+	{
+             key: 1,
+             author: '김아무개',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '지금 전세계적으로 긴장 상태인데, 평화로운 한반도를 만드는 것이 적절할까요?'
+	},
+	{
+             key: 2,
+             author: '김태우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '협력 외교... 어떻게 실현합니까 ?'
+	},
+	{
+             key: 3,
+             author: '김현우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '한반도 비핵화 찬성합니다. 핵은 절대 안됩니다.'
+	}
+	],
         progresses: []
       },
       {
@@ -108,7 +208,32 @@ export default new Vuex.Store({
         popularGroup: ['20대', '30대', '학생'],
         category: '경제',
         key: 4,
-        comments: [],
+        comments: [
+	{
+             key: 0,
+             author: '유지애',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '청년 일자리 문제를 꼭 해결해주세요.'
+	},
+	{
+             key: 1,
+             author: '김아무개',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '청년만 중요합니까? '
+	},
+	{
+             key: 2,
+             author: '김태우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '구체적으로 어떻게 청년들의 일자리를 늘리겠다는 것인지요?'
+	},
+	{
+             key: 3,
+             author: '김현우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '요즘 결혼도 많이 안한다는데, 꼭 필요한 것 같습니다.'
+	}
+	],
         progresses: []
       },
       {
@@ -126,7 +251,33 @@ export default new Vuex.Store({
         popularGroup: ['20대', '30대', '학생', '여성'],
         category: '인권',
         key: 5,
-        comments: [],
+        comments: [
+
+	{
+             key: 0,
+             author: '유지애',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '성 평등 너무 중요합니다.'
+	},
+	{
+             key: 1,
+             author: '김아무개',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '여성 정책 기구 권한 강화한다는데, 구체적으로 어떻게 하실 것인지요 ?'
+	},
+	{
+             key: 2,
+             author: '김태우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '여성 관리자 비율 확대가 근본적인 해결책이 될 수 있습니까?'
+	},
+	{
+             key: 3,
+             author: '김현우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '여성에 대한 차별을 꼭 막아야 합니다.'
+	}
+	],
         progresses: []
       },
       {
@@ -144,7 +295,32 @@ export default new Vuex.Store({
         popularGroup: ['50대', '60대'],
         category: '보건복지',
         key: 6,
-        comments: [],
+        comments: [
+	{
+             key: 0,
+             author: '유지애',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '노인 복지 꼭 실현해주세요.'
+	},
+	{
+             key: 1,
+             author: '김아무개',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '노인 수당 2배 인상을 어떻게 실현합니까?'
+	},
+	{
+             key: 2,
+             author: '김태우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '노년 건강 증진 사업을 하기 위해서 자금은 어떻게 마련하는지요 ?'
+	},
+	{
+             key: 3,
+             author: '김현우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '노인 복지가 너무 빈약한 것 같습니다. 꼭 실현되었으면 좋겠습니다.'
+	}
+	],
         progresses: []
       },
       {
@@ -165,7 +341,32 @@ export default new Vuex.Store({
         popularGroup: ['30대', '40대'],
         category: '교육',
         key: 7,
-        comments: [],
+        comments: [
+	{
+             key: 0,
+             author: '유지애',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '육아가 너무 힘듭니다. 도와주세요.'
+	},
+	{
+             key: 1,
+             author: '김아무개',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '육아휴직 확대가 가능합니까? 회사 입장은 생각 안하나요?'
+	},
+	{
+             key: 2,
+             author: '김태우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '현실성이 떨어짐.'
+	},
+	{
+             key: 3,
+             author: '김현우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '교실 혁명 좋습니다. '
+	}
+	],
         progresses: []
       },
       {
@@ -186,7 +387,32 @@ export default new Vuex.Store({
         popularGroup: ['40대', '50대', '자영업자'],
         category: '농축수산',
         key: 8,
-        comments: [],
+        comments: [
+	{
+             key: 0,
+             author: '유지애',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '중소기업이 살아나야 합니다. 대기업에 집중 투자는 안됩니다.'
+	},
+	{
+             key: 1,
+             author: '김아무개',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '어떻게 지원하는지요 ?'
+	},
+	{
+             key: 2,
+             author: '김태우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '그 돈 있으면 대기업에 좀 더 투자하지...'
+	},
+	{
+             key: 3,
+             author: '김현우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '중소기업과 소상공인의 권익을 꼭 보호해주세요.'
+	}
+	],
         progresses: []
       },
       {
@@ -205,7 +431,32 @@ export default new Vuex.Store({
         popularGroup: ['20대', '30대', '40대', '50대', '자영업자'],
         category: '안전/환경',
         key: 9,
-        comments: [],
+        comments: [
+	{
+             key: 0,
+             author: '유지애',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '안전한 사회 굉장히 중요합니다.'
+	},
+	{
+             key: 1,
+             author: '김아무개',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '미세먼지 배출량을 감축한다고 하면 감축이 됩니까?'
+	},
+	{
+             key: 2,
+             author: '김태우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '노후 원전을 폐쇄하면 에너지는 어디서 끌어오나요?'
+	},
+	{
+             key: 3,
+             author: '김현우',
+             date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
+             text: '자연재해로부터 보호해야 합니다.'
+	}
+	],
         progresses: []
       },
       
