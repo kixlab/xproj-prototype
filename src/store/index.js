@@ -21,7 +21,20 @@ export default new Vuex.Store({
       job: '대통령',
       type: 'president',
       img: '/static/moonjaein.jpg',
-      promise: '스펙 없는 이력서'
+      promise: '스펙 없는 이력서',
+      ratings:
+      {
+        person: {
+          my: 5,
+          city: 4.2,
+          nation: 4.5
+        },
+        promise: {
+          my: 5,
+          city: 4.4,
+          nation: 4.8
+        }
+      }
     },
     presidentPromises: [
       {
@@ -469,7 +482,19 @@ export default new Vuex.Store({
         type: 'mayor',
         city: 'daejeon',
         img: '/static/daejeon.jpg',
-        promise: '공기업 사장 인사청문 간담회 시행'
+        promise: '공기업 사장 인사청문 간담회 시행',
+        ratings: {
+          person: {
+            my: 4,
+            city: 3.8,
+            nation: 3.9
+          },
+          promise: {
+            my: 3,
+            city: 3.5,
+            nation: 4.1
+          }
+        }
       },
       {
         name: '박원순',
@@ -477,7 +502,19 @@ export default new Vuex.Store({
         job: '시장',
         type: 'mayor',
         city: 'seoul',
-        img: '/static/seoul.jpg'
+        img: '/static/seoul.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 3.8,
+            nation: 3.9
+          },
+          promise: {
+            my: 3,
+            city: 3.5,
+            nation: 4.1
+          }
+        }
       },
       {
         name: '남경필',
@@ -485,7 +522,19 @@ export default new Vuex.Store({
         job: '지사',
         type: 'mayor',
         city: 'gyeonggi',
-        img: '/static/gyeonggi.jpg'
+        img: '/static/gyeonggi.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 3.8,
+            nation: 3.9
+          },
+          promise: {
+            my: 3,
+            city: 3.5,
+            nation: 4.1
+          }
+        }
       },
       {
         name: '서병수',
@@ -493,7 +542,19 @@ export default new Vuex.Store({
         job: '시장',
         type: 'mayor',
         city: 'busan',
-        img: '/static/busan.jpg'
+        img: '/static/busan.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 3.8,
+            nation: 3.9
+          },
+          promise: {
+            my: 3,
+            city: 3.5,
+            nation: 4.1
+          }
+        }
       },
       {
         name: '원희룡',
@@ -501,7 +562,19 @@ export default new Vuex.Store({
         job: '지사',
         type: 'mayor',
         city: 'jeju',
-        img: '/static/jeju.jpg'
+        img: '/static/jeju.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 3.8,
+            nation: 3.9
+          },
+          promise: {
+            my: 3,
+            city: 3.5,
+            nation: 4.1
+          }
+        }
       } 
     ],
     mayorsPromises: [
@@ -790,6 +863,18 @@ export default new Vuex.Store({
         city: 'daejeon',
         district: 3,
         img: '/static/daejeon-yuseong.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
       },
       {
         name: '진영',
@@ -799,6 +884,18 @@ export default new Vuex.Store({
         city: 'seoul',
         district: 20,
         img: '/static/seoul-yongsan.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
       },
       {
         name: '하태경',
@@ -808,6 +905,18 @@ export default new Vuex.Store({
         city: 'busan',
         district: 0,
         img: '/static/busan-haeundae.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
       },
       {
         name: '오영훈',
@@ -817,6 +926,18 @@ export default new Vuex.Store({
         city: 'jeju',
         district: 0,
         img: '/static/jeju-jeju.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
       },
     ],
     congressPromises: [
