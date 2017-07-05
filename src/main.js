@@ -17,6 +17,10 @@ Vue.config.productionTip = false
 //   }
 // })
 /* eslint-disable no-new */
+router.beforeEach(function (to, from, next) {
+  window.scrollTo(0, 0)
+  next()
+})
 
 new Vue({
   store,
