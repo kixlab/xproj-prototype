@@ -2,7 +2,7 @@
   <div id="app" class="ui container">
     <div class="ui top inverted fixed menu">
       <div class="ui item">
-        <router-link to="/myReprs">ProgressBook</router-link>
+        <router-link to="/myReprs" id="logo">ProgressBook</router-link>
       </div>
     </div>
     <router-view></router-view>
@@ -25,5 +25,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#logo {
+  background: url(assets/logo.png) 50% 50% no-repeat;
+  background-size: auto 44px;
+  text-indent: -999px;
+  width: 130px;
 }
 </style>
