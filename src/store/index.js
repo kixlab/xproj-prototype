@@ -877,6 +877,69 @@ export default new Vuex.Store({
         }
       },
       {
+        name: '정세균',
+        title: '국회의원 (서을 종로구)', 
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 22,
+        img: '/static/seoul-22.jpg',
+        ratings: {
+          person: {
+            my: 3,
+            city: 3.7,
+            nation: 3.7
+          },
+          promise: {
+            my: 3.4,
+            city: 3.4,
+            nation: 3.8
+          }
+        }
+      },
+      {
+        name: '홍익표',
+        title: '국회의원 (서을 중구 성동구 갑)', 
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 23,
+        img: '/static/seoul-23.jpg',
+        ratings: {
+          person: {
+            my: 3,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 2.9,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '지상욱',
+        title: '국회의원 (서을 중구 성동구 을)', 
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 23,
+        img: '/static/seoul-23-1.jpg',
+        ratings: {
+          person: {
+            my: 3,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 2.9,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
         name: '진영',
         title: '국회의원 (서울 용산구)',
         job: '국회의원',
@@ -884,6 +947,258 @@ export default new Vuex.Store({
         city: 'seoul',
         district: 20,
         img: '/static/seoul-yongsan.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '전혜숙',
+        title: '국회의원 (서울 광진구 갑)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 5,
+        img: '/static/seoul-5.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '추미애',
+        title: '국회의원 (서울 광진구 을)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 5,
+        img: '/static/seoul-5-1.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '안규백',
+        title: '국회의원 (서울 동대문구 갑)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 10,
+        img: '/static/seoul-10.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '민병두',
+        title: '국회의원 (서울 동대문구 을)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 10,
+        img: '/static/seoul-10-1.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '서영교',
+        title: '국회의원 (서울 중랑구 갑)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 24,
+        img: '/static/seoul-24.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '박홍근',
+        title: '국회의원 (서울 중랑구 을)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 24,
+        img: '/static/seoul-24-1.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '유승희',
+        title: '국회의원 (서울 성북구 갑)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 16,
+        img: '/static/seoul-16.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '기동민',
+        title: '국회의원 (서울 성북구 을)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 16,
+        img: '/static/seoul-16-1.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '정양석',
+        title: '국회의원 (서울 강북구 갑)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 2,
+        img: '/static/seoul-2.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '박용진',
+        title: '국회의원 (서울 강북구 을)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 2,
+        img: '/static/seoul-2-1.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '인재근',
+        title: '국회의원 (서울 도봉구 갑)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 9,
+        img: '/static/seoul-9.jpg',
+        ratings: {
+          person: {
+            my: 4,
+            city: 4.1,
+            nation: 3.8
+          },
+          promise: {
+            my: 4,
+            city: 3.9,
+            nation: 4.1
+          }
+        }
+      },
+      {
+        name: '최명길',
+        title: '국회의원 (서울 송파구 을)',
+        job: '국회의원',
+        type: 'congressPerson',
+        city: 'seoul',
+        district: 17,
+        img: '/static/seoul-17.jpg',
         ratings: {
           person: {
             my: 4,
