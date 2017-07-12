@@ -42,10 +42,10 @@
         return this.$store.getters.mayorPromises.promises[0]
       },
       president: function () {
-        return this.$store.state.president
+        return this.$store.getters.president
       },
       presidentPromise: function () {
-        return this.$store.state.presidentPromises[0]
+        return this.$store.getters.presidentPromises.promises[0]
       },
       curReprPromise: function () {
         if(this.reprIdx == 0){

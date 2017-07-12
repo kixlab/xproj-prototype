@@ -1,18 +1,18 @@
 <template>
   <div class="ui grid">
     <div class="ui six wide column">
-      <router-link :to="{name: 'reprDetail', params: {type: repr.type, name: repr.name}}">
+      <router-link :to="{name: 'reprDetail', params: {city: repr.city, district: repr.district}}">
         <img :src="repr.img" class="profilePic" />
       </router-link>
     </div>
     <div class="ui ten wide column">
       <div class="description">
         <div class="name">
-          <router-link v-if="!isReprDetail" :to="{name: 'reprDetail', params: {type: repr.type, name: repr.name}}">{{repr.name}}</router-link>
+          <router-link v-if="!isReprDetail" :to="{name: 'reprDetail', params: {city: repr.city, district: repr.district}}">{{repr.name}}</router-link>
           <span v-else>{{repr.name}}</span>
         </div>
         <div class="district">
-          <router-link v-if="!isReprDetail" :to="{name: 'reprDetail', params: {type: repr.type, name: repr.name}}">{{repr.title}}</router-link>
+          <router-link v-if="!isReprDetail" :to="{name: 'reprDetail', params: {city: repr.city, district: repr.district}}">{{repr.title}}</router-link>
           <span v-else>{{repr.title}}</span>
         </div>
         <div class="updateDate">
@@ -23,7 +23,7 @@
             <tr>
               <th></th>
               <th>지지도</th>
-              <th>공약 점수</th>
+              <th>공약 호감도</th>
             </tr>
           </thead>
           <tbody>
@@ -55,7 +55,7 @@ export default {
   props: ['repr'],
   methods: {
     showDetails: function () {
-      this.$router.push({ name: 'reprDetail', params: { type: this.repr.type, name: this.repr.name } })
+      this.$router.push({ name: 'reprDetail', params: {city: repr.city, district: repr.district} })
     }
   },
   computed: {

@@ -24,7 +24,14 @@
         <label>Age</label>
         <input type="number"></input>
       </div>
-      <div class="inline fields" id="genderField">
+      <h5 class="ui header">Gender</h5>
+      <div class="ui fluid compact buttons">
+        <button class="ui button" :class="gender === 'M'?'secondary':''" @click="gender = 'M'">Male</button>
+        <button class="ui button" :class="gender === 'F'?'secondary':''" @click="gender = 'F'">Female</button>
+        <button class="ui button" :class="gender === 'O'?'secondary':''" @click="gender = 'O'">Others</button>
+        <button class="ui button" :class="gender === 'R'?'secondary':''" @click="gender = 'R'">Rather not say</button>
+      </div>
+      <!-- <div class="inline fields" id="genderField">
         <label for="gender">Gender</label>
         <div class="field">
           <div class="ui radio checkbox">
@@ -38,12 +45,25 @@
             <label>F</label>
           </div>
         </div>
-      </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="gender"></input>
+            <label>Other</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="gender"></input>
+            <label>Don't want to answer</label>
+          </div>
+        </div>
+      </div> -->
       <!--</div>-->
+      <h5 class="ui header">Address</h5>
       <div class="two fields">
         <div class="field">
-          <label>Address</label>
-          <select class="ui fluid dropdown" :value="city" @change="onCityChanged($event.target.value)">
+          <label>City</label>
+          <select class="ui fluid search selection dropdown" :value="city" @change="onCityChanged($event.target.value)">
             <option value="seoul">서울특별시</option>
             <option value="daejeon">대전광역시</option>
             <option value="busan">부산광역시</option>
@@ -55,7 +75,8 @@
           </select>
         </div>
         <div class="field">
-          <select class="ui fluid dropdown" :value="district" @change="onDistrictChanged($event.target.value)">
+          <label>District</label>
+          <select class="ui fluid search selection dropdown" :value="district" @change="onDistrictChanged($event.target.value)">
             <option v-for="(dist, idx) in districts" :key="dist" :value="idx">{{dist}}</option>
             <!--<option value="dong">동구</option>
             <option value="jung">중구</option>
@@ -76,7 +97,7 @@
       </div>
     </form>
     <br>
-    <button class="ui button" @click="onSubmit">Submit</button>
+    <button class="ui primary button" @click="onSubmit">Submit</button>
   </div>
 </template>
 
@@ -85,7 +106,7 @@ export default {
   name: 'signUp',
   data: function () {
     return {
-      
+      gender: ''
     }
   },
   computed: {
@@ -112,6 +133,7 @@ export default {
   },
   mounted: function () {
     // $('select.dropdown').dropdown()
+    $('.ui.dropdown').dropdown()
   }
 }
 </script>
