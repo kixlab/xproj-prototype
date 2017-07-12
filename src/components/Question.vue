@@ -22,7 +22,7 @@
       <button class="ui button" @click="stopIntro">
         그만
       </button>
-      <button class="ui button green" @click="incrementQuestionNum">
+      <button class="ui button primary" @click="incrementQuestionNum">
         다음
       </button>
     </div>
