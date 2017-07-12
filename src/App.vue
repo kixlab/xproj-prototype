@@ -7,8 +7,8 @@
           <i class="search link icon"></i>
         </div>
       </div>-->
-      <router-link class="item" to="/findReprs">공직자 찾기</router-link>
-      <router-link class="item" to="/myReprs">내 대표자들</router-link>
+      <a class="item" @click="findReprs">공직자 찾기</a>
+      <a class="item" @click="seeMyReprs">내 대표자들</a>
     </div>
     <div class="pusher">
       <div class="ui container">
@@ -18,6 +18,9 @@
           </div>
           <div class="ui item">
             <router-link to="/myReprs" id="logo" >ProgressBook</router-link>
+          </div>
+          <div class="right menu">
+            <a class="item" @click="goBack"><i class="arrow left icon"></i></a>
           </div>
         </div>
         <router-view></router-view>
@@ -34,6 +37,17 @@ export default {
   methods: {
     toggleSidebar: function () {
       $('.ui.sidebar').sidebar('toggle')
+    },
+    findReprs: function () {
+      this.$router.push('/findReprs')
+      $('.ui.sidebar').sidebar('hide')
+    },
+    seeMyReprs: function () {
+      this.$router.push('/myReprs')
+      $('.ui.sidebar').sidebar('hide')
+    },
+    goBack: function () {
+      this.$router.go(-1)
     }
   }
 }

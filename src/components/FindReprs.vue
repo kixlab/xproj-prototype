@@ -1,12 +1,13 @@
 <template>
   <div>
     <h1 class="ui dividing header">공직자 찾기</h1>
+    <h5 class="ui header">공직자 분류 선택</h5>
     <div class="ui fluid buttons">
       <button class="ui button" :class="isCong ? 'blue' : ''" @click="isCong = !isCong">국회의원</button>
       <button class="ui button" :class="isMayor ? 'blue' : ''" @click="isMayor = !isMayor">시장/도지사</button>
       <button class="ui button" :class="isPresident ? 'blue' : ''" @click="isPresident = !isPresident">대통령</button>
     </div>
-
+    <h5 class="ui header">시/도</h5>
     <select class="ui fluid search selection dropdown" :value="city" @change="onCityChanged($event.target.value)">
       <option value="seoul">서울특별시</option>
       <option value="daejeon">대전광역시</option>
@@ -17,7 +18,7 @@
       <option value="gyeonggi">경기도</option>
       <option value="jeju">제주특별자치도</option>
     </select>
-
+    <h5 class="ui header">선거구</h5>
     <select class="ui fluid search selection dropdown" :value="district" @change="onDistrictChanged($event.target.value)">
       <option v-for="(district, idx) in districts" :value="idx" :key="district">{{district}}</option>
     </select>
@@ -57,7 +58,7 @@ export default {
         if(this.city !== '' && (repr.city !== this.city && repr.city !== 'korea')){
           return false
         }
-        if(this.district !== -1 && repr.district != this.district){
+        if(this.district !== 0 && repr.district != this.district){
           return false
         }
         return true
@@ -70,7 +71,7 @@ export default {
       isMayor: false, 
       isPresident: false,
       city: '',
-      district: -1
+      district: 0
     }
   },
   methods: {

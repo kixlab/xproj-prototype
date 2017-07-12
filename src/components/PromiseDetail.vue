@@ -210,6 +210,13 @@
       },
       comments: function () {
         return this.promise.comments
+      },
+      repr: function () {
+        return this.$store.state.reprs.find(function(repr) {
+          if(repr.city === this.$route.params.city && repr.district == this.$route.params.district) {
+            return repr
+          }
+        }.bind(this))
       }
     },
     data: function () {
@@ -261,7 +268,7 @@
         $('#question' + i).modal('show')
       },
       getArticles: function () {
-        let url = this.newsURL + '/' + this.promise.title
+        let url = this.newsURL + '/' + this.repr.name + ' ' + this.promise.title
         this.$http.get(url).then(function(response) {
           console.log(url)
           let items = JSON.parse(response.body).items
