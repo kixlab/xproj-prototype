@@ -13,9 +13,9 @@ export default new Vuex.Store({
         '동대문구 을', '동작구 갑', '동작구 을', '마포구 갑', '마포구 을', '서대문구 갑', '서대문구 을', '서초구 갑', '서초구 을', '성북구 갑', '성북구 을',
         '송파구 갑', '송파구 을', '송파구 병', '양천구 갑', '양천구 을', '영등포구 갑', '영등포구 을', '용산구', '은평구 갑', '은평구 을', '종로구', '중구·성동구 갑', '중구·성동구 을', '중랑구 갑', '중랑구 을', '강북구 갑', '강북구 을'],
       'daejeon': ['전체', '대덕구', '동구', '서구 갑', '서구 을', '유성구 갑', '유성구 을', '중구'],
-      'jeju': ['제주시'],
-      'gyeonggi': ['평택시'],
-      'busan': ['해운대구']
+      'jeju': ['전체', '제주시'],
+      'gyeonggi': ['전체','평택시'],
+      'busan': ['전체', '해운대구']
     },
     reprs: [
       {
@@ -174,7 +174,7 @@ export default new Vuex.Store({
         job: '국회의원',
         type: 'congressPerson',
         city: 'seoul',
-        district: 20,
+        district: 40,
         img: '/static/seoul-yongsan.jpg',
         ratings: {
           person: {
@@ -195,7 +195,7 @@ export default new Vuex.Store({
         job: '국회의원',
         type: 'congressPerson',
         city: 'busan',
-        district: 0,
+        district: 1,
         img: '/static/busan-haeundae.jpg',
         ratings: {
           person: {
@@ -216,7 +216,7 @@ export default new Vuex.Store({
         job: '국회의원',
         type: 'congressPerson',
         city: 'jeju',
-        district: 0,
+        district: 1,
         img: '/static/jeju-jeju.jpg',
         ratings: {
           person: {
@@ -1309,7 +1309,7 @@ export default new Vuex.Store({
       },
       {
         city: 'jeju',
-        district: 0,
+        district: 1,
         promises: [
           {
             title: '가축질병공제제도 도입 및 시범사업',
@@ -1355,7 +1355,7 @@ export default new Vuex.Store({
       },
       {
         city: 'busan',
-        district: '0',
+        district: 1,
         promises: [
           {
             title: '신바람나는 해운대 교통',
@@ -1411,7 +1411,7 @@ export default new Vuex.Store({
       },
       {
         city: 'seoul',
-        district: 20,
+        district: 40,
         promises: [
           {
             title: '이태원 관광특구 및 앤틱가구거리 상권 활성화',

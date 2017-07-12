@@ -17,13 +17,13 @@
     </div>
     <div class="navButtons">
       <button class="ui button" v-bind:class="{disabled: !isPreviousEnabled()}" @click="decrementQuestionNum">
-        예전
+        이전 질문
       </button>
       <button class="ui button" @click="stopIntro">
-        그만
+        건너뛰기
       </button>
       <button class="ui button primary" @click="incrementQuestionNum">
-        다음
+        다음 질문
       </button>
     </div>
     <div class="ui modal">
@@ -43,10 +43,13 @@
         <div v-else-if="curTabStatus === 'progress'" class="ui bottom attached segment">
           TBD
         </div>
+        <div class="ui positive message" :class="!isRequestSent? 'hidden' : ''">
+          <div class="header">의견이 전달되었습니다.</div>
+        </div>
         <div v-if="isRequestActive">
           <form class="ui form">
             <textarea placeholder="의견을 남겨주세요"></textarea>
-            <button class="ui button" @click="isRequestActive=false">의견 보내기</button>
+            <button class="ui button" @click="onOpinionSend">의견 보내기</button>
           </form>
         </div>
         <div v-else class="ui fluid button" @click="isRequestActive=true">
@@ -102,7 +105,8 @@
           '그 이유는 무엇입니까?'
         ],
         curTabStatus: 'purpose',
-        isRequestActive: false
+        isRequestActive: false,
+        isRequestSent: false
       }
     },
     methods: {
@@ -134,6 +138,10 @@
       },
       stopIntro: function () {
         this.$router.push('myReprs')
+      },
+      onOpinionSend: function () {
+        this.isRequestActive = false
+        this.isRequestSent = true
       }
     }
   }
