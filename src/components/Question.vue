@@ -16,14 +16,14 @@
       <textarea rows="3"></textarea>
     </div>
     <div class="navButtons">
-      <button class="ui button" @click="decrementQuestionNum">
-        Prev
+      <button class="ui button" v-bind:class="{disabled: !isPreviousEnabled()}" @click="decrementQuestionNum">
+        예전
       </button>
       <button class="ui button" @click="stopIntro">
-        Stop
+        그만
       </button>
-      <button class="ui button" @click="incrementQuestionNum">
-        Next
+      <button class="ui button green" @click="incrementQuestionNum">
+        다음
       </button>
     </div>
     <div class="ui modal">
@@ -106,6 +106,9 @@
       }
     },
     methods: {
+      isPreviousEnabled: function () {
+        return this.questionNum > 0;
+      },
       incrementQuestionNum: function () {
         if (this.questionNum < 3)
           this.questionNum += 1
@@ -143,5 +146,10 @@
   }
   a {
     cursor: pointer;
+  }
+  .question {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 1em 0;
   }
 </style>
