@@ -228,7 +228,7 @@
         ],
         score: 0,
         commentText: '',
-        newsURL: 'http://localhost:3000',
+        newsURL: 'http://ec2-52-25-49-93.us-west-2.compute.amazonaws.com:3000',
         // newsHeader: 
         // { 
         //   headers: 

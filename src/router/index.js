@@ -7,7 +7,7 @@ import signUp from '@/components/SignUp'
 import promiseDetail from '@/components/PromiseDetail'
 import intro from '@/components/Intro'
 import findReprs from '@/components/FindReprs'
-import chooseInterest from '@/components/chooseInterest'
+import chooseInterest from '@/components/ChooseInterest'
 Vue.use(Router)
 
 export default new Router({
