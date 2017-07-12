@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1 class="ui dividing header">
-      Sign Up
+      환영합니다
     </h1>
-    <div class="intro">
+    <div class="intro">    
       다음은 시민 분께서 선출하신 공직자입니다.
     </div>
     <div class="ui buttons">

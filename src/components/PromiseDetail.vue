@@ -202,7 +202,7 @@
     computed: {
       promise: function () {
         let promiseList =  this.$store.state.promises.find(function(ps) {
-          if(ps.city === this.$route.params.city && ps.district === this.$route.params.district) {
+          if(ps.city === this.$route.params.city && ps.district == this.$route.params.district) {
             return ps
           }
         }.bind(this))
@@ -228,7 +228,7 @@
         ],
         score: 0,
         commentText: '',
-        newsURL: 'http://localhost:3000',
+        newsURL: 'http://ec2-52-25-49-93.us-west-2.compute.amazonaws.com:3000',
         // newsHeader: 
         // { 
         //   headers: 

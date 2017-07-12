@@ -3,9 +3,9 @@
     <div class="question">
       {{question}}
     </div>
-    <div v-if="questionNum == 1" class="promise">
+    <div v-if="questionNum == 1" class="promise ui message big">
       {{promise.title}}
-      <a @click="showPromiseDetail">자세히</a>
+      <a @click="showPromiseDetail" class="ui right floated button mini icon"><i class="search icon"></i></a>
     </div>
     <div v-if="questionNum != 3" class="ui buttons">
       <button class="ui button" :class="score == i ? 'active' : ''" @click="score = i" v-for="i in 5" :key="i">
@@ -16,14 +16,14 @@
       <textarea rows="3"></textarea>
     </div>
     <div class="navButtons">
-      <button class="ui button" @click="decrementQuestionNum">
-        Prev
+      <button class="ui button" v-bind:class="{disabled: !isPreviousEnabled()}" @click="decrementQuestionNum">
+        이전 질문
       </button>
       <button class="ui button" @click="stopIntro">
-        Stop
+        건너뛰기
       </button>
-      <button class="ui button" @click="incrementQuestionNum">
-        Next
+      <button class="ui button primary" @click="incrementQuestionNum">
+        다음 질문
       </button>
     </div>
     <div class="ui modal">
@@ -43,10 +43,13 @@
         <div v-else-if="curTabStatus === 'progress'" class="ui bottom attached segment">
           TBD
         </div>
+        <div class="ui positive message" :class="!isRequestSent? 'hidden' : ''">
+          <div class="header">의견이 전달되었습니다.</div>
+        </div>
         <div v-if="isRequestActive">
           <form class="ui form">
             <textarea placeholder="의견을 남겨주세요"></textarea>
-            <button class="ui button" @click="isRequestActive=false">의견 보내기</button>
+            <button class="ui button" @click="onOpinionSend">의견 보내기</button>
           </form>
         </div>
         <div v-else class="ui fluid button" @click="isRequestActive=true">
@@ -102,10 +105,14 @@
           '그 이유는 무엇입니까?'
         ],
         curTabStatus: 'purpose',
-        isRequestActive: false
+        isRequestActive: false,
+        isRequestSent: false
       }
     },
     methods: {
+      isPreviousEnabled: function () {
+        return this.questionNum > 0;
+      },
       incrementQuestionNum: function () {
         if (this.questionNum < 3)
           this.questionNum += 1
@@ -131,6 +138,10 @@
       },
       stopIntro: function () {
         this.$router.push('myReprs')
+      },
+      onOpinionSend: function () {
+        this.isRequestActive = false
+        this.isRequestSent = true
       }
     }
   }
@@ -144,4 +155,10 @@
   a {
     cursor: pointer;
   }
+  .question {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 1em 0;
+  }
+
 </style>

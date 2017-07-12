@@ -150,7 +150,7 @@ export default new Vuex.Store({
         job: '국회의원',
         type: 'congressPerson',
         city: 'daejeon',
-        district: 3,
+        district: 5,
         img: '/static/daejeon-yuseong.jpg',
         ratings: {
           person: {
@@ -171,7 +171,7 @@ export default new Vuex.Store({
         job: '국회의원',
         type: 'congressPerson',
         city: 'seoul',
-        district: 20,
+        district: 40,
         img: '/static/seoul-yongsan.jpg',
         ratings: {
           person: {
@@ -192,7 +192,7 @@ export default new Vuex.Store({
         job: '국회의원',
         type: 'congressPerson',
         city: 'busan',
-        district: 0,
+        district: 1,
         img: '/static/busan-haeundae.jpg',
         ratings: {
           person: {
@@ -213,7 +213,7 @@ export default new Vuex.Store({
         job: '국회의원',
         type: 'congressPerson',
         city: 'jeju',
-        district: 0,
+        district: 1,
         img: '/static/jeju-jeju.jpg',
         ratings: {
           person: {
@@ -2020,7 +2020,7 @@ export default new Vuex.Store({
       },
       {
         city: 'jeju',
-        district: 0,
+        district: 1,
         promises: [
           {
             title: '가축질병공제제도 도입 및 시범사업',
@@ -2066,7 +2066,7 @@ export default new Vuex.Store({
       },
       {
         city: 'busan',
-        district: '0',
+        district: 1,
         promises: [
           {
             title: '신바람나는 해운대 교통',
@@ -2122,7 +2122,7 @@ export default new Vuex.Store({
       },
       {
         city: 'seoul',
-        district: 20,
+        district: 40,
         promises: [
           {
             title: '이태원 관광특구 및 앤틱가구거리 상권 활성화',
@@ -2178,7 +2178,7 @@ export default new Vuex.Store({
       },
       {
         city: 'daejeon',
-        district: 3,
+        district: 5,
         promises: [
           {
             title: '유성온천의 브랜드 가치 제고',
