@@ -119,7 +119,9 @@ export default {
   methods: {
     onSubmit: function () {
       console.log('onSubmit!!')
-      this.$router.push('walkThrough')
+      if(this.district != 0){
+        this.$router.push('walkThrough')
+      }
     },
     onCityChanged: function (value) {
       this.$store.commit('setCity', value)

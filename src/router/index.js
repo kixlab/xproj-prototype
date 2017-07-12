@@ -7,7 +7,7 @@ import signUp from '@/components/SignUp'
 import promiseDetail from '@/components/PromiseDetail'
 import intro from '@/components/Intro'
 import findReprs from '@/components/FindReprs'
-
+import chooseInterest from '@/components/chooseInterest'
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +46,11 @@ export default new Router({
       path: '/findReprs',
       name: 'findReprs',
       component: findReprs
+    },
+    {
+      path: '/chooseInterest',
+      name: 'chooseInterest',
+      component: chooseInterest
     }
 
   ]

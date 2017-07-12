@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="ui circular buttons">
-      <button v-for="cat in categories" :key="cat">{{cat}}</button>
+    <div class="ui circular labels">
+      <a class="ui label" v-for="cat in categories" :key="cat">{{cat}}</a>
     </div>
   </div>
 </template>
