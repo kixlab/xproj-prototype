@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div class="ui dimmer" :class="{active: isLoading}"><div class="ui big text loader">대표자들 찾기 중...</div></div>
+
     <h1 class="ui dividing header">
       Select a few topics you are interested in
     </h1>
@@ -24,6 +26,7 @@ export default {
       categories: ['안전/환경', '일자리', '문화체육', '보건복지', '교통/건설', 
       '정치행정', '경제', '과학기술', '외교안보', '교육', '농축수산', '인권'],
       selected: [],
+      isLoading: false
     }
   },
   methods: {
@@ -43,7 +46,10 @@ export default {
       }
     },
     next: function() {
-      this.$router.push('walkThrough');
+      this.isLoading = true;
+      setTimeout(() => {
+        this.$router.push('walkThrough');
+      }, 2500);
     }
   }
 }
