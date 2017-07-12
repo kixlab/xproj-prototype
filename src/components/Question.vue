@@ -3,9 +3,9 @@
     <div class="question">
       {{question}}
     </div>
-    <div v-if="questionNum == 1" class="promise">
+    <div v-if="questionNum == 1" class="promise ui message big">
       {{promise.title}}
-      <a @click="showPromiseDetail">자세히</a>
+      <a @click="showPromiseDetail" class="ui right floated button mini icon"><i class="search icon"></i></a>
     </div>
     <div v-if="questionNum != 3" class="ui buttons">
       <button class="ui button" :class="score == i ? 'active' : ''" @click="score = i" v-for="i in 5" :key="i">
@@ -152,4 +152,5 @@
     font-size: 1.2em;
     margin: 1em 0;
   }
+
 </style>
