@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="ui sidebar inverted vertical menu" id="sidebarMenu">
+    <div class="ui right sidebar inverted vertical menu" id="sidebarMenu">
       <!--<div class="item">
         <div class="ui inverted transparent icon input">
           <input class="prompt" placeholder="공직자 찾기" type="text">
@@ -14,13 +14,13 @@
       <div class="ui container">
         <div class="ui top inverted fixed menu">
           <div class="item">
-            <a @click="toggleSidebar"> <i class="sidebar icon"></i></a>
+            <a @click="goBack" v-if="backEnabled()"><i class="arrow left icon"></i></a>
           </div>
-          <div class="ui item">
+          <div class="ui item middle-item">
             <router-link to="/myReprs" id="logo" >ProgressBook</router-link>
           </div>
           <div class="right menu">
-            <a class="item" @click="goBack"><i class="arrow left icon"></i></a>
+            <a class="item" @click="toggleSidebar"> <i class="sidebar icon"></i></a>
           </div>
         </div>
         <router-view></router-view>
@@ -48,6 +48,10 @@ export default {
     },
     goBack: function () {
       this.$router.go(-1)
+    },
+    backEnabled: function() {
+      console.log(this.$router.history.current.fullPath);
+      return this.$router.history.current.fullPath !== '/';
     }
   }
 }
@@ -68,7 +72,10 @@ export default {
   text-indent: -999px;
   width: 130px;
 }
-
+.ui.menu .item.middle-item {
+  flex: 1;
+  justify-content: center;
+}
 /*#sidebarMenu {
   padding-top: 2em;
 }*/
