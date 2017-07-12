@@ -2,15 +2,18 @@
   <div class="card">
     <div class="content">
       <div class="header">
-        <!--<a @click="showPromiseDetail"> {{promise.title}} </a>-->
-        <router-link :to="{name: 'promiseDetail', params: {type: type, city: city, district: district, key: promise.key}}"> {{promise.title}} </router-link>
+        <router-link :to="{name: 'promiseDetail', params: {city: repr.city, district: repr.district, key: promise.key}}"> {{promise.title}} </router-link>
       </div>
     </div>
-    <div class="content">
+    <!--<div class="content">
       <p v-for="pps in promise.purpose" :key="pps">{{pps}}</p>
-    </div>
+    </div>-->
     <div class="extra content">
+      <a class="ui basic red label" @click="onCategoryClick">
+        {{promise.category}}
+      </a>
       <div class="ui tag label" v-for="group in promise.popularGroup" :key="group">{{group}}</div>
+
     </div>
     <!--<div class="ui modal" :id="modalID">
       <div class="header">{{promise.title}}</div>
@@ -48,7 +51,7 @@
 <script>
 export default {
   name: 'promiseItem',
-  props: ['promise', 'type', 'city', 'district'],
+  props: ['promise', 'repr'],
   computed: {
     modalID: function () {
       return (Math.random().toString(36)+'00000000000000000').slice(2, 18)
@@ -66,6 +69,9 @@ export default {
     },
     showRequest: function () {
       this.isRequestActive = true
+    },
+    onCategoryClick: function () {
+      this.$emit('categoryClick', this.promise.category)
     }
   }
 }

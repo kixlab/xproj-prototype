@@ -1,15 +1,14 @@
 <template>
   <div>
-    <p class="intro-text">Browse, check and speak!</p>
+    <h1 class="ui header">Browse, check and speak!</h1>
     <ul class="intro-text check-list">
-<li>Browse politician’s 
-    promises that relate to YOU</li>
-<li>Check the progress of 
-    promises</li>
-<li>Make your voice heard</li>
-</ul>
-
+      <li>Browse politician’s promises that relate to YOU</li>
+      <li>Check the progress of promises
+      </li>
+      <li>Make your voice heard</li>
+    </ul>
     <button class="ui basic big green button" @click="$router.push('signUp')">Get Started</button>
+
   </div>
 </template>
 

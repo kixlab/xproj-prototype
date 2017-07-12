@@ -1,7 +1,8 @@
 <template>
   <div>
+    <h1 class="ui dividing header">{{repr.job}} 정보 자세히 보기</h1>
     <repr-item :repr="repr"></repr-item>
-    <promise-list id="promiseList" :promises="promises" :type="$route.params.type" :name="repr.name" :job="repr.job"></promise-list>
+    <promise-list id="promiseList" :promises="promises" :repr="repr"></promise-list>
   </div>
 </template>
 
@@ -17,49 +18,21 @@ export default {
   },
   computed: {
     repr: function () {
-      if(this.$route.params.type === 'president'){
-        return this.$store.state.president
-      } else if (this.$route.params.type === 'congressPerson') {
-        return this.$store.state.congressPeople.find(function(cp){
-          if(cp.name === this.$route.params.name){
-            return cp
-          }
-        }.bind(this))
-      } else if (this.$route.params.type === 'mayor') {
-        return this.$store.state.mayors.find(function(mayor){
-          if(mayor.name === this.$route.params.name){
-            return mayor
-          }
-        }.bind(this))
-      }
+      return this.$store.state.reprs.find(function(repr){
+        if(repr.city === this.$route.params.city && repr.district == this.$route.params.district){
+          return repr
+        }
+      }.bind(this))
     },
     promises: function () {
-      if(this.$route.params.type === 'president'){
-        return {promises: this.$store.state.presidentPromises}
-      } else if (this.$route.params.type === 'congressPerson') {
-        return this.$store.state.congressPromises.find(function(cp){
-          if(cp.city === this.repr.city && cp.district == this.repr.district){
-            return cp
-          }
-        }.bind(this))
-      } else if (this.$route.params.type === 'mayor') {
-        return this.$store.state.mayorsPromises.find(function(mp){
-          if(mp.city === this.repr.city){
-            return mp
-          }
-        }.bind(this))
-      }
-    }
-  },
-  data: function () {
-    return {
-      reprs: [{
-        name: '조승래',
-        district: '국회의원 (대전 유성구 갑)',
-        title: '국회의원',
-        img: '/static/logo.png',
-        promise: '유성온천의 브랜드 가치 제고 및 주변 상권 활성화를 위한 계룡스파텔 재개발'
-      }]
+      return this.$store.state.promises.find(function(p){
+        if(p.city === this.$route.params.city && p.district == this.$route.params.district){
+          return p
+        }
+      }.bind(this))
+    },
+    route: function () {
+      return this.$route.params.city + ' ' + this.$route.params.district
     }
   }
 }
