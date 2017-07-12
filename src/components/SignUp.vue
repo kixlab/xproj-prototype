@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="ui dividing header">
-      Sign-up form
+      가입
     </h1>
     <form class="ui form">
       <div class="ui dividing header">Account Information</div>
@@ -21,14 +21,14 @@
       <div class="ui dividing header">Additional Information</div>
       <!--<div class="two fields">-->
       <div class="field">
-        <label>Age</label>
+        <label>나이</label>
         <input type="number"></input>
       </div>
-      <h5 class="ui header">Gender</h5>
+      <h5 class="ui header">성</h5>
       <div class="ui fluid compact buttons">
         <button class="ui button" :class="gender === 'M'?'secondary':''" @click="gender = 'M'">Male</button>
         <button class="ui button" :class="gender === 'F'?'secondary':''" @click="gender = 'F'">Female</button>
-        <button class="ui button" :class="gender === 'O'?'secondary':''" @click="gender = 'O'">Others</button>
+        <button class="ui button" :class="gender === 'O'?'secondary':''" @click="gender = 'O'">Other</button>
         <button class="ui button" :class="gender === 'R'?'secondary':''" @click="gender = 'R'">Rather not say</button>
       </div>
       <!-- <div class="inline fields" id="genderField">
@@ -59,10 +59,10 @@
         </div>
       </div> -->
       <!--</div>-->
-      <h5 class="ui header">Address</h5>
+      <h5 class="ui header">어디에 사십니까?</h5>
       <div class="two fields">
         <div class="field">
-          <label>City</label>
+          <label>도 / 시</label>
           <select class="ui fluid search selection dropdown" :value="city" @change="onCityChanged($event.target.value)">
             <option value="seoul">서울특별시</option>
             <option value="daejeon">대전광역시</option>
@@ -75,7 +75,7 @@
           </select>
         </div>
         <div class="field">
-          <label>District</label>
+          <label>시 / 구 / 군</label>
           <select class="ui fluid search selection dropdown" :value="district" @change="onDistrictChanged($event.target.value)">
             <option v-for="(dist, idx) in districts" :key="dist" :value="idx">{{dist}}</option>
             <!--<option value="dong">동구</option>
@@ -87,17 +87,18 @@
         </div>
       </div>
       <div class="field">
-        <label>Job Type</label>
+        <label>직업</label>
         <select class="ui fluid dropdown">
           <option value="student">학생</option>
           <option value="whitecollar">사무직</option>
           <option value="bluecollar">생산직</option>
           <option value="selfemployment">자영업자</option>
+          <option value="unemployed">무직</option>
         </select>
       </div>
     </form>
     <br>
-    <button class="ui primary button" @click="onSubmit">Submit</button>
+    <button class="ui primary button" @click="onSubmit">계속</button>
   </div>
 </template>
 
@@ -120,7 +121,7 @@ export default {
     onSubmit: function () {
       console.log('onSubmit!!')
       if(this.district != 0){
-        this.$router.push('walkThrough')
+        this.$router.push('chooseInterest')
       }
     },
     onCityChanged: function (value) {
