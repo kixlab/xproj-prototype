@@ -34681,14 +34681,8 @@
     "district": 6
   },
   {
-    "city": "ulsan",
-    "name": "세종",
-    "promises": [],
-    "district": 7
-  },
-  {
-    "city": "ulsan",
-    "name": "세종특별자치시(이해찬 )",
+    "city": "sejong",
+    "name": "이해찬(세종특별자치시)",
     "promises": [
       {
         "key": 0,
@@ -34921,7 +34915,7 @@
         "comments": []
       }
     ],
-    "district": 8
+    "district": 1
   },
   {
     "city": "gyeonggi",
