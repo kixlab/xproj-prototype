@@ -30,13 +30,13 @@
                 </div>
                 <div class="content">
                   <div class="summary">
-                    <a :href="article.link">{{article.title}}</a>
+                    <a :href="article.link" target="_blank" v-html="article.title"></a>
                     <div class="date">
                       {{article.pubDate}}
                     </div>
                   </div>
                   <div class="extra text">
-                    <p>{{article.description}}</p>
+                    <p v-html="article.description"></p>
                   </div>
                 </div>
               </div>
@@ -235,7 +235,7 @@
         ],
         score: 0,
         commentText: '',
-        newsURL: 'http://ec2-52-25-49-93.us-west-2.compute.amazonaws.com:3000',
+        newsURL: 'http://34.208.245.104:3000',
         // newsHeader: 
         // { 
         //   headers: 
