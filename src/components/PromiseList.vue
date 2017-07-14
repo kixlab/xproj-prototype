@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3> {{repr.name + ' ' + repr.job}}의 공약 </h3>
+    <h3> 당신이 좋아할 {{repr.name + ' ' + repr.job}}의 공약 </h3>
     <div class="ui top attached tabular menu">
       <!--<a class="item" v-for="category in categories" :key="category">{{category}}</a>-->
       <div class="ui dropdown item">

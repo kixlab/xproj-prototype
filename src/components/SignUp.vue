@@ -24,7 +24,7 @@
         <label>나이</label>
         <input type="number"></input>
       </div>
-      <h5 class="ui header">성</h5>
+      <h5 class="ui header">성별</h5>
       <div class="ui fluid compact buttons">
         <button class="ui button" :class="gender === 'M'?'secondary':''" @click="gender = 'M'">Male</button>
         <button class="ui button" :class="gender === 'F'?'secondary':''" @click="gender = 'F'">Female</button>

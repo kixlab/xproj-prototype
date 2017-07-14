@@ -9,7 +9,7 @@
       <p v-for="pps in promise.purpose" :key="pps">{{pps}}</p>
     </div>-->
     <div class="extra content">
-      <a class="ui basic red label" @click="onCategoryClick">
+      <a class="ui basic circular red label" @click="onCategoryClick">
         {{promise.category}}
       </a>
       <div class="ui tag label" v-for="group in promise.popularGroup" :key="group">{{group}}</div>
