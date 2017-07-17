@@ -14,6 +14,7 @@ export default new Vuex.Store({
       'gyeonggi': ['평택시'],
       'busan': ['해운대구']
     },
+    favPromises: [],
     reprs: [
       {
         name: '문재인',
@@ -17792,6 +17793,9 @@ export default new Vuex.Store({
           return p
         }
       })
+    },
+    addFavPromises(state, payload){
+      state.favPromises.push(payload)
     }
   }
 })

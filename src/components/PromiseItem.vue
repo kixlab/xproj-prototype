@@ -3,18 +3,61 @@
     <div class="content">
       <div class="header">
         <router-link :to="{name: 'promiseDetail', params: {city: repr.city, district: repr.district, key: promise.key}}"> {{promise.title}} </router-link>
+        <div class="right floated meta"><i class="star icon" :class="liked ? 'active' : ''" @click="onFavClick"></i></div>
       </div>
     </div>
     <!--<div class="content">
       <p v-for="pps in promise.purpose" :key="pps">{{pps}}</p>
     </div>-->
-    <div class="extra content">
+    <div class="content">
       <a class="ui basic circular red label" @click="onCategoryClick">
         {{promise.category}}
       </a>
-      <div class="ui tag label" v-for="group in promise.popularGroup" :key="group">{{group}}</div>
-
     </div>
+    <div class="extra content">
+      <i class="heart icon"></i>
+      <div class="ui basic blue label" v-for="group in promise.popularGroup" :key="group">{{group}}</div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'promiseItem',
+  props: ['promise', 'repr'],
+  computed: {
+    modalID: function () {
+      return (Math.random().toString(36)+'00000000000000000').slice(2, 18)
+    }
+  },
+  data: function () {
+    return {
+      isPurposeActive: 'purpose',
+      isRequestActive: false,
+      liked: false
+    }
+  },
+  methods: {
+    showPromiseDetail: function () {
+      $('#' + this.modalID).modal('show')
+    },
+    showRequest: function () {
+      this.isRequestActive = true
+    },
+    onCategoryClick: function () {
+      this.$emit('categoryClick', this.promise.category)
+    },
+    onFavClick: function () {
+      this.liked = !this.liked
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
+
     <!--<div class="ui modal" :id="modalID">
       <div class="header">{{promise.title}}</div>
       <div class="content">
@@ -45,38 +88,3 @@
         </button>
       </div>
     </div>-->
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'promiseItem',
-  props: ['promise', 'repr'],
-  computed: {
-    modalID: function () {
-      return (Math.random().toString(36)+'00000000000000000').slice(2, 18)
-    }
-  },
-  data: function () {
-    return {
-      isPurposeActive: 'purpose',
-      isRequestActive: false
-    }
-  },
-  methods: {
-    showPromiseDetail: function () {
-      $('#' + this.modalID).modal('show')
-    },
-    showRequest: function () {
-      this.isRequestActive = true
-    },
-    onCategoryClick: function () {
-      this.$emit('categoryClick', this.promise.category)
-    }
-  }
-}
-</script>
-
-<style scoped>
-
-</style>
