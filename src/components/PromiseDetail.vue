@@ -13,6 +13,9 @@
     <div class="ui feed">
       <button class="ui button" @click="getArticles">이행 현황 추가</button>
       <div class="ui long modal" id="addProgressModal">
+        <div class="ui active dimmer" v-if="articles.length === 0">
+          <div class="ui loader"></div>
+        </div>
         <i class="close icon"></i>
         <div class="ui header">이행 현황 추가</div>
         <div class="content">
@@ -43,6 +46,28 @@
             </div>
           </div>
           <div v-else-if="registerArticle == 1" class="ui bottom attached segment">
+            공약과 연관있는 서울시 문서를 골라주세요.
+            <div class="ui feed" v-if="documents.length != 0">
+              <div class="event" v-for="document in documents" :key="document.title">
+                <div class="label">
+                  <i :class="document.checked ? 'checkmark box icon' : 'square icon'" @click="document.checked = !document.checked"></i>
+                </div>
+                <div class="content">
+                  <div class="summary">
+                    <a :href="document.url">{{document.title}}</a>
+                    <div class="date">
+                      {{document.regdate}}
+                    </div>
+                  </div>
+                  <div class="extra text">
+                    <p>{{document.kwrd}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-else>검색 결과가 없습니다.</div>
+          </div>
+          <!-- <div v-else-if="registerArticle == 1" class="ui bottom attached segment">
             <form class="ui form">
               <div class="field">
                 <label>제목</label>
@@ -94,8 +119,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> -->
+        </div> 
         <div class="actions">
           <div class="ui positive right button">
             진행 상황 저장하기
@@ -222,6 +247,7 @@
     data: function () {
       return {
         articles: [],
+        documents: [],
         registerArticle: 0,
         otherRefs: [              
           {
@@ -235,7 +261,8 @@
         ],
         score: 0,
         commentText: '',
-        newsURL: 'http://34.208.245.104:3000',
+        newsURL: 'http://34.208.245.104:3000/article',
+        docuURL: 'http://34.208.245.104:3000/seoul'
         // newsHeader: 
         // { 
         //   headers: 
@@ -247,6 +274,9 @@
         //     }
         // }
       }
+    },
+    mounted: function () {
+      $('.modal').modal({observeChanges: true})
     },
     methods: {
       addReply: function () {
@@ -268,7 +298,9 @@
         $('#question' + i).modal('show')
       },
       getArticles: function () {
+        $('#addProgressModal').modal('show')
         let url = this.newsURL + '/' + this.repr.name + ' ' + this.promise.title
+        console.log(url)
         this.$http.get(url).then(function(response) {
           console.log(url)
           let items = JSON.parse(response.body).items
@@ -280,10 +312,19 @@
           // console.log(response.body)
         }.bind(this), function(response) {
           this.article = [{title: 'Error'}]
-        }.bind(this)).then(function () {
-          $('#addProgressModal').modal('show')
-        })
-        
+        }.bind(this))
+        this.$http.get(this.docuURL + '/' + this.promise.keyword).then(function(response) {
+          console.log(response.body)
+          let items = response.body.item
+          if(items) {
+            this.documents = items.map(function (a) {
+              a.checked = false
+              return a
+            })
+          }
+        }.bind(this), function(response){
+          this.documents = [{title: 'Error'}]
+        }.bind(this))
       },
       showAddProgressModal: function () {
         $('#addProgressModal').modal('show')

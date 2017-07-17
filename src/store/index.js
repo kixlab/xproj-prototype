@@ -17225,6 +17225,7 @@ export default new Vuex.Store({
             category: '안전/환경',
             key: 0,
             comments: [],
+            keyword: '천개의 숲',
             progresses: [
               {
                 key: 1,
@@ -17254,6 +17255,7 @@ export default new Vuex.Store({
             category: '보건복지',
             key: 1,
             comments: [],
+            keyword: '복지플래너',
             progresses: []
           },
           {
@@ -17263,6 +17265,7 @@ export default new Vuex.Store({
             popularGroup: ['30대', '40대'],
             category: '보건복지',
             key: 2,
+            keyword: '안심주택',
             comments: [],
             progresses: []
           },
@@ -17273,6 +17276,7 @@ export default new Vuex.Store({
             popularGroup: ['20대', '30대'],
             category: '경제',
             key: 3,
+            keyword: '창조경제거점',
             comments: [],
             progresses: []
           },
@@ -17283,6 +17287,7 @@ export default new Vuex.Store({
             popularGroup: ['30대', '40대'],
             category: '안전/환경',
             key: 4,
+            keyword: '안전',
             comments: [],
             progresses: []
           }
