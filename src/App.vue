@@ -7,7 +7,7 @@
           <i class="search link icon"></i>
         </div>
       </div>-->
-      <a class="item">관심 공약 보기</a>
+      <a class="item" @click="seeFavPromises">내가 좋아한 공약 보기</a>
       <a class="item">추천 공약 보기</a>
       <a class="item" @click="findReprs">공직자 찾기</a>
       <a class="item" @click="seeMyReprs">내 대표자들</a>
@@ -46,6 +46,10 @@ export default {
     },
     seeMyReprs: function () {
       this.$router.push('/myReprs')
+      $('.ui.sidebar').sidebar('hide')
+    },
+    seeFavPromises: function () {
+      this.$router.push('/favoritePromises')
       $('.ui.sidebar').sidebar('hide')
     },
     goBack: function () {

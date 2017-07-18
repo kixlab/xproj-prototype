@@ -14,7 +14,7 @@
     </div>
     <div class="ui bottom attached segment">
       <div class="ui cards">
-        <promise-item v-for="promise in filteredPromises" @categoryClick="onCategoryClick" :promise="promise" :key="promise.key" :repr="repr"></promise-item>
+        <promise-item v-for="promise in filteredPromises" @categoryClick="onCategoryClick" :promise="promise" :key="promise.key" :city="repr.city" :district="repr.district"></promise-item>
       </div>
     </div>
   </div>

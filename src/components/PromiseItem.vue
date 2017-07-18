@@ -2,7 +2,7 @@
   <div class="card">
     <div class="content">
       <div class="header">
-        <router-link :to="{name: 'promiseDetail', params: {city: repr.city, district: repr.district, key: promise.key}}"> {{promise.title}} </router-link>
+        <router-link :to="{name: 'promiseDetail', params: {city: city, district: district, key: promise.key}}"> {{promise.title}} </router-link>
         <div class="right floated meta"><i class="star icon" :class="liked ? 'active' : ''" @click="onFavClick"></i></div>
       </div>
     </div>
@@ -24,7 +24,7 @@
 <script>
 export default {
   name: 'promiseItem',
-  props: ['promise', 'repr'],
+  props: ['promise', 'city', 'district'],
   computed: {
     modalID: function () {
       return (Math.random().toString(36)+'00000000000000000').slice(2, 18)
@@ -49,6 +49,7 @@ export default {
     },
     onFavClick: function () {
       this.liked = !this.liked
+      this.$store.commit('addFavPromises', {city: this.city, district: this.district, key: this.promise.key})
     }
   }
 }

@@ -17776,6 +17776,17 @@ export default new Vuex.Store({
           return cpp
         }
       })
+    },
+    favoritePromises: state => {
+      return state.favPromises.map(function (fp) {
+        return {
+          city: fp.city,
+          district: fp.district,
+          promise: state.promises.find(function (p) {
+            return (p.city === fp.city && p.district == fp.district)            
+          }).promises[fp.key]
+        }
+      })
     }
   },
   mutations: {

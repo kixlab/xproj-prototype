@@ -8,6 +8,7 @@ import promiseDetail from '@/components/PromiseDetail'
 import intro from '@/components/Intro'
 import findReprs from '@/components/FindReprs'
 import chooseInterest from '@/components/ChooseInterest'
+import favoritePromises from '@/components/FavoritePromises'
 Vue.use(Router)
 
 export default new Router({
@@ -51,6 +52,11 @@ export default new Router({
       path: '/chooseInterest',
       name: 'chooseInterest',
       component: chooseInterest
+    },
+    {
+      path: '/favoritePromises',
+      name: 'favoritePromises',
+      component: favoritePromises
     }
 
   ]
