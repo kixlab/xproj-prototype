@@ -14,15 +14,39 @@ export default {
   components: {
     promiseItem
   },
+  data: function () {
+    return {
+      presidentPromises: {promises: []},
+      congressPersonPromises: {promises: []},
+      mayorPromises: {promises: []}
+    }
+  },
+  mounted: function () {
+    let url = ''
+    // let url = this.promiseURL + '/korea/0'
+    // this.$http.get(url).then(function(response) {
+    //   this.presidentPromises = response.body
+    // }.bind(this))
+
+    url = this.promiseURL + '/' + this.congressPerson.city + '/' + this.congressPerson.district
+    this.$http.get(url).then(function(response) {
+      this.congressPersonPromises = response.body
+    }.bind(this))
+    
+    url = this.promiseURL + '/' + this.mayor.city + '/' + this.mayor.district
+    this.$http.get(url).then(function(response) {
+      this.mayorPromises = response.body
+    }.bind(this))
+  },
   computed: {
-    presidentPromises: function (){
-      return this.$store.getters.presidentPromises
+    promiseURL: function () {
+      return 'http://34.208.245.104:3000/promise'
     },
-    congressPersonPromises: function () {
-      return this.$store.getters.congressPersonPromises
+    congressPerson: function () {
+      return this.$store.getters.congressPerson
     },
-    mayorPromises: function () {
-      return this.$store.getters.mayorPromises
+    mayor: function () {
+      return this.$store.getters.mayor
     },
     interests: function () {
       return this.$store.state.interests
@@ -31,7 +55,7 @@ export default {
       let interests = this.interests
       let generatePromiseList = function (pl) {
         return pl.promises.filter(function(p) {
-          return interests.includes(p.category) 
+          return p.category.reduce(function(pv, c){ return pv || interests.includes(c) }, false)
         }).map(function (p) {
           return {
             city: pl.city,
@@ -40,7 +64,7 @@ export default {
           }
         })
       }
-      let promiseList = generatePromiseList(this.congressPersonPromises).concat(generatePromiseList(this.mayorPromises), generatePromiseList(this.presidentPromises))
+      let promiseList = generatePromiseList(this.congressPersonPromises).concat(generatePromiseList(this.mayorPromises))
       return promiseList
       //  generatePromiseList(this.presidentPromises) +
     }

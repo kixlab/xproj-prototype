@@ -15,12 +15,34 @@ export default {
     promiseItem
   },
   computed: {
-    favoritePromises: function () {
-      return this.$store.getters.favoritePromises
-    },
+    // favoritePromises: function () {
+    //   return this.$store.getters.favoritePromises
+    // },
     favPromises: function () {
       return this.$store.state.favPromises
+    },
+    promiseURL: function () {
+      return 'http://34.208.245.104:3000/promise'
     }
+  },
+  data: function () {
+    return {
+      favoritePromises: []
+    }
+  },
+  mounted: function () {
+    this.favPromises.forEach(function (fp) {
+      let url = this.promiseURL + '/' + fp.city + '/' + fp.district + '/' + fp.key
+      let promise = {}
+      return this.$http.get(url).then(function(response) {
+        promise = response.body
+        this.favoritePromises.push({
+          city: fp.city,
+          district: fp.district,
+          promise: promise
+        })
+      }.bind(this))
+    }.bind(this))
   }
 }
 </script>

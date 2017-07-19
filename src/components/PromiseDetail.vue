@@ -26,6 +26,24 @@
         </div>
       </div>
     </div>
+    <div class="ui comments">
+      <div class="comment">
+        <div class="content">
+          <span class="author">서지수</span>
+          <div class="metadata">
+            <span class="date">Yesterday at 12:30AM</span>
+          </div>
+          <div class="text">
+            <p>이 사업은 왜 하는걸까요? 의미있는 사업 맞죠?</p>
+          </div>
+          <div class="actions">
+            <a class="like"><i class="smile icon"></i> 5 </a>
+            <a class="dislike"><i class="frown icon"></i> 2 </a>
+            <a class="reply"><i class="comment icon"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="ui dividing medium header">이행 계획</div>
     <ul>
     <li v-for="pln in promise.plan" :key="pln">{{pln}}</li>
@@ -48,6 +66,24 @@
         </div>
       </div>
     </div>
+    <div class="ui comments">
+      <div class="comment">
+        <div class="content">
+          <span class="author">이수정</span>
+          <div class="metadata">
+            <span class="date">Yesterday at 12:11PM</span>
+          </div>
+          <div class="text">
+            <p>이거 달성 가능한가요?? 계획이 엄서용 ㅜㅜ</p>
+          </div>
+          <div class="actions">
+            <a class="like"><i class="smile icon"></i> 7 </a>
+            <a class="dislike"><i class="frown icon"></i> 1 </a>
+            <a class="reply"><i class="comment icon"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="ui dividing medium header">이행 현황</div>
     <div class="ui feed">
       <button class="ui button" @click="getArticles">이행 현황 추가</button>
@@ -60,8 +96,8 @@
         <div class="content">
           <div class="ui top attached tabular menu">
             <a class="item" :class="registerArticle == 0 ? 'active' : ''" @click="registerArticle = 0">기사 추가</a>
-            <a class="item" :class="registerArticle == 1? 'active' : ''" @click="registerArticle = 1">기타 자료 추가</a>
-            <a class="item" :class="registerArticle == 2 ? 'active': ''" @click="registerArticle = 2">기타 자료 확인</a>
+            <a class="item" :class="registerArticle == 1? 'active' : ''" @click="registerArticle = 1">서울시 공문서 추가</a>
+            <a class="item" :class="registerArticle == 2 ? 'active': ''" @click="registerArticle = 2">기타 자료 추가</a>
           </div>
           <div v-if="registerArticle == 0" class="ui bottom attached segment">
             공약과 연관있는 기사를 골라주세요.
@@ -106,7 +142,7 @@
             </div>
             <div v-else>검색 결과가 없습니다.</div>
           </div>
-          <!-- <div v-else-if="registerArticle == 1" class="ui bottom attached segment">
+           <div v-else-if="registerArticle == 2" class="ui bottom attached segment">
             <form class="ui form">
               <div class="field">
                 <label>제목</label>
@@ -137,7 +173,7 @@
               </div>
             </form>
           </div>
-          <div v-else-if="registerArticle == 2" class="ui bottom attached segment">
+          <!-- <div v-else-if="registerArticle == 2" class="ui bottom attached segment">
             공약과 연관있는 자료를 골라주세요.
             <div class="ui feed">
               <div class="event" v-for="otherRef in otherRefs" :key="otherRef.key">
@@ -158,7 +194,7 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>  -->
         </div> 
         <div class="actions">
           <div class="ui positive right button">
@@ -249,6 +285,9 @@
           </div>
         </div>
         <form class="ui reply form">
+          <div class="ui buttons">
+            <button class="ui basic positive button" @submit.prevent>찬성</button><button @submit.prevent class="ui basic negative button">반대</button>
+          </div>
           <div class="field">
             <textarea v-model="commentText" rows="2"></textarea>
           </div>
@@ -264,14 +303,17 @@
   export default {
     name: 'promiseDetail', 
     computed: {
-      promise: function () {
-        let promiseList =  this.$store.state.promises.find(function(ps) {
-          if(ps.city === this.$route.params.city && ps.district == this.$route.params.district) {
-            return ps
-          }
-        }.bind(this))
-        return promiseList.promises[this.$route.params.key]
-      },
+      // promise: function () {
+      //   let promiseList =  this.$store.state.promises.find(function(ps) {
+      //     if(ps.city === this.$route.params.city && ps.district == this.$route.params.district) {
+      //       return ps
+      //     }
+      //   }.bind(this))
+      //   return promiseList.promises[this.$route.params.key]
+      // },
+      city: function () {return this.$route.params.city},
+      district: function () { return this.$route.params.district},
+      key: function () { return this.$route.params.key },
       comments: function () {
         return this.promise.comments
       },
@@ -281,6 +323,9 @@
             return repr
           }
         }.bind(this))
+      },
+      keyword: function () {
+        return this.promise.title.split(' ')[0]
       }
     },
     data: function () {
@@ -298,10 +343,12 @@
             checked: false,
           },
         ],
+        promise: {},
         score: 0,
         commentText: '',
         newsURL: 'http://34.208.245.104:3000/article',
-        docuURL: 'http://34.208.245.104:3000/seoul'
+        docuURL: 'http://34.208.245.104:3000/seoul',
+        promiseURL: 'http://34.208.245.104:3000/promise'
         // newsHeader: 
         // { 
         //   headers: 
@@ -316,6 +363,12 @@
     },
     mounted: function () {
       $('.modal').modal({observeChanges: true})
+      let url = this.promiseURL + '/' + this.city + '/' + this.district + '/' + this.key
+      this.$http.get(url).then(function(response) {
+        this.promise = response.body
+        console.log(response.body)
+      }.bind(this), function(response) {
+      }.bind(this))
     },
     methods: {
       addReply: function () {
@@ -352,7 +405,7 @@
         }.bind(this), function(response) {
           this.article = [{title: 'Error'}]
         }.bind(this))
-        this.$http.get(this.docuURL + '/' + this.promise.keyword).then(function(response) {
+        this.$http.get(this.docuURL + '/' + this.keyword).then(function(response) {
           console.log(response.body)
           let items = response.body.item
           if(items) {

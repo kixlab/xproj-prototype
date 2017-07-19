@@ -15,8 +15,11 @@
       <p v-for="pps in promise.purpose" :key="pps">{{pps}}</p>
     </div>-->
     <div class="content">
-      <a class="ui basic circular red label" @click="onCategoryClick">
-        {{promise.category}}
+      <a class="ui basic circular red label" v-for="cat in promise.category" :key="cat" @click="onCategoryClick(cat)">
+        {{cat}}
+      </a>
+      <a class="ui basic circular blue label" v-for="t in promise.target" :key="t" @click="onTargetClick(t)">
+        {{t}}
       </a>
     </div>
     <div class="extra content">
@@ -54,8 +57,11 @@ export default {
     showRequest: function () {
       this.isRequestActive = true
     },
-    onCategoryClick: function () {
-      this.$emit('categoryClick', this.promise.category)
+    onCategoryClick: function (cat) {
+      this.$emit('categoryClick', cat)
+    },
+    onTargetClick: function (t) {
+      this.$emit('targetClick', t)
     },
     onFavClick: function () {
       this.liked = !this.liked
