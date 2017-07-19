@@ -1,14 +1,53 @@
 <template>
   <div>
     <h1 class="ui dividing header">{{promise.title}}</h1>
-    <div class="ui dividing medium header">공약 목적</div>
+    <div class="ui dividing medium header">
+      공약 목적
+      <!-- <i id="purposeQuestion" class="question icon"></i> -->
+    </div>
     <ul>
-    <li v-for="pps in promise.purpose" :key="pps">{{pps}}</li>
+      <li v-for="pps in promise.purpose" :key="pps">{{pps}}</li>
     </ul>
+    <button class="ui basic icon button" @click="onPurposeQuestionClick"><i class="question icon"></i></button>
+    <div class="ui modal" id="purposeQuestion">
+      <i class="close icon"></i>
+      <div class="ui header">공약 목적 질문하기</div>
+      <div class="content">
+        <div class="ui form">
+          <div class="field">
+            <label>공약의 목적에 대해 궁금하신 점을 남겨주세요.</label>
+            <textarea rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui positive right button">
+          질문 남기기
+        </div>
+      </div>
+    </div>
     <div class="ui dividing medium header">이행 계획</div>
     <ul>
     <li v-for="pln in promise.plan" :key="pln">{{pln}}</li>
     </ul>
+    <button class="ui basic icon button" @click="onPlanQuestionClick"><i class="question icon"></i></button>
+    <div class="ui modal" id="planQuestion">
+      <i class="close icon"></i>
+      <div class="ui header">공약 이행 계획 질문하기</div>
+      <div class="content">
+        <div class="ui form">
+          <div class="field">
+            <label>공약의 이행 계획에 대해 궁금하신 점을 남겨주세요.</label>
+            <textarea rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui positive right button">
+          질문 남기기
+        </div>
+      </div>
+    </div>
     <div class="ui dividing medium header">이행 현황</div>
     <div class="ui feed">
       <button class="ui button" @click="getArticles">이행 현황 추가</button>
@@ -328,6 +367,12 @@
       },
       showAddProgressModal: function () {
         $('#addProgressModal').modal('show')
+      },
+      onPurposeQuestionClick: function () {
+        $('#purposeQuestion').modal('show')
+      },
+      onPlanQuestionClick: function () {
+        $('#planQuestion').modal('show')
       }
     }
   }
@@ -387,5 +432,9 @@
 }
 li {
   text-align: left;
+}
+
+#purposeQuestion {
+  float: right;
 }
 </style>

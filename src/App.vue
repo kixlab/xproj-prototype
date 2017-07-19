@@ -8,7 +8,7 @@
         </div>
       </div>-->
       <a class="item" @click="seeFavPromises">내가 좋아한 공약 보기</a>
-      <a class="item">추천 공약 보기</a>
+      <a class="item" @click="seePersonalizedPromises">추천 공약 보기</a>
       <a class="item" @click="findReprs">공직자 찾기</a>
       <a class="item" @click="seeMyReprs">내 대표자들</a>
     </div>
@@ -50,6 +50,10 @@ export default {
     },
     seeFavPromises: function () {
       this.$router.push('/favoritePromises')
+      $('.ui.sidebar').sidebar('hide')
+    },
+    seePersonalizedPromises: function () {
+      this.$router.push('/personalizedPromises')
       $('.ui.sidebar').sidebar('hide')
     },
     goBack: function () {

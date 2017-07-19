@@ -47,6 +47,7 @@ export default {
     },
     next: function() {
       this.isLoading = true;
+      this.$store.commit('setInterest', this.selected)
       setTimeout(() => {
         this.$router.push('walkThrough');
       }, 2500);

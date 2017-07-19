@@ -3,8 +3,13 @@
     <div class="content">
       <div class="header">
         <router-link :to="{name: 'promiseDetail', params: {city: city, district: district, key: promise.key}}"> {{promise.title}} </router-link>
-        <div class="right floated meta"><i class="star icon" :class="liked ? 'active' : ''" @click="onFavClick"></i></div>
+        <div class="right floated meta">          
+          <i v-if="!isFav" class="star icon" :class="liked ? 'active' : ''" @click="onFavClick"></i>
+        </div>
       </div>
+      <div class="right floated meta">
+          <span v-if="isFav">{{reprName}}</span>
+        </div>
     </div>
     <!--<div class="content">
       <p v-for="pps in promise.purpose" :key="pps">{{pps}}</p>
@@ -24,10 +29,15 @@
 <script>
 export default {
   name: 'promiseItem',
-  props: ['promise', 'city', 'district'],
+  props: ['promise', 'city', 'district', 'isFav'],
   computed: {
     modalID: function () {
       return (Math.random().toString(36)+'00000000000000000').slice(2, 18)
+    },
+    reprName: function () {
+      return this.$store.state.reprs.find(function(r) {
+        return (r.city === this.city && r.district == this.district)
+      }.bind(this)).name
     }
   },
   data: function () {
