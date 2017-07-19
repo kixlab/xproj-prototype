@@ -15,6 +15,7 @@ export default new Vuex.Store({
       'busan': ['해운대구']
     },
     favPromises: [],
+    interests: [],
     reprs: [
       {
         name: '문재인',
@@ -17807,6 +17808,9 @@ export default new Vuex.Store({
     },
     addFavPromises(state, payload){
       state.favPromises.push(payload)
+    },
+    setInterest(state, payload) {
+      state.interests = payload
     }
   }
 })
