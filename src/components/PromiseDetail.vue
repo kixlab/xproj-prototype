@@ -144,28 +144,6 @@
               </div>
             </form>
           </div>
-          <!-- <div v-else-if="registerArticle == 2" class="ui bottom attached segment">
-            공약과 연관있는 자료를 골라주세요.
-            <div class="ui feed">
-              <div class="event" v-for="otherRef in otherRefs" :key="otherRef.key">
-                <div class="label">
-                  <i :class="otherRef.checked ? 'checkmark box icon' : 'square icon'" @click="otherRef.checked = !otherRef.checked"></i>
-                </div>
-                <div class="content">
-                  <div class="summary">
-                    {{otherRef.title}}
-                    <div class="date">
-                      {{otherRef.date}}
-                    </div>
-                  </div>
-                  <div class="extra text">
-                    <p>{{otherRef.content}}</p>
-                    참고자료: <a :href="otherRef.reference.link">{{otherRef.reference.title}}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>  -->
         </div> 
         <div class="actions">
           <div class="ui positive right button">
@@ -343,18 +321,21 @@
     methods: {
       addReply: function () {
         console.log('addReply')
-        this.$store.commit('addComment', {
-          comment: 
-          {
-            author: '나',
-            date: new Date(Date.now()).toLocaleString('ko-KR'),
-            text: this.commentText
-          },
-          city: this.$route.params.city,
-          district: this.$route.params.district,
-          key: this.$route.params.key
-        })
-        this.commentText = ''
+        let url = this.promiseURL + '/' + this.city + '/' + this.district + '/' + this.key + '/comment'
+        let comment =  {
+          author: this.$store.state.userName,
+          date: Date.now(),
+          text: this.commentText
+        }
+        this.$http.put(url, {body: comment}).then(function(response){
+          let url = this.promiseURL + '/' + this.city + '/' + this.district + '/' + this.key
+          this.$http.get(url).then(function(response) {
+            this.promise = response.body
+            console.log(response.body)
+          }.bind(this), function(response) {
+          }.bind(this))
+          this.commentText = ''
+        }.bind(this))
       },
       makeNewQuestion: function (i) {
         $('#question' + i).modal('show')

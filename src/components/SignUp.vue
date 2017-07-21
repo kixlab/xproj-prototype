@@ -6,6 +6,10 @@
     <form class="ui form">
       <div class="ui dividing header">Account Information</div>
       <div class="field">
+        <label>사용자 이름</label>
+        <input name="userName" placeholder="사이트에서 사용하실 이름을 적어주세요" type="text" v-model="userName"></input>
+      </div>
+      <div class="field">
         <label>E-mail</label>
         <input name="email" placeholder="E-mail" type="email"></input>
       </div>
@@ -26,39 +30,11 @@
       </div>
       <h5 class="ui header">성별</h5>
       <div class="ui fluid compact buttons">
-        <button class="ui button" :class="gender === 'M'?'secondary':''" @click="gender = 'M'">Male</button>
-        <button class="ui button" :class="gender === 'F'?'secondary':''" @click="gender = 'F'">Female</button>
-        <button class="ui button" :class="gender === 'O'?'secondary':''" @click="gender = 'O'">Other</button>
-        <button class="ui button" :class="gender === 'R'?'secondary':''" @click="gender = 'R'">Rather not say</button>
+        <button class="ui button" @submit.prevent :class="gender === 'M'?'secondary':''" @click="gender = 'M'">Male</button>
+        <button class="ui button" @submit.prevent :class="gender === 'F'?'secondary':''" @click="gender = 'F'">Female</button>
+        <button class="ui button" @submit.prevent :class="gender === 'O'?'secondary':''" @click="gender = 'O'">Other</button>
+        <button class="ui button" @submit.prevent :class="gender === 'R'?'secondary':''" @click="gender = 'R'">Rather not say</button>
       </div>
-      <!-- <div class="inline fields" id="genderField">
-        <label for="gender">Gender</label>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="gender"></input>
-            <label>M</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="gender"></input>
-            <label>F</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="gender"></input>
-            <label>Other</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="gender"></input>
-            <label>Don't want to answer</label>
-          </div>
-        </div>
-      </div> -->
-      <!--</div>-->
       <h5 class="ui header">어디에 사십니까?</h5>
       <div class="two fields">
         <div class="field">
@@ -107,7 +83,8 @@ export default {
   name: 'signUp',
   data: function () {
     return {
-      gender: ''
+      gender: '',
+      userName: ''
     }
   },
   computed: {
@@ -120,6 +97,7 @@ export default {
   methods: {
     onSubmit: function () {
       console.log('onSubmit!!')
+      this.$store.commit('setName', this.userName)
       if(this.district != 0){
         this.$router.push('chooseInterest')
       }
