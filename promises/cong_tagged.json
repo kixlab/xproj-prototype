@@ -19486,31 +19486,32 @@
     "city": "seoul",
     "name": "용산구(진영 )",
     "promises": [
-      {
-        "key": 0,
-        "plan": [],
-        "title": "오산고 학교 환경개선 및  학생식당․도서실 신증축",
-        "popularGroup": [],
+       {
+        "plan": ["이태원 뒷골목 상권 업종 다양화","외국인 관광객 유치 전략 도출","앤틱가구거리 조성을 통해 지역 상권 활성화"],
+        "title": "이태원 관광특구 및 앤틱가구거리 상권 활성화",
+        "popularGroup": ["20대", "30대"],
         "category": [
-          "교육"
+          "경제",
+          "문화/관광"
         ],
-        "purpose": [],
+        "purpose": ["이태원 관광 특구 재정비","앤틱가구거리 조성을 통한 관광 활성화"],
         "progresses": [],
         "comments": [],
         "target": [
-          "어린이/청소년"
+          "전체",
+          "소상공인
+          "
         ]
       },
       {
         "key": 1,
-        "plan": [],
-        "title": "장문로 간판 개선",
-        "popularGroup": [],
+        "plan": ["낙후 지역 내 평생교육 프로그램 운영","해방촌 군인아파트 활용을 위한 연구 진행","노후 저층주거지 및 신흥시장 환경 개선"],
+        "title": "해방촌, 전자상가, 원효로, 후암동, 서울역 일대 도시재생사업 추진",
+        "popularGroup": ["40대", "50대"],
         "category": [
-          "행정",
-          "공공질서/안전"
+          "경제"
         ],
-        "purpose": [],
+        "purpose": ["낙후된 지역의 환경 개선을 통한 지역간 생활 격차 해소"],
         "progresses": [],
         "comments": [],
         "target": [
@@ -19519,13 +19520,14 @@
       },
       {
         "key": 2,
-        "plan": [],
-        "title": "뉴타운 조속 추진 및 지원",
-        "popularGroup": [],
+        "plan": ["용산 공원을 남산과 연결", "용산 공원을 한강시민공원과 연결"],
+        "title": "용산공원 접근성 향상을 위한 도로 기반시설 신설",
+        "popularGroup": ["20대", "30대"],
         "category": [
-          "교통/건설"
+          "교통/건설",
+          "문화/관광"
         ],
-        "purpose": [],
+        "purpose": ["용산의 역사성, 자연성, 접근성 강화"],
         "progresses": [],
         "comments": [],
         "target": [
@@ -19534,13 +19536,13 @@
       },
       {
         "key": 3,
-        "plan": [],
-        "title": "신동아아파트 구조안전진단",
-        "popularGroup": [],
+        "plan": ["한남동 공영주차장 입체화 사업 진행을 통해 주차 공간 증설"],
+        "title": "이태원, 한남동 주변 주차난 해소를 위한 대형 공영주차장 신설",
+        "popularGroup": ["20대", "30대"],
         "category": [
-          "공공질서/안전"
+          "교통/건설"
         ],
-        "purpose": [],
+        "purpose": ["늘어나는 관광 수요에 걸맞은 주차 공간 제공"],
         "progresses": [],
         "comments": [],
         "target": [
@@ -19549,18 +19551,17 @@
       },
       {
         "key": 4,
-        "plan": [],
-        "title": "서빙고 고가 옆 인도 확장",
-        "popularGroup": [],
+        "plan": ["공공데이터 활용지원센터 오픈스퀘어 D 설립","예비 사업자 발굴 및 창업 지원","전문 기업과 민관 협업관계 구축"],
+        "title": "숙명여대 공공데이터 청년일자리 지원센터 지원",
+        "popularGroup": ["20대", "30대"],
         "category": [
-          "행정",
-          "공공질서/안전"
+          "경제"
         ],
-        "purpose": [],
+        "purpose": ["청년일자리 창출"],
         "progresses": [],
         "comments": [],
         "target": [
-          "전체"
+          "청년"
         ]
       },
       {
@@ -19578,7 +19579,8 @@
         "target": [
           "전체"
         ]
-      },
+      }
+
       {
         "key": 6,
         "plan": [],
@@ -20620,6 +20622,83 @@
         "comments": [],
         "target": [
           "어린이/청소년"
+        ]
+      },
+      {
+        "key": 73,
+        "plan": [],
+        "title": "오산고 학교 환경개선 및  학생식당․도서실 신증축",
+        "popularGroup": [],
+        "category": [
+          "교육"
+        ],
+        "purpose": [],
+        "progresses": [],
+        "comments": [],
+        "target": [
+          "어린이/청소년"
+        ]
+      },
+      {
+        "key": 74,
+        "plan": [],
+        "title": "장문로 간판 개선",
+        "popularGroup": [],
+        "category": [
+          "행정",
+          "공공질서/안전"
+        ],
+        "purpose": [],
+        "progresses": [],
+        "comments": [],
+        "target": [
+          "전체"
+        ]
+      },
+      {
+        "key": 75,
+        "plan": [],
+        "title": "뉴타운 조속 추진 및 지원",
+        "popularGroup": [],
+        "category": [
+          "교통/건설"
+        ],
+        "purpose": [],
+        "progresses": [],
+        "comments": [],
+        "target": [
+          "전체"
+        ]
+      },
+      {
+        "key": 76,
+        "plan": [],
+        "title": "신동아아파트 구조안전진단",
+        "popularGroup": [],
+        "category": [
+          "공공질서/안전"
+        ],
+        "purpose": [],
+        "progresses": [],
+        "comments": [],
+        "target": [
+          "전체"
+        ]
+      },
+      {
+        "key": 77,
+        "plan": [],
+        "title": "서빙고 고가 옆 인도 확장",
+        "popularGroup": [],
+        "category": [
+          "행정",
+          "공공질서/안전"
+        ],
+        "purpose": [],
+        "progresses": [],
+        "comments": [],
+        "target": [
+          "전체"
         ]
       }
     ],

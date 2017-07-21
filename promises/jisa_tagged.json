@@ -4,81 +4,53 @@
     "district": 0,
     "promises": [
       {
-        "purpose": [],
-        "popularGroup": [],
+        "purpose": ["서울시 내 초미세먼지 4년간 20% 이상 감축","초미세먼지 노출 예방 시스템 구축"],
+        "popularGroup": ["20대","30대"],
         "progresses": [],
-        "title": "도시안전예산 확대 및 통합관리",
+        "title": "천개의 숲, 만개의 산책길",
         "key": 0,
-        "plan": [],
+        "plan": ["저감장치 확대 등 경우차 저공해 사업 지속 추진","그린카 추가 보급 및 충전인프라 구축 지속 확대","초미세먼지 예보시스템 구축 및 취약계층 미세먼지 마스크 지원"],
         "comments": [],
         "category": [
-          "공공질서/안전",
-          "교통/건설"
+          "환경",
+          "공공질서/안전"
         ],
         "target": [
           "전체"
         ]
       },
       {
-        "purpose": [],
-        "popularGroup": [],
+        "purpose": ["복지사각지대 해소"],
+        "popularGroup": ["20대","30대"],
         "progresses": [],
-        "title": "시장직속의  <재난컨트롤타워> 구축",
+        "title": "찾아가는 복지플래너, 사회복지인력 2배 확충",
         "key": 1,
-        "plan": [],
+        "plan": ["신상아 출생시, 어르신 70세 도달시 사회복지사 방문","주민센터 사회복지인력 두배 확대"],
         "comments": [],
         "category": [
-          "문화/관광",
-          "교통/건설"
+          "복지",
+          "보건"
         ],
         "target": [
-          "전체"
+          "전체",
+          "유아",
+          "노인"
         ]
       },
       {
-        "purpose": [],
-        "popularGroup": [],
+        "purpose": ["새로운 안심주택 8만호 공급과 재고비율 10% 추친"],
+        "popularGroup": ["40대","30대"],
         "progresses": [],
-        "title": "골든타임 목표제 실행",
+        "title": "새로운 안심주택 8만호 공급",
         "key": 2,
-        "plan": [],
+        "plan": ["소형주택 공급지원을 위한 조례 및 제도 개선","관리형 주택협동조합 및 공공토지임대형 주택협동조합 육성"],
         "comments": [],
         "category": [
+          "복지",
           "경제"
         ],
         "target": [
-          "근로자",
-          "소상공인"
-        ]
-      },
-      {
-        "purpose": [],
-        "popularGroup": [],
-        "progresses": [],
-        "title": "교통사망사고 50% 감축 추진",
-        "key": 3,
-        "plan": [],
-        "comments": [],
-        "category": [
-          "교통/건설"
-        ],
-        "target": [
-          "전체"
-        ]
-      },
-      {
-        "purpose": [],
-        "popularGroup": [],
-        "progresses": [],
-        "title": "장기사용 노후 전동차 호선별로 2022년까지 전면 교체",
-        "key": 4,
-        "plan": [],
-        "comments": [],
-        "category": [
-          "교통/건설"
-        ],
-        "target": [
-          "전체"
+          "전체",
         ]
       },
       {
@@ -4056,6 +4028,84 @@
         "category": [
           "행정",
           "공공질서/안전"
+        ],
+        "target": [
+          "전체"
+        ]
+      },
+      {
+        "purpose": [],
+        "popularGroup": [],
+        "progresses": [],
+        "title": "도시안전예산 확대 및 통합관리",
+        "key": 256,
+        "plan": [],
+        "comments": [],
+        "category": [
+          "공공질서/안전",
+          "교통/건설"
+        ],
+        "target": [
+          "전체"
+        ]
+      },
+      {
+        "purpose": [],
+        "popularGroup": [],
+        "progresses": [],
+        "title": "시장직속의  <재난컨트롤타워> 구축",
+        "key": 257,
+        "plan": [],
+        "comments": [],
+        "category": [
+          "문화/관광",
+          "교통/건설"
+        ],
+        "target": [
+          "전체"
+        ]
+      },
+      {
+        "purpose": [],
+        "popularGroup": [],
+        "progresses": [],
+        "title": "골든타임 목표제 실행",
+        "key": 258,
+        "plan": [],
+        "comments": [],
+        "category": [
+          "경제"
+        ],
+        "target": [
+          "근로자",
+          "소상공인"
+        ]
+      },
+      {
+        "purpose": [],
+        "popularGroup": [],
+        "progresses": [],
+        "title": "교통사망사고 50% 감축 추진",
+        "key": 259,
+        "plan": [],
+        "comments": [],
+        "category": [
+          "교통/건설"
+        ],
+        "target": [
+          "전체"
+        ]
+      },
+      {
+        "purpose": [],
+        "popularGroup": [],
+        "progresses": [],
+        "title": "장기사용 노후 전동차 호선별로 2022년까지 전면 교체",
+        "key": 260,
+        "plan": [],
+        "comments": [],
+        "category": [
+          "교통/건설"
         ],
         "target": [
           "전체"
