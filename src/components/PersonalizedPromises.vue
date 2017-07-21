@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 class="ui dividing header">내가 좋아할만한 공약</h1>
+    <p>입력하셨던 관심 분야에 따라 추천된 공약입니다</p>
     <div class="ui cards">
       <promise-item v-for="p in filteredPromiseList" :key="p.promise.title" :city="p.city" :district="p.district" :promise="p.promise" :isFav="true"></promise-item>
     </div>

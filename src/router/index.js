@@ -9,7 +9,7 @@ import intro from '@/components/Intro'
 import findReprs from '@/components/FindReprs'
 import chooseInterest from '@/components/ChooseInterest'
 import favoritePromises from '@/components/FavoritePromises'
-import personalizedPromises from '@/components/personalizedPromises'
+import personalizedPromises from '@/components/PersonalizedPromises'
 Vue.use(Router)
 
 export default new Router({

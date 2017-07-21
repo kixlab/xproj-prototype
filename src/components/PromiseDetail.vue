@@ -7,6 +7,7 @@
     </div>
     <ul>
       <li v-for="pps in promise.purpose" :key="pps">{{pps}}</li>
+      <li style="color: red;">새로 추가된 무언가</li>
     </ul>
     <button class="ui basic icon button" @click="onPurposeQuestionClick"><i class="question icon"></i></button>
     <div class="ui modal" id="purposeQuestion">
@@ -253,7 +254,7 @@
     <br>
     전체시민: 3.4 / 5
     <br>
-    <div class="ui dividing small header">직접 평가해주세요</div>
+    <div class="ui dividing small header">공약을 직접 점수로 평가해주세요</div>
     <div class="ui buttons">
       <button class="ui button" v-for="i in 5" :key="i" :class="score == i ? 'active' : ''" @click="score = i">{{i}}</button>
     </div>
