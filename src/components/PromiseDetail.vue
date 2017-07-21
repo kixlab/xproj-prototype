@@ -1,14 +1,16 @@
 <template>
   <div>
-    <h1 class="ui dividing header">{{promise.title}}</h1>
+    <h2 class="ui dividing header">{{promise.title}}
+      <a ><i @click="onFavClick" class="star icon" :class="liked ? 'active' : ''"></i></a>
+    </h2>
     <div class="ui dividing medium header">
       공약 목적
-      <!-- <i id="purposeQuestion" class="question icon"></i> -->
+       <a @click="onPurposeQuestionClick"><i id="ppsQ" class="help icon"></i> </a>
     </div>
     <ul>
       <li v-for="pps in promise.purpose" :key="pps">{{pps}}</li>
     </ul>
-    <button class="ui basic icon button" @click="onPurposeQuestionClick"><i class="question icon"></i></button>
+    <!-- <button class="ui small basic icon button" ><i class="question icon"></i></button> -->
     <div class="ui modal" id="purposeQuestion">
       <i class="close icon"></i>
       <div class="ui header">공약 목적 질문하기</div>
@@ -26,29 +28,14 @@
         </div>
       </div>
     </div>
-    <div class="ui comments">
-      <div class="comment">
-        <div class="content">
-          <span class="author">서지수</span>
-          <div class="metadata">
-            <span class="date">Yesterday at 12:30AM</span>
-          </div>
-          <div class="text">
-            <p>이 사업은 왜 하는걸까요? 의미있는 사업 맞죠?</p>
-          </div>
-          <div class="actions">
-            <a class="like"><i class="smile icon"></i> 5 </a>
-            <a class="dislike"><i class="frown icon"></i> 2 </a>
-            <a class="reply"><i class="comment icon"></i></a>
-          </div>
-        </div>
-      </div>
+    <div class="ui dividing medium header">
+      이행 계획
+      <a @click="onPlanQuestionClick"><i id="plnQ" class="help icon"></i></a>
     </div>
-    <div class="ui dividing medium header">이행 계획</div>
     <ul>
     <li v-for="pln in promise.plan" :key="pln">{{pln}}</li>
     </ul>
-    <button class="ui basic icon button" @click="onPlanQuestionClick"><i class="question icon"></i></button>
+    <!-- <button class="ui basic icon button" @click="onPlanQuestionClick"><i class="question icon"></i></button> -->
     <div class="ui modal" id="planQuestion">
       <i class="close icon"></i>
       <div class="ui header">공약 이행 계획 질문하기</div>
@@ -66,29 +53,11 @@
         </div>
       </div>
     </div>
-    <div class="ui comments">
-      <div class="comment">
-        <div class="content">
-          <span class="author">이수정</span>
-          <div class="metadata">
-            <span class="date">Yesterday at 12:11PM</span>
-          </div>
-          <div class="text">
-            <p>이거 달성 가능한가요?? 계획이 엄서용 ㅜㅜ</p>
-          </div>
-          <div class="actions">
-            <a class="like"><i class="smile icon"></i> 7 </a>
-            <a class="dislike"><i class="frown icon"></i> 1 </a>
-            <a class="reply"><i class="comment icon"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="ui dividing medium header">이행 현황</div>
     <div class="ui feed">
       <button class="ui button" @click="getArticles">이행 현황 추가</button>
       <div class="ui long modal" id="addProgressModal">
-        <div class="ui active dimmer" v-if="articles.length === 0">
+        <div class="ui active dimmer" v-if="articles === 'notyet'">
           <div class="ui loader"></div>
         </div>
         <i class="close icon"></i>
@@ -101,6 +70,7 @@
           </div>
           <div v-if="registerArticle == 0" class="ui bottom attached segment">
             공약과 연관있는 기사를 골라주세요.
+            <div v-if="articles.length == 0">검색 결과가 없습니다.</div>
             <div class="ui feed">
               <div class="event" v-for="article in articles" :key="article.title">
                 <div class="label">
@@ -210,7 +180,7 @@
           <div class="summary">
             {{progress.title}}
             <div class="date">
-            {{progress.date.toLocaleDateString('ko-KR')}}
+            {{progress.date}}
             </div>
           </div>
           <div class="extra text">
@@ -253,7 +223,7 @@
     <br>
     전체시민: 3.4 / 5
     <br>
-    <div class="ui dividing small header">직접 평가해주세요</div>
+    <div class="ui small header">직접 평가해주세요</div>
     <div class="ui buttons">
       <button class="ui button" v-for="i in 5" :key="i" :class="score == i ? 'active' : ''" @click="score = i">{{i}}</button>
     </div>
@@ -261,6 +231,7 @@
       <div class="header">점수가 기록되었습니다.</div>
     </div>
     <div class="ui dividing medium header">시민 의견</div>
+    공약에 대한 의견이나 궁금하신 점을 자유롭게 남겨주세요.
     <div class="ui basic segment">
       <div class="ui minimal comments">
         <div class="comment" v-for="comment in comments" :key="comment.key">
@@ -285,9 +256,6 @@
           </div>
         </div>
         <form class="ui reply form">
-          <div class="ui buttons">
-            <button class="ui basic positive button" @submit.prevent>찬성</button><button @submit.prevent class="ui basic negative button">반대</button>
-          </div>
           <div class="field">
             <textarea v-model="commentText" rows="2"></textarea>
           </div>
@@ -330,7 +298,7 @@
     },
     data: function () {
       return {
-        articles: [],
+        articles: 'notyet',
         documents: [],
         registerArticle: 0,
         otherRefs: [              
@@ -348,7 +316,8 @@
         commentText: '',
         newsURL: 'http://34.208.245.104:3000/article',
         docuURL: 'http://34.208.245.104:3000/seoul',
-        promiseURL: 'http://34.208.245.104:3000/promise'
+        promiseURL: 'http://34.208.245.104:3000/promise',
+        liked: false
         // newsHeader: 
         // { 
         //   headers: 
@@ -426,6 +395,10 @@
       },
       onPlanQuestionClick: function () {
         $('#planQuestion').modal('show')
+      },
+      onFavClick: function () {
+        this.liked = !this.liked
+        this.$store.commit('addFavPromises', {city: this.city, district: this.district, key: this.promise.key})
       }
     }
   }
@@ -487,7 +460,15 @@ li {
   text-align: left;
 }
 
-#purposeQuestion {
+.header {
+  text-align: left;
+  padding-left: 2em;
+}
+#ppsQ {
+  float: right;
+}
+
+#plnQ{
   float: right;
 }
 </style>

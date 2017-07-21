@@ -2,10 +2,12 @@
   <div>
     <div class="question">
       {{question}}
+      <br>
+      <span v-if="questionNum != 3">1점에서 5점까지 점수로 평가해주세요.</span>
     </div>
     <div v-if="questionNum == 1" class="promise ui message big">
       {{promise.title}}
-      <a @click="showPromiseDetail" class="ui right floated button mini icon"><i class="search icon"></i></a>
+      <a @click="showPromiseDetail" class="ui right floated button mini icon"><i class="question icon"></i></a>
     </div>
     <div v-if="questionNum != 3" class="ui buttons">
       <button class="ui button" :class="score == i ? 'active' : ''" @click="score = i" v-for="i in 5" :key="i">
@@ -30,7 +32,7 @@
       <div class="header">{{promise.title}}</div>
       <div class="content">
         <div class="ui top attached tabular menu">
-          <a class="item" :class="curTabStatus === 'purpose' ? 'active' : ''" @click="curTabStatus = 'purpose'">공약 내용</a>
+          <a class="item" :class="curTabStatus === 'purpose' ? 'active' : ''" @click="curTabStatus = 'purpose'">공약 목적</a>
           <a class="item" :class="curTabStatus === 'plan' ? 'active' : ''" @click="curTabStatus = 'plan'">이행 계획</a>
           <a class="item" :class="curTabStatus === 'progress'? 'active' : ''" @click="curTabStatus = 'progress'">진행 상황</a>
         </div>
@@ -44,7 +46,7 @@
           TBD
         </div>
         <div class="ui positive message" :class="!isRequestSent? 'hidden' : ''">
-          <div class="header">의견이 전달되었습니다.</div>
+          <div class="header">의견이 등록되었습니다. 공약 정보에서 확인하실 수 있습니다.</div>
         </div>
         <div v-if="isRequestActive">
           <form class="ui form">
