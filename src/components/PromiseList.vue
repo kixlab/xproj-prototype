@@ -7,14 +7,15 @@
         {{displayedCurCategory}}
         <i class="ui dropdown icon"></i>
         <div class="ui menu">
-          <a class="item" @click="curCategory = ''">모두보기</a>
+          <a class="item" @click="curCategory = ''">모두 보기</a>
           <a class="item" v-for="category in categories" :key="category" @click="curCategory = category">{{category}}</a>
         </div>
       </div>
       <div class="ui dropdown item">
-        {{curTarget}}
+        {{displayedCurTarget}}
         <i class="ui dropdown icon"></i>
         <div class="ui menu">
+          <a class="item" @click="curTarget = ''">모두 보기</a>
           <a class="item" v-for="target in targets" :key="target" @click="curTarget= target">{{target}}</a>
         </div>
       </div>
@@ -46,20 +47,33 @@ export default {
   computed: {
     filteredPromises: function () {
       // return this.promises.promises
-      if(this.curCategory.length === 0){
-        return this.promises.promises.filter((promise) => {
-          return promise.target.includes(this.curTarget) || promise.target === '전체'
+      let promises = []
+      if(this.curCategory.length === 0 || this.curCategory === '공약 분류'){
+        promises = this.promises.promises
+      } else {
+        promises = this.promises.promises.filter((promise) => {
+          return promise.category.includes(this.curCategory)
         })
       }
-      return this.promises.promises.filter((promise) => {
-        return promise.category.includes(this.curCategory)
-      }).filter((promise) => {
-        return promise.target.includes(this.curTarget) || promise.target === '전체'
-      })
+
+      if(this.curTarget.length === 0 || this.curTarget === '수혜 대상'){
+        return promises
+      } else {
+        return promises.filter((promise) => {
+          return promise.target.includes(this.curTarget)
+        })
+      }
     },
     displayedCurCategory: function () {
       if(this.curCategory.length !== 0){
         return this.curCategory
+      } else {
+        return '모두 보기'
+      }
+    },
+    displayedCurTarget: function () {
+      if(this.curTarget.length !== 0){
+        return this.curTarget
       } else {
         return '모두 보기'
       }
@@ -72,8 +86,8 @@ export default {
   },
   data: function () {
     return {
-      curCategory: '',
-      curTarget: '전체'
+      curCategory: '공약 분류',
+      curTarget: '수혜 대상'
       // categories: ['안전/환경', '일자리', '문화체육', '보건복지', '교통/건설', 
       // '정치행정', '경제', '과학기술', '외교안보', '교육', '농축수산', '인권', '기타'],
 

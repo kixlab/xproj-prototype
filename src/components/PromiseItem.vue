@@ -22,7 +22,7 @@
         {{t}}
       </a>
     </div>
-    <div class="extra content">
+    <div class="extra content" v-if="promise.popularGroup.length !== 0">
       <i class="heart icon"></i>
       <div class="ui basic blue label" v-for="group in promise.popularGroup" :key="group">{{group}}</div>
     </div>
