@@ -9,14 +9,37 @@
       {{promise.title}}
       <a @click="showPromiseDetail" class="ui right floated button mini icon"><i class="info icon"></i></a>
     </div>
-    <div v-if="questionNum != 3" class="ui buttons">
-      <div v-for="i in 5" :key="i">
-      yay
-      <button class="ui button" :class="score == i ? 'active' : ''" @click="score = i">
-        {{i}}
-      </button>
+    <div v-if="questionNum != 3">
+      <div style="text-align: center">
+        <div style="display: inline-block;" v-for="i in 5" :key="i">
+	  <div v-if="questionNum == 0 && i == 1">
+	  <b>전혀 모른다</b>
+	  </div>
+	  <div v-if="questionNum == 0 && i == 5">
+	  <b>매우 잘 안다</b>
+	  </div>
+
+	  <div v-if="questionNum == 1 && i == 1">
+	  <b>좋아하지<br>않는다</b>
+	  </div>
+	  <div v-if="questionNum == 1 && i == 5">
+	  <b>좋아한다</b>
+	  </div>
+
+	  <div v-if="questionNum == 2 && i == 1">
+	  <b>지지하지<br>않는다</b>
+	  </div>
+	  <div v-if="questionNum == 2 && i == 5">
+	  <b>지지한다</b>
+	  </div>
+
+          <button style="margin-left: 5px; margin-right: 5px;" class="ui button" :class="score == i ? 'active' : ''" @click="score = i">
+            {{i}}
+          </button>
+        </div>
       </div>
     </div>
+
     <div v-else class="ui form">
       <textarea rows="3"></textarea>
     </div>
