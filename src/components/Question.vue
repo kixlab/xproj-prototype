@@ -7,7 +7,7 @@
     </div>
     <div v-if="questionNum == 1" class="promise ui message big">
       {{promise.title}}
-      <a @click="showPromiseDetail" class="ui right floated button mini icon"><i class="question icon"></i></a>
+      <a @click="showPromiseDetail" class="ui right floated button mini icon"><i class="info icon"></i></a>
     </div>
     <div v-if="questionNum != 3" class="ui buttons">
       <div v-for="i in 5" :key="i">
@@ -124,6 +124,7 @@
         else{
           this.$emit('nextRepr')
           this.questionNum = 0
+          this.isRequestSent = false
         }
         this.score = 0
         this.curTabStatus = 'purpose'
