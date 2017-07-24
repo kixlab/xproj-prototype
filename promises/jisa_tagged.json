@@ -57,6 +57,36 @@
         "purpose": [],
         "popularGroup": [],
         "progresses": [],
+        "title": "교통사망사고 50% 감축 추진",
+        "key": 3,
+        "plan": [],
+        "comments": [],
+        "category": [
+          "교통/건설"
+        ],
+        "target": [
+          "전체"
+        ]
+      },
+      {
+        "purpose": [],
+        "popularGroup": [],
+        "progresses": [],
+        "title": "장기사용 노후 전동차 호선별로 2022년까지 전면 교체",
+        "key": 4,
+        "plan": [],
+        "comments": [],
+        "category": [
+          "교통/건설"
+        ],
+        "target": [
+          "전체"
+        ]
+      }
+      {
+        "purpose": [],
+        "popularGroup": [],
+        "progresses": [],
         "title": "호선별로 분리된 관제센터를  SMART 통합관제 로 통합·운영",
         "key": 5,
         "plan": [],
@@ -4080,41 +4110,11 @@
           "근로자",
           "소상공인"
         ]
-      },
-      {
-        "purpose": [],
-        "popularGroup": [],
-        "progresses": [],
-        "title": "교통사망사고 50% 감축 추진",
-        "key": 259,
-        "plan": [],
-        "comments": [],
-        "category": [
-          "교통/건설"
-        ],
-        "target": [
-          "전체"
-        ]
-      },
-      {
-        "purpose": [],
-        "popularGroup": [],
-        "progresses": [],
-        "title": "장기사용 노후 전동차 호선별로 2022년까지 전면 교체",
-        "key": 260,
-        "plan": [],
-        "comments": [],
-        "category": [
-          "교통/건설"
-        ],
-        "target": [
-          "전체"
-        ]
       }
     ]
   },
   {
-    "city": "",
+    "city": "busan",
     "district": 0,
     "promises": [
       {
@@ -8031,7 +8031,7 @@
     ]
   },
   {
-    "city": "",
+    "city": "incheon",
     "district": 0,
     "promises": [
       {
