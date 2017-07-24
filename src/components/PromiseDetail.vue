@@ -258,7 +258,7 @@
           "type": 'plan'
         }
         if(this.planQuestion.length == 0){
-          comment.text = '공약 목적에 관한 설명이 부족합니다.'
+          comment.text = '공약의 이행 계획에 대해 자세한 설명을 요구합니다.'
         }
         this.postReply(comment)
         this.planQuestion = ''
