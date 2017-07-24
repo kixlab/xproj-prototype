@@ -151,7 +151,7 @@
 </template>
 
 <script>
-  import addProgress from './addProgress'
+  import addProgress from './AddProgress'
   export default {
     name: 'promiseDetail', 
     components: {
