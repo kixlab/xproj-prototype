@@ -10,9 +10,12 @@
       <a @click="showPromiseDetail" class="ui right floated button mini icon"><i class="question icon"></i></a>
     </div>
     <div v-if="questionNum != 3" class="ui buttons">
-      <button class="ui button" :class="score == i ? 'active' : ''" @click="score = i" v-for="i in 5" :key="i">
+      <div v-for="i in 5" :key="i">
+      yay
+      <button class="ui button" :class="score == i ? 'active' : ''" @click="score = i">
         {{i}}
       </button>
+      </div>
     </div>
     <div v-else class="ui form">
       <textarea rows="3"></textarea>
@@ -22,7 +25,7 @@
         이전 질문
       </button>
       <button class="ui button" @click="stopIntro">
-        건너뛰기
+        모두 건너뛰기
       </button>
       <button class="ui button primary" @click="incrementQuestionNum">
         다음 질문
@@ -46,7 +49,7 @@
           TBD
         </div>
         <div class="ui positive message" :class="!isRequestSent? 'hidden' : ''">
-          <div class="header">의견이 등록되었습니다. 공약 정보에서 확인하실 수 있습니다.</div>
+          <div class="header">의견이 등록되었습니다.<br> 이 의견은 모여 해당 인물에게 전달됩니다.</div>
         </div>
         <div v-if="isRequestActive">
           <form class="ui form">
@@ -55,7 +58,7 @@
           </form>
         </div>
         <div v-else class="ui fluid button" @click="isRequestActive=true">
-          자세한 정보를 알려주세요!!
+	  공약에 대한 자세한 정보를 요청합니다.
           <br>
           (1,241명이 요청합니다.)
         </div>

@@ -16,7 +16,7 @@
           <span v-else>{{repr.title}}</span>
         </div>
         <div class="updateDate">
-          마지막 갱신일: 17/05/31
+          최근 답변 일자: 17/05/31
         </div>
         <table class="ui small single line unstackable striped very compact table">
           <thead>
