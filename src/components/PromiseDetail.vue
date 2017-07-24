@@ -77,10 +77,21 @@
     <br>
     전체시민: 3.4 / 5
     <br>
-    <div class="ui small header">공약을 직접 점수로 평가해주세요</div>
-    <div class="ui buttons">
-      <button class="ui button" v-for="i in 5" :key="i" :class="score == i ? 'active' : ''" @click="score = i">{{i}}</button>
-    </div>
+    <div class="ui small header">이 공약을 좋아하십니까 ?</div>
+      <div style="text-align: center">
+        <div style="display: inline-block;" v-for="i in 5" :key="i">
+	  <div v-if="i == 1">
+	  <b>좋아하지<br>않는다</b>
+	  </div>
+	  <div v-else-if="i == 5">
+	  <b>좋아한다</b>
+	  </div>
+
+          <button style="margin-left: 5px; margin-right: 5px;" class="ui button" :class="score == i ? 'active' : ''" @click="score = i">
+            {{i}}
+          </button>
+        </div>
+      </div>
     <div class="ui positive message" v-if="score != 0">
       <div class="header">점수가 기록되었습니다.</div>
     </div>
