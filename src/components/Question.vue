@@ -80,7 +80,7 @@
             <button class="ui button" @click="onOpinionSend">의견 보내기</button>
           </form>
         </div>
-        <div v-else class="ui fluid button" @click="isRequestActive=true">
+        <div v-else class="ui fluid button" :class="isRequestSent? 'disabled' : ''" @click="isRequestActive=true">
 	  공약에 대한 자세한 정보를 요청합니다.
           <br>
           (1,241명이 요청합니다.)

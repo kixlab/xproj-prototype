@@ -98,7 +98,7 @@
       </div>
     </div>
     <div class="actions">
-      <div class="ui positive right button" @click="addProgress">
+      <div class="ui positive right button" @click="addProgress(0)">
         {{registerArticle !== 3 ? '닫기' : '저장'}}
       </div>
     </div>
@@ -110,7 +110,7 @@ export default {
   name: 'addProgress',
   props: ['city', 'district', 'promiseKey', 'reprName', 'promiseTitle', 'otherRefs'],
   mounted: function () {
-    $('.modal').modal({ observeChanges: true })
+    $('.modal').modal({ observeChanges: true, detachable: false })
     let url = this.newsURL + '/' + this.reprName + ' ' + this.promiseTitle
     console.log(url)
     this.$http.get(url).then(function (response) {
@@ -183,18 +183,23 @@ export default {
     },
     addProgress: function (p) {
       let progress = {}
+      console.log(p)
+      if(p === 0 && this.registerArticle !== 3){
+        console.log(p)
+        return
+      }
       p.checked = !p.checked
       if (this.registerArticle === 0){
         progress.title = p.title
         progress.type = 'article'
         progress.content = p.description
-        progress.date = new Date(p.pubDate)
+        progress.date = new Date(p.pubDate).toString()
         progress.references = {title: p.title, link: p.link}
       } else if (this.registerArticle === 1) {
         progress.title = p.title
         progress.type = 'document'
         progress.content = ''
-        progress.date = new Date(p.regDate)
+        progress.date = new Date(p.regDate).toString()
         progress.references = {title: p.title, link: p.url}
       } else if (this.registerArticle === 2) {
         progress = p

@@ -209,10 +209,6 @@
         }.bind(this))
       }.bind(this), 10000)
     },
-    destroyed: function () {
-      this.isProgressModalVisible = false
-      console.log('promisedetail destoryed')
-    },
     methods: {
       addReply: function () {
         console.log('addReply')
