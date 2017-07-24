@@ -170,27 +170,27 @@ export default new Vuex.Store({
           }
         }
       },
-      {
-        name: '진영',
-        title: '국회의원 (서울 용산구)',
-        job: '국회의원',
-        type: 'congressPerson',
-        city: 'seoul',
-        district: 40,
-        img: '/static/seoul-yongsan.jpg',
-        ratings: {
-          person: {
-            my: 4,
-            city: 4.1,
-            nation: 3.8
-          },
-          promise: {
-            my: 4,
-            city: 3.9,
-            nation: 4.1
-          }
-        }
-      },
+      // {
+      //   name: '진영',
+      //   title: '국회의원 (서울 용산구)',
+      //   job: '국회의원',
+      //   type: 'congressPerson',
+      //   city: 'seoul',
+      //   district: 40,
+      //   img: '/static/seoul-yongsan.jpg',
+      //   ratings: {
+      //     person: {
+      //       my: 4,
+      //       city: 4.1,
+      //       nation: 3.8
+      //     },
+      //     promise: {
+      //       my: 4,
+      //       city: 3.9,
+      //       nation: 4.1
+      //     }
+      //   }
+      // },
       {
         name: '하태경',
         title: '국회의원 (부산 해운대 갑)',
