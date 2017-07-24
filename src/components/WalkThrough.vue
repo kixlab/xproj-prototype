@@ -75,9 +75,9 @@
     data() {
       return {
         reprIdx: 0,
-        congressPersonPromise: {},
-        mayorPromise: {},
-        presidentPromise: {}
+        // congressPersonPromise: {},
+        // mayorPromise: {},
+        // presidentPromise: {}
       }
     },
     methods: {
