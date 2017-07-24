@@ -28,6 +28,10 @@
       reprQuestion,
       question
     },
+    mounted: function () {
+      // TODO: connect with the db
+      // this.$http.get()
+    },
     computed: {
       congressPerson: function () {
         return this.$store.getters.congressPerson
@@ -70,7 +74,10 @@
     },
     data() {
       return {
-        reprIdx: 0
+        reprIdx: 0,
+        congressPersonPromise: {},
+        mayorPromise: {},
+        presidentPromise: {}
       }
     },
     methods: {

@@ -67,38 +67,9 @@
             </div>
           </div>
           <div class="extra text" v-if="progress.content" v-html="progress.content">
-            <!-- <p>{{progress.content}}</p> -->
             <span v-if="progress.references"> 참고 자료: </span> <a v-if="progress.references" :href="progress.references.link" target="_blank">{{progress.references.title}}</a>
           </div>
-          <!-- <div class="meta">
-            <a class="like" @click="progress.likes += 1">
-              <i class="smile icon" ></i> {{progress.likes}} 
-            </a>
-            <a class="dislike" @click="progress.dislikes += 1">
-              <i class="frown icon"></i> {{progress.dislikes}}
-            </a>
-            <a class="question" @click="makeNewQuestion(progress.key)">
-              <i class="question icon"></i>
-            </a>
-          </div> -->
         </div>
-        <!-- <div class="ui modal" :id="'question' + progress.key">
-          <i class="close icon"></i>
-          <div class="ui header">진행 상황 질문하기</div>
-          <div class="content">
-            <div class="ui form">
-              <div class="field">
-                <label>공약의 진행 상황에 대해 궁금하신 점을 남겨주세요.</label>
-                <textarea rows="3"></textarea>
-              </div>
-            </div>
-          </div>
-          <div class="actions">
-            <div class="ui positive right button">
-              질문 남기기
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
     <div class="ui dividing medium header">공약 호감도</div>
@@ -267,21 +238,27 @@
         $('#planQuestion' + this.city + this.district + this.key).modal('show')
       },
       onPurposeQuestionLeft: function () {
-        let comment =  {
+        const comment =  {
           "author": this.$store.state.userName,
           "date": new Date(),
           "text": this.purposeQuestion,
           "type": 'purpose'
         }
+        if(this.purposeQuestion.length == 0){
+          comment.text = '공약 목적에 관한 설명이 부족합니다.'
+        }
         this.postReply(comment)
         this.purposeQuestion = ''
       },
       onPlanQuestionLeft: function () {
-        let comment =  {
+        const comment =  {
           "author": this.$store.state.userName,
           "date": new Date(),
           "text": this.planQuestion,
           "type": 'plan'
+        }
+        if(this.planQuestion.length == 0){
+          comment.text = '공약 목적에 관한 설명이 부족합니다.'
         }
         this.postReply(comment)
         this.planQuestion = ''

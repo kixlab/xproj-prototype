@@ -30,10 +30,10 @@
       </div>
       <h5 class="ui header">성별</h5>
       <div class="ui fluid compact buttons">
-        <button class="ui button" @submit.prevent :class="gender === 'M'?'secondary':''" @click="gender = 'M'">Male</button>
-        <button class="ui button" @submit.prevent :class="gender === 'F'?'secondary':''" @click="gender = 'F'">Female</button>
-        <button class="ui button" @submit.prevent :class="gender === 'O'?'secondary':''" @click="gender = 'O'">Other</button>
-        <button class="ui button" @submit.prevent :class="gender === 'R'?'secondary':''" @click="gender = 'R'">Rather not say</button>
+        <button class="ui button" :class="gender === 'M'?'secondary':''" @click.prevent="gender = 'M'">Male</button>
+        <button class="ui button" :class="gender === 'F'?'secondary':''" @click.prevent="gender = 'F'">Female</button>
+        <button class="ui button" :class="gender === 'O'?'secondary':''" @click.prevent="gender = 'O'">Other</button>
+        <button class="ui button" :class="gender === 'R'?'secondary':''" @click.prevent="gender = 'R'">Rather not say</button>
       </div>
       <h5 class="ui header">어디에 사십니까?</h5>
       <div class="two fields">

@@ -142,7 +142,10 @@ export default {
     promiseURL: () => {return 'http://34.208.245.104:3000/promise'},
     newsURL: () => { return 'http://34.208.245.104:3000/article'},
     docuURL: () => { return 'http://34.208.245.104:3000/seoul'},
-    keyword: function () { return this.promiseTitle.split(' ')[0]}
+    keyword: function () {
+      let kwds = this.promiseTitle.split(' ')
+      return kwds[0] + ' ' + kwds[1]
+    }
   },
   data: function () {
     return {
