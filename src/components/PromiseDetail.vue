@@ -1,7 +1,6 @@
 <template>
   <div>
     <h2 class="ui dividing header">{{promise.title}}
-      <a ><i @click="onFavClick" class="star icon" :class="liked ? 'active' : ''"></i></a>
     </h2>
     <div class="ui dividing medium header">
       공약 목적
@@ -9,22 +8,20 @@
     </div>
     <ul>
       <li v-for="pps in promise.purpose" :key="pps">{{pps}}</li>
-      <li style="color: red;">새로 추가된 무언가</li>
     </ul>
-    <!-- <button class="ui small basic icon button" ><i class="question icon"></i></button> -->
-    <div class="ui modal" id="purposeQuestion">
+    <div class="ui modal" :id="'purposeQuestion' + city + district + key">
       <i class="close icon"></i>
       <div class="ui header">공약 목적 질문하기</div>
       <div class="content">
         <div class="ui form">
           <div class="field">
             <label>공약의 목적에 대해 궁금하신 점을 남겨주세요.</label>
-            <textarea rows="3"></textarea>
+            <textarea rows="3" placeholder="공약 목적에 관한 설명이 부족합니다." v-model="purposeQuestion"></textarea>
           </div>
         </div>
       </div>
       <div class="actions">
-        <div class="ui positive right button">
+        <div class="ui positive right button" @click="onPurposeQuestionLeft">
           질문 남기기
         </div>
       </div>
@@ -36,137 +33,44 @@
     <ul>
     <li v-for="pln in promise.plan" :key="pln">{{pln}}</li>
     </ul>
-    <!-- <button class="ui basic icon button" @click="onPlanQuestionClick"><i class="question icon"></i></button> -->
-    <div class="ui modal" id="planQuestion">
+    <div class="ui modal" :id="'planQuestion' + city + district + key">
       <i class="close icon"></i>
       <div class="ui header">공약 이행 계획 질문하기</div>
       <div class="content">
         <div class="ui form">
           <div class="field">
             <label>공약의 이행 계획에 대해 궁금하신 점을 남겨주세요.</label>
-            <textarea rows="3"></textarea>
+            <textarea rows="3" placeholder="공약의 이행 계획에 대해 자세한 설명을 요구합니다." v-model="planQuestion"></textarea>
           </div>
         </div>
       </div>
       <div class="actions">
-        <div class="ui positive right button">
+        <div class="ui positive right button" @click="onPlanQuestionLeft">
           질문 남기기
         </div>
       </div>
     </div>
     <div class="ui dividing medium header">이행 현황</div>
     <div class="ui feed">
-      <button class="ui button" @click="getArticles">이행 현황 추가</button>
-      <div class="ui long modal" id="addProgressModal">
-        <div class="ui active dimmer" v-if="articles === 'notyet'">
-          <div class="ui loader"></div>
-        </div>
-        <i class="close icon"></i>
-        <div class="ui header">이행 현황 추가</div>
-        <div class="content">
-          <div class="ui top attached tabular menu">
-            <a class="item" :class="registerArticle == 0 ? 'active' : ''" @click="registerArticle = 0">기사 추가</a>
-            <a class="item" :class="registerArticle == 1? 'active' : ''" @click="registerArticle = 1">서울시 공문서 추가</a>
-            <a class="item" :class="registerArticle == 2 ? 'active': ''" @click="registerArticle = 2">기타 자료 추가</a>
-          </div>
-          <div v-if="registerArticle == 0" class="ui bottom attached segment">
-            공약과 연관있는 기사를 골라주세요.
-            <div v-if="articles.length == 0">검색 결과가 없습니다.</div>
-            <div class="ui feed">
-              <div class="event" v-for="article in articles" :key="article.title">
-                <div class="label">
-                  <i :class="article.checked ? 'checkmark box icon' : 'square icon'" @click="article.checked = !article.checked"></i>
-                </div>
-                <div class="content">
-                  <div class="summary">
-                    <a :href="article.link" target="_blank" v-html="article.title"></a>
-                    <div class="date">
-                      {{article.pubDate}}
-                    </div>
-                  </div>
-                  <div class="extra text">
-                    <p v-html="article.description"></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div v-else-if="registerArticle == 1" class="ui bottom attached segment">
-            공약과 연관있는 서울시 문서를 골라주세요.
-            <div class="ui feed" v-if="documents.length != 0">
-              <div class="event" v-for="document in documents" :key="document.title">
-                <div class="label">
-                  <i :class="document.checked ? 'checkmark box icon' : 'square icon'" @click="document.checked = !document.checked"></i>
-                </div>
-                <div class="content">
-                  <div class="summary">
-                    <a :href="document.url">{{document.title}}</a>
-                    <div class="date">
-                      {{document.regdate}}
-                    </div>
-                  </div>
-                  <div class="extra text">
-                    <p>{{document.kwrd}}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div v-else>검색 결과가 없습니다.</div>
-          </div>
-           <div v-else-if="registerArticle == 2" class="ui bottom attached segment">
-            <form class="ui form">
-              <div class="field">
-                <label>제목</label>
-                <input type="text"></input>
-              </div>
-              <div class="inline fields" id="genderField">
-                <label>자료 종류</label>
-                <div class="field">
-                  <div class="ui radio checkbox">
-                    <input type="radio"></input>
-                    <label>정부 공식 문서</label>
-                  </div>
-                </div>
-                <div class="field">
-                  <div class="ui radio checkbox">
-                    <input type="radio" name="gender"></input>
-                    <label>그 외(개인 경험, 블로그 등)</label>
-                  </div>
-                </div>
-              </div>
-              <div class="field">
-                <label>설명</label>
-                <textarea rows="3"></textarea>
-              </div>
-              <div class="field">
-                <label>출처</label>
-                <input type="text"></input>
-              </div>
-            </form>
-          </div>
-        </div> 
-        <div class="actions">
-          <div class="ui positive right button">
-            진행 상황 저장하기
-          </div>
-        </div>
-      </div>
-      <div class="event" v-for="progress in promise.progresses" :key="progress.key">
+      <button class="ui button" @click="showAddProgressModal">이행 현황 추가</button>
+      <add-progress v-if="isProgressModalVisible" @otherRefChecked="onOtherRefChecked" :otherRefs="otherRefs" :city="city" :district="district" :promiseKey="key" @progressUpdate="onProgressUpdate" :reprName="repr.name" :promiseTitle="promise.title"></add-progress>
+      <div class="event" v-for="progress in progresses" :key="progress.key">
         <div class="label">
           <i class="checkmark box icon"></i>
         </div>
         <div class="content">
           <div class="summary">
-            {{progress.title}}
+            <span v-if="progress.title" v-html="progress.title"></span>
+            <!-- {{progress.title}} -->
             <div class="date">
-            {{progress.date}}
+            {{convertDate(progress.date)}}
             </div>
           </div>
-          <div class="extra text">
-            <p>{{progress.content}}</p>
-            <span v-if="progress.reference"> 참고 자료: </span> <a v-if="progress.reference" :href="progress.reference.link" target="_blank">{{progress.reference.title}}</a>
+          <div class="extra text" v-if="progress.content" v-html="progress.content">
+            <!-- <p>{{progress.content}}</p> -->
+            <span v-if="progress.references"> 참고 자료: </span> <a v-if="progress.references" :href="progress.references.link" target="_blank">{{progress.references.title}}</a>
           </div>
-          <div class="meta">
+          <!-- <div class="meta">
             <a class="like" @click="progress.likes += 1">
               <i class="smile icon" ></i> {{progress.likes}} 
             </a>
@@ -176,9 +80,9 @@
             <a class="question" @click="makeNewQuestion(progress.key)">
               <i class="question icon"></i>
             </a>
-          </div>
+          </div> -->
         </div>
-        <div class="ui modal" :id="'question' + progress.key">
+        <!-- <div class="ui modal" :id="'question' + progress.key">
           <i class="close icon"></i>
           <div class="ui header">진행 상황 질문하기</div>
           <div class="content">
@@ -194,7 +98,7 @@
               질문 남기기
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="ui dividing medium header">공약 호감도</div>
@@ -210,18 +114,14 @@
       <div class="header">점수가 기록되었습니다.</div>
     </div>
     <div class="ui dividing medium header">시민 의견</div>
-    공약에 대한 의견이나 궁금하신 점을 자유롭게 남겨주세요.
     <div class="ui basic segment">
       <div class="ui minimal comments">
         <div class="comment" v-for="comment in comments" :key="comment.key">
           <a class="avatar"><img src="/static/logo.png"></a>
           <div class="content">
             <span class="author">{{comment.author}}</span>
-            <div class="metadata"><span class="date">{{comment.date}}</span></div>
+            <div class="metadata"><span class="date">{{convertDate(comment.date)}}</span></div>
             <div class="text">{{comment.text}}</div>
-            <!--<div class="actions">
-              <a class="reply">Reply</a>
-            </div>-->
             <div v-if="comment.replies" class="comments">
               <div class="comment" v-for="reply in comment.replies" :key="reply.key">
                 <a class="avatar"><img src="/static/logo.png"></a>
@@ -235,6 +135,10 @@
           </div>
         </div>
         <form class="ui reply form">
+          <label class="ui tiny header">
+            공약에 대한 의견이나 궁금하신 점을 자유롭게 남겨주세요.
+          </label>
+          <br>
           <div class="field">
             <textarea v-model="commentText" rows="2"></textarea>
           </div>
@@ -247,17 +151,13 @@
 </template>
 
 <script>
+  import addProgress from './addProgress'
   export default {
     name: 'promiseDetail', 
+    components: {
+      addProgress
+    },
     computed: {
-      // promise: function () {
-      //   let promiseList =  this.$store.state.promises.find(function(ps) {
-      //     if(ps.city === this.$route.params.city && ps.district == this.$route.params.district) {
-      //       return ps
-      //     }
-      //   }.bind(this))
-      //   return promiseList.promises[this.$route.params.key]
-      // },
       city: function () {return this.$route.params.city},
       district: function () { return this.$route.params.district},
       key: function () { return this.$route.params.key },
@@ -271,167 +171,137 @@
           }
         }.bind(this))
       },
+      otherRefs: function () {
+        if(!this.promise.progresses){
+          return []
+        }
+        return this.promise.progresses.filter(function (p){
+          return p.type === 'otherRef'
+        })
+      },
       keyword: function () {
         return this.promise.title.split(' ')[0]
+      },
+      progresses: function () {
+        if(!this.promise.progresses){
+          return []
+        }
+        return this.promise.progresses.filter(function(p){
+          return p.approval >= 5
+        }).sort(function(a, b){
+          const aDate = new Date(a.date)
+          const bDate = new Date(b.date)
+          return aDate > bDate
+        })
       }
     },
     data: function () {
       return {
-        articles: 'notyet',
-        documents: [],
-        registerArticle: 0,
-        otherRefs: [              
-          {
-            key: 1,
-            content: '천개의 숲 사업 예산안입니다. 2017년 새로 조성하는 숲 200개와 지금까지 조성된 숲 500개의 유지 관리비를 포함해 총 50억 예산이 배정되어 있습니다.',
-            date: new Date(2017, 5, 31),
-            title: '2017년 천개의 숲 사업 관련 예산안',
-            reference: { 'title': '2017년 서울시 예산안', 'link': 'http://www.seoul.go.kr' },
-            checked: false,
-          },
-        ],
         promise: {},
         score: 0,
         commentText: '',
         newsURL: 'http://34.208.245.104:3000/article',
         docuURL: 'http://34.208.245.104:3000/seoul',
         promiseURL: 'http://34.208.245.104:3000/promise',
-        liked: false
-        // newsHeader: 
-        // { 
-        //   headers: 
-        //     {
-        //       'X-Naver-Client-Secret': '6svkkZa8A8',
-        //       'X-Naver-Client-Id': 'X7WP9A3NGB1H8J8iJA7Y',
-        //       'Access-Control-Allow-Origin': 'http://localhost:8080',
-        //       'Access-Control-Request-Method': 'GET'
-        //     }
-        // }
+        liked: false,
+        isProgressModalVisible: false,
+        purposeQuestion: '',
+        planQuestion: ''
       }
     },
     mounted: function () {
-      $('.modal').modal({observeChanges: true})
       let url = this.promiseURL + '/' + this.city + '/' + this.district + '/' + this.key
-      this.$http.get(url).then(function(response) {
-        this.promise = response.body
-        console.log(response.body)
-      }.bind(this), function(response) {
-      }.bind(this))
+      this.$http.get(url).then(function (response) {
+          this.promise = response.body
+          console.log(response.body)
+          this.isProgressModalVisible = true
+
+        }.bind(this), function (response) {
+        }.bind(this))
+      setInterval(function () {
+        console.log('polling...')
+        this.$http.get(url).then(function (response) {
+          this.promise = response.body
+          console.log(response.body)
+        }.bind(this), function (response) {
+        }.bind(this))
+      }.bind(this), 10000)
+    },
+    destroyed: function () {
+      this.isProgressModalVisible = false
+      console.log('promisedetail destoryed')
     },
     methods: {
       addReply: function () {
         console.log('addReply')
-        let url = this.promiseURL + '/' + this.city + '/' + this.district + '/' + this.key + '/comment'
         let comment =  {
-          author: this.$store.state.userName,
-          date: Date.now(),
-          text: this.commentText
+          "author": this.$store.state.userName,
+          "date": new Date(),
+          "text": this.commentText,
+          "type": 'general'
         }
-        this.$http.put(url, {body: comment}).then(function(response){
+        this.postReply(comment)
+        this.commentText = ''
+      },
+      postReply: function(comment) {
+        let url = this.promiseURL + '/' + this.city + '/' + this.district + '/' + this.key + '/comment'
+        this.$http.put(url, comment).then(function(response){
           let url = this.promiseURL + '/' + this.city + '/' + this.district + '/' + this.key
           this.$http.get(url).then(function(response) {
             this.promise = response.body
             console.log(response.body)
           }.bind(this), function(response) {
           }.bind(this))
-          this.commentText = ''
         }.bind(this))
       },
       makeNewQuestion: function (i) {
         $('#question' + i).modal('show')
       },
-      getArticles: function () {
-        $('#addProgressModal').modal('show')
-        let url = this.newsURL + '/' + this.repr.name + ' ' + this.promise.title
-        console.log(url)
-        this.$http.get(url).then(function(response) {
-          console.log(url)
-          let items = JSON.parse(response.body).items
-          this.articles = items.map(function (a) {
-            a.checked = false
-            return a
-          })
-          console.log(this.articles)
-          // console.log(response.body)
-        }.bind(this), function(response) {
-          this.article = [{title: 'Error'}]
-        }.bind(this))
-        this.$http.get(this.docuURL + '/' + this.keyword).then(function(response) {
-          console.log(response.body)
-          let items = response.body.item
-          if(items) {
-            this.documents = items.map(function (a) {
-              a.checked = false
-              return a
-            })
-          }
-        }.bind(this), function(response){
-          this.documents = [{title: 'Error'}]
-        }.bind(this))
-      },
       showAddProgressModal: function () {
-        $('#addProgressModal').modal('show')
+        $('#addProgressModal' + this.city + this.district + this.key).modal('show')
       },
       onPurposeQuestionClick: function () {
-        $('#purposeQuestion').modal('show')
+        $('#purposeQuestion' + this.city + this.district + this.key).modal('show')
       },
       onPlanQuestionClick: function () {
-        $('#planQuestion').modal('show')
+        $('#planQuestion' + this.city + this.district + this.key).modal('show')
       },
-      onFavClick: function () {
-        this.liked = !this.liked
-        this.$store.commit('addFavPromises', {city: this.city, district: this.district, key: this.promise.key})
+      onPurposeQuestionLeft: function () {
+        let comment =  {
+          "author": this.$store.state.userName,
+          "date": new Date(),
+          "text": this.purposeQuestion,
+          "type": 'purpose'
+        }
+        this.postReply(comment)
+        this.purposeQuestion = ''
+      },
+      onPlanQuestionLeft: function () {
+        let comment =  {
+          "author": this.$store.state.userName,
+          "date": new Date(),
+          "text": this.planQuestion,
+          "type": 'plan'
+        }
+        this.postReply(comment)
+        this.planQuestion = ''
+      },
+      onProgressUpdate: function () {
+
+      },
+      onOtherRefChecked: function(otherRef){
+        let o = this.otherRefs.find(function(o){
+          return (o.title === otherRef.title && o.content === otherRef.content)
+        })
+        console.log('onOtherRefChecked')
+        o.checked = !o.checked
+      },
+      convertDate: function(dateStr){
+        const date = new Date(dateStr)
+        return date.toLocaleString('ko-KR')
       }
     }
   }
-        //   promise:  {
-      //     title: '쉐어하우스형 임대주택 공급',
-      //     purpose: '주택 공급난 해소',
-      //     plan: '2020년까지 1500호 공급',
-      //     popularGroup: ['20대', '30대'],
-      //     category: '교통/건설',
-      //     progresses:[          
-      //     {
-      //       key: 1,
-      //       title: '토지 보상 완료',
-      //       content: '토지주와 협의 끝에 토지 보상을 완료하였습니다.',
-      //       reference: {
-      //         title: '유성구 임대주택 사업 토지보상 완료... 마침내 첫 삽 뜨나' ,
-      //         link: 'https://news.naver.com'
-      //       },
-      //       date: new Date(2017, 5, 19),
-      //       likes: 21,
-      //       dislikes: 9
-      //     }, 
-      //     {
-      //       key: 0,
-      //       title: '구암동 34번지 부지 선정',
-      //       content: '첫번째 임대주택 건립을 위해 공청회를 거쳐 부지를 선정하였습니다.',
-      //       date: new Date(2017, 3, 2),
-      //       likes: 34,
-      //       dislikes: 12
-      //     }] 
-      //   },
-      //   comments:[
-      //     {
-      //       key: 0,
-      //       author: '유지애',
-      //       date:  new Date(2017, 6, 2, 9, 0, 15).toLocaleString('ko-KR'),
-      //       text: '우와! 참 좋은 공약이에요'
-      //     },
-      //     {
-      //       key: 1,
-      //       author: '이수정',
-      //       date: new Date(2017, 6, 2, 15, 37, 12).toLocaleString('ko-KR'),
-      //       text: '예산이 얼마나 들 지 걱정되네요',
-      //       replies: [{
-      //         key: 0,
-      //         author: '조승래',
-      //         date: new Date(2017, 6, 4, 11, 21, 57).toLocaleString('ko-KR'),
-      //         text: '대통령 공약 사업으로 선정되어 전액 국비 지원 예정입니다. 걱정하지 마세요!'
-      //       }]
-      //     }
-      //   ],
 </script>
 
 <style scoped>
