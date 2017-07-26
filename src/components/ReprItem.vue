@@ -15,9 +15,9 @@
           <router-link v-if="!isReprDetail" :to="{name: 'reprDetail', params: {city: repr.city, district: repr.district}}">{{repr.title}}</router-link>
           <span v-else>{{repr.title}}</span>
         </div>
-        <div class="updateDate">
+        <!-- <div class="updateDate">
           최근 답변 일자: 17/05/31
-        </div>
+        </div> -->
         <table class="ui small single line unstackable striped very compact table">
           <thead>
             <tr>

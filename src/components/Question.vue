@@ -33,7 +33,7 @@
 	  <b>지지한다</b>
 	  </div>
 
-          <button style="margin-left: 5px; margin-right: 5px;" class="ui button" :class="score == i ? 'active' : ''" @click="score = i">
+          <button style="margin-left: 5px; margin-right: 5px;" class="ui button" :class="score == i ? 'primary' : ''" @click="score = i">
             {{i}}
           </button>
         </div>

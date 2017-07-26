@@ -4,7 +4,7 @@
     </h2>
     <div class="ui dividing medium header">
       공약 목적
-       <a @click="onPurposeQuestionClick"><i id="ppsQ" class="help icon"></i> </a>
+       <a @click="onPurposeQuestionClick"><i id="ppsQ" class="comment outline icon"></i> </a>
     </div>
     <ul>
       <li v-for="pps in promise.purpose" :key="pps">{{pps}}</li>
@@ -28,7 +28,7 @@
     </div>
     <div class="ui dividing medium header">
       이행 계획
-      <a @click="onPlanQuestionClick"><i id="plnQ" class="help icon"></i></a>
+      <a @click="onPlanQuestionClick"><i id="plnQ" class="comment outline icon"></i></a>
     </div>
     <ul>
     <li v-for="pln in promise.plan" :key="pln">{{pln}}</li>
@@ -67,7 +67,9 @@
             </div>
           </div>
           <div class="extra text" v-if="progress.content" v-html="progress.content">
-            <span v-if="progress.references"> 참고 자료: </span> <a v-if="progress.references" :href="progress.references.link" target="_blank">{{progress.references.title}}</a>
+          </div>
+          <div class="extra text">
+            <span v-if="typeof progress.references != 'undefined' && progress.references"> 참고 자료: </span> <a v-if="progress.references" :href="progress.references.link" target="_blank">{{progress.references.title}}</a>
           </div>
         </div>
       </div>

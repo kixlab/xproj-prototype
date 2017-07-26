@@ -55,25 +55,7 @@
           </div>
         </div>
         <div v-else>검색 결과가 없습니다.</div>
-      </div>
-      <div v-else-if="registerArticle == 3" class="ui bottom attached segment">
-        <form class="ui form">
-          <div class="field">
-            <label>제목</label>
-            <input type="text" v-model="otherRef.title" placeholder="자료의 제목을 적어주세요."></input>
-          </div>
-          <div class="field">
-            <label>설명</label>
-            <textarea rows="3" v-model="otherRef.content" placeholder="자료에 관한 간단한 설명을 적어주세요."></textarea>
-          </div>
-          <div class="field">
-            <label>출처 설명</label>
-            <input type="text" v-model="otherRef.references.title" placeholder="출처에 관한 간단한 설명을 적어주세요."></input>
-            <label>출처 링크</label>
-            <input type="text" v-model="otherRef.references.link" placeholder="출처를 가리키는 URL을 적어주세요."></input>
-          </div>
-        </form>
-      </div>
+      </div>   
       <div v-else-if="registerArticle == 2" class="ui bottom attached segment">
         공약과 연관있는 자료를 골라주세요.
         <div v-if="otherRefs.length == 0">검색 결과가 없습니다.</div>
@@ -96,10 +78,28 @@
           </div>
         </div>
       </div>
+      <div v-else-if="registerArticle == 3" class="ui bottom attached segment">
+        <form class="ui form">
+          <div class="field">
+            <label>제목</label>
+            <input type="text" v-model="otherRef.title" placeholder="자료의 제목을 적어주세요."></input>
+          </div>
+          <div class="field">
+            <label>설명</label>
+            <textarea rows="3" v-model="otherRef.content" placeholder="자료에 관한 간단한 설명을 적어주세요."></textarea>
+          </div>
+          <div class="field">
+            <label>출처 설명</label>
+            <input type="text" v-model="otherRef.reference.title" placeholder="출처에 관한 간단한 설명을 적어주세요."></input>
+            <label>출처 링크</label>
+            <input type="text" v-model="otherRef.reference.link" placeholder="출처를 가리키는 URL을 적어주세요."></input>
+          </div>
+        </form>
+      </div>
     </div>
     <div class="actions">
       <div class="ui positive right button" @click="addProgress(0)">
-        {{registerArticle !== 3 ? '닫기' : '저장'}}
+        저장
       </div>
     </div>
   </div>
@@ -157,7 +157,7 @@ export default {
         title: '',
         content:'',
         date: Date.now(),
-        references: {
+        reference: {
           title: '',
           link: ''
         }
@@ -194,13 +194,13 @@ export default {
         progress.type = 'article'
         progress.content = p.description
         progress.date = new Date(p.pubDate).toString()
-        progress.references = {title: p.title, link: p.link}
+        progress.reference = {title: p.title, link: p.link}
       } else if (this.registerArticle === 1) {
         progress.title = p.title
         progress.type = 'document'
         progress.content = ''
         progress.date = new Date(p.regDate).toString()
-        progress.references = {title: p.title, link: p.url}
+        progress.reference = {title: p.title, link: p.url}
       } else if (this.registerArticle === 2) {
         progress = p
       } else if (this.registerArticle === 3) {
@@ -214,7 +214,7 @@ export default {
           title: '',
           content:'',
           date: Date.now(),
-          references: {
+          reference: {
             title: '',
             link: ''
           }
