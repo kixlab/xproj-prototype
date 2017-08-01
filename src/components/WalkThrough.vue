@@ -7,9 +7,9 @@
       다음은 시민 분께서 선출하신 공직자입니다.
     </div>
     <div class="ui buttons">
-      <button class="ui button" :class="reprIdx == 0 ? 'blue' : ''" >{{congressPerson.name}}</button>
-      <button class="ui button" :class="reprIdx == 1 ? 'blue' : ''">{{mayor.name}}</button>
-      <button class="ui button" :class="reprIdx == 2 ? 'blue' : ''">{{president.name}}</button>
+      <button class="ui button" @click="reprIdx = 0" :class="reprIdx == 0 ? 'blue' : ''" >{{congressPerson.name}}</button>
+      <button class="ui button" @click="reprIdx = 1" :class="reprIdx == 1 ? 'blue' : ''">{{mayor.name}}</button>
+      <button class="ui button" @click="reprIdx = 2" :class="reprIdx == 2 ? 'blue' : ''">{{president.name}}</button>
     </div>
     <repr-question :repr="curRepr">
     </repr-question>
@@ -30,26 +30,34 @@
     },
     mounted: function () {
       // TODO: connect with the db
-      // this.$http.get()
+      this.$http.get(this.congressPersonPromiseURL).then(function(res){
+        this.congressPersonPromise = res.body
+      }.bind(this))
+      this.$http.get(this.mayorPromiseURL).then(function(res){
+        this.mayorPromise = res.body
+      }.bind(this))
+      this.$http.get(this.presidentPromiseURL).then(function(res){
+        this.presidentPromise = res.body
+      }.bind(this))
     },
     computed: {
+      congressPersonPromiseURL: function () {
+        return 'http://34.208.245.104:3000/promise/'+this.city+ '/'+this.district+'/0'
+      },
+      mayorPromiseURL: function () {
+        return 'http://34.208.245.104:3000/promise/'+this.city+ '/0/0'
+      },
+      presidentPromiseURL: function () {
+        return 'http://34.208.245.104:3000/promise/korea/0/0'
+      },
       congressPerson: function () {
         return this.$store.getters.congressPerson
-      },
-      congressPersonPromise: function () {
-        return this.$store.getters.congressPersonPromises.promises[0]
       },
       mayor: function () {
         return this.$store.getters.mayor
       },
-      mayorPromise: function () {
-        return this.$store.getters.mayorPromises.promises[0]
-      },
       president: function () {
         return this.$store.getters.president
-      },
-      presidentPromise: function () {
-        return this.$store.getters.presidentPromises.promises[0]
       },
       curReprPromise: function () {
         if(this.reprIdx == 0){
@@ -75,9 +83,9 @@
     data() {
       return {
         reprIdx: 0,
-        // congressPersonPromise: {},
-        // mayorPromise: {},
-        // presidentPromise: {}
+        congressPersonPromise: {},
+        mayorPromise: {},
+        presidentPromise: {}
       }
     },
     methods: {

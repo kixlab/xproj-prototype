@@ -22,7 +22,7 @@
     <select class="ui fluid search selection dropdown" :value="district" @change="onDistrictChanged($event.target.value)">
       <option v-for="(district, idx) in districts" :value="idx" :key="district">{{district}}</option>
     </select>
-
+    <input class="ui fluid input" v-model="name" placeholder="이름"></input>
     <repr-item v-for="repr in filteredReprs" :key="repr.name" :repr="repr"></repr-item>
   </div>
 </template>
@@ -61,6 +61,9 @@ export default {
         if(this.district !== 0 && repr.district != this.district){
           return false
         }
+        if(this.name !== '' && !repr.name.includes(name)){
+          return false
+        }
         return true
       }.bind(this))
     }
@@ -71,7 +74,8 @@ export default {
       isMayor: false, 
       isPresident: false,
       city: '',
-      district: 0
+      district: 0,
+      name: ''
     }
   },
   methods: {

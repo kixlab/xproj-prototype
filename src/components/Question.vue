@@ -6,8 +6,11 @@
       <span v-if="questionNum != 3">1점에서 5점까지 점수로 평가해주세요.</span>
     </div>
     <div v-if="questionNum == 1" class="promise ui message big">
-      {{promise.title}}
-      <a @click="showPromiseDetail" class="ui right floated button mini icon"><i class="info icon"></i></a>
+      <div>{{promise.title}}</div>
+      <!-- <button @click="showPromiseDetail" class="ui right floated mini icon button"><i class="info icon"></i></button> -->
+    </div>
+    <div v-if="questionNum == 1" class="showPromiseDetail">
+      <a @click="showPromiseDetail">더 알아보기...</a>
     </div>
     <div v-if="questionNum != 3">
       <div style="text-align: center">
@@ -188,6 +191,9 @@
     font-weight: bold;
     font-size: 1.2em;
     margin: 1em 0;
+  }
+  .showPromiseDetail {
+    text-align: right;
   }
 
 </style>

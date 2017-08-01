@@ -6,7 +6,7 @@
     <i class="close icon"></i>
     <div class="ui header">이행 현황 추가</div>
     <div class="content">
-      <div class="ui top attached tabular menu">
+      <div class="ui top attached tabular four item menu">
         <a class="item" :class="registerArticle == 0 ? 'active' : ''" @click="registerArticle = 0">기사 추가</a>
         <a class="item" :class="registerArticle == 1 ? 'active' : ''" @click="registerArticle = 1">서울시 공문서 추가</a>
         <a class="item" :class="registerArticle == 2 ? 'active' : ''" @click="registerArticle = 2">기타 자료 확인하기</a>
