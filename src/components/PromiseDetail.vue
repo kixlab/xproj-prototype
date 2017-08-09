@@ -4,7 +4,7 @@
     </h2>
     <div class="ui dividing medium header">
       공약 목적
-       <a @click="onPurposeQuestionClick"><i id="ppsQ" class="comment outline icon"></i> </a>
+       <a @click="onPurposeQuestionClick" id="ppsQ"><i class="comment outline icon"></i> {{purposeCount}}</a>
     </div>
     <ul>
       <li v-for="pps in promise.purpose" :key="pps">{{pps}}</li>
@@ -28,7 +28,7 @@
     </div>
     <div class="ui dividing medium header">
       이행 계획
-      <a @click="onPlanQuestionClick"><i id="plnQ" class="comment outline icon"></i></a>
+      <a @click="onPlanQuestionClick" id="plnQ"><i class="comment outline icon"></i> {{planCount}} </a>
     </div>
     <ul>
     <li v-for="pln in promise.plan" :key="pln">{{pln}}</li>
@@ -69,12 +69,15 @@
           <div class="extra text" v-if="progress.content" v-html="progress.content">
           </div>
           <div class="extra text">
-            <span v-if="typeof progress.references != 'undefined' && progress.references"> 참고 자료: </span> <a v-if="progress.references" :href="progress.references.link" target="_blank">{{progress.references.title}}</a>
+            <span v-if="typeof progress.references != 'undefined' && progress.references"> 참고 자료: </span> <a v-if="progress.references" :href="progress.references.link" target="_blank" v-html="progress.references.title"></a>
+          </div>
+          <div class="extra text">
+            {{progress.approval}}명이 관련있는 자료라고 생각합니다.
           </div>
         </div>
       </div>
     </div>
-    <div class="ui dividing medium header">공약 호감도</div>
+    <!-- <div class="ui dividing medium header">공약 호감도</div>
     지역구민: 3.7 / 5
     <br>
     전체시민: 3.4 / 5
@@ -96,19 +99,17 @@
       </div>
     <div class="ui positive message" v-if="score != 0">
       <div class="header">점수가 기록되었습니다.</div>
-    </div>
+    </div> -->
     <div class="ui dividing medium header">시민 의견</div>
     <div class="ui basic segment">
-      <div class="ui minimal comments">
+      <div class="ui comments">
         <div class="comment" v-for="comment in comments" :key="comment.key">
-          <a class="avatar"><img src="/static/logo.png"></a>
           <div class="content">
             <span class="author">{{comment.author}}</span>
             <div class="metadata"><span class="date">{{convertDate(comment.date)}}</span></div>
             <div class="text">{{comment.text}}</div>
-            <div v-if="comment.replies" class="comments">
-              <div class="comment" v-for="reply in comment.replies" :key="reply.key">
-                <a class="avatar"><img src="/static/logo.png"></a>
+            <div v-if="replies && isReplyVisible[comment.key]" class="comments">
+              <div class="comment" v-for="reply in replies" :key="reply.key">
                 <div class="content">
                   <span class="author">{{reply.author}}</span>
                   <div class="metadata"><span class="date">{{reply.date}}</span></div>
@@ -116,12 +117,16 @@
                 </div>
               </div>
             </div>
+            <div class="actions">
+              <a class="reply" @click="setReplyVisible(comment.key)">{{isReplyVisible[comment.key] ? '답글 접기' : '답글 보기'}}</a>
+            </div>
           </div>
         </div>
         <form class="ui reply form">
           <label class="ui tiny header">
             공약에 대한 의견이나 궁금하신 점을 자유롭게 남겨주세요.
           </label>
+          <br>
           <br>
           <div class="field">
             <textarea v-model="commentText" rows="2"></textarea>
@@ -142,6 +147,16 @@
       addProgress
     },
     computed: {
+      purposeCount: function () {
+        return this.comments.reduce(function(prev, cur){
+          return (cur.type === 'purpose') ? prev + 1 : prev
+        }, 0)
+      },
+      planCount: function () {
+        return this.comments.reduce(function(prev, cur){
+          return (cur.type === 'plan') ? prev + 1 : prev
+        }, 0)
+      },
       city: function () {return this.$route.params.city},
       district: function () { return this.$route.params.district},
       key: function () { return this.$route.params.key },
@@ -190,7 +205,14 @@
         liked: false,
         isProgressModalVisible: false,
         purposeQuestion: '',
-        planQuestion: ''
+        planQuestion: '',
+        replies: [{
+          key: 0,
+          author: '정예인',
+          date: new Date(),
+          text: '과연 그럴까요?'
+        }],
+        isReplyVisible: []
       }
     },
     mounted: function () {
@@ -199,13 +221,16 @@
           this.promise = response.body
           console.log(response.body)
           this.isProgressModalVisible = true
-
+          this.isReplyVisible = this.comments.map(function(c){ return false })
         }.bind(this), function (response) {
         }.bind(this))
       setInterval(function () {
         console.log('polling...')
         this.$http.get(url).then(function (response) {
           this.promise = response.body
+          while(this.isReplyVisible.length < this.comments.length){
+            this.isReplyVisible.push(false)
+          }
           console.log(response.body)
         }.bind(this), function (response) {
         }.bind(this))
@@ -233,6 +258,10 @@
           }.bind(this), function(response) {
           }.bind(this))
         }.bind(this))
+      },
+      setReplyVisible: function(key){
+        const curVal = this.isReplyVisible[key]
+        this.isReplyVisible.splice(key, 1, !curVal)
       },
       makeNewQuestion: function (i) {
         $('#question' + i).modal('show')
@@ -304,9 +333,11 @@ li {
 }
 #ppsQ {
   float: right;
+  cursor: pointer;
 }
 
 #plnQ{
   float: right;
+  cursor: pointer;
 }
 </style>

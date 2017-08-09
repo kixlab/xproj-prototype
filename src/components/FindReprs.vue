@@ -9,6 +9,7 @@
     </div>
     <h5 class="ui header">시/도</h5>
     <select class="ui fluid search selection dropdown" :value="city" @change="onCityChanged($event.target.value)">
+      <option value="">모두보기</option>
       <option value="seoul">서울특별시</option>
       <option value="daejeon">대전광역시</option>
       <option value="busan">부산광역시</option>
@@ -22,7 +23,10 @@
     <select class="ui fluid search selection dropdown" :value="district" @change="onDistrictChanged($event.target.value)">
       <option v-for="(district, idx) in districts" :value="idx" :key="district">{{district}}</option>
     </select>
-    <input class="ui fluid input" v-model="name" placeholder="이름"></input>
+    <h5 class="ui header">이름</h5>
+    <div class="ui fluid input">
+      <input v-model="name" placeholder="이름"></input>
+    </div>
     <repr-item v-for="repr in filteredReprs" :key="repr.name" :repr="repr"></repr-item>
   </div>
 </template>
@@ -61,7 +65,7 @@ export default {
         if(this.district !== 0 && repr.district != this.district){
           return false
         }
-        if(this.name !== '' && !repr.name.includes(name)){
+        if(this.name.length !== 0 && !repr.name.includes(this.name)){
           return false
         }
         return true

@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="ui bottom attached segment">
-      <div class="ui cards">
+      <div class="ui centered cards">
         <promise-item v-for="promise in filteredPromises" @targetClick="onTargetClick" @categoryClick="onCategoryClick" :promise="promise" :key="promise.key" :city="repr.city" :district="repr.district" :isFav="false"></promise-item>
       </div>
     </div>

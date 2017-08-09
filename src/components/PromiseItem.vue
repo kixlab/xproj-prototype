@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="ui fluid card">
     <div class="content">
       <div class="header">
         <router-link :to="{name: 'promiseDetail', params: {city: city, district: district, key: promise.key}}"> {{promise.title}} </router-link>
@@ -18,14 +18,22 @@
       <a class="ui basic circular red label" v-for="cat in promise.category" :key="cat" @click="onCategoryClick(cat)">
         {{cat}}
       </a>
+      주제와 관련있는
+    </div>
+    <div class="content">
       <a class="ui basic circular blue label" v-for="t in promise.target" :key="t" @click="onTargetClick(t)">
         {{t}}
       </a>
+      인 사람들을 위한
     </div>
-    <div class="extra content" v-if="promise.popularGroup.length !== 0">
-      <i class="heart icon"></i>
+    <div class="content" v-if="promise.popularGroup.length !== 0">
+      <!-- <i class="heart icon"></i> -->
       <div class="ui basic blue label" v-for="group in promise.popularGroup" :key="group">{{group}}</div>
+      인 사람들이 좋아하는
     </div>
+    <!-- <div class="content">
+      공약입니다.
+    </div> -->
   </div>
 </template>
 
@@ -72,7 +80,9 @@ export default {
 </script>
 
 <style scoped>
-
+.card {
+  text-align: left;
+}
 </style>
 
     <!--<div class="ui modal" :id="modalID">
