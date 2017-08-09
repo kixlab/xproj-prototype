@@ -93,14 +93,14 @@
         if(this.reprIdx < 2){
           this.reprIdx += 1
         } else {
-          this.$router.push('myReprs')
+          this.$router.push('personalizedPromises')
         }
       },
       onPrevRepr: function () {
         if(this.reprIdx > 0){
           this.reprIdx -= 1
         } else {
-          this.$router.push('myReprs')
+          this.$router.push('personalizedPromises')
         }
       }
     }

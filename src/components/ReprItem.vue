@@ -18,7 +18,7 @@
         <!-- <div class="updateDate">
           최근 답변 일자: 17/05/31
         </div> -->
-        <table class="ui small single line unstackable striped very compact table">
+        <!-- <table class="ui small single line unstackable striped very compact table">
           <thead>
             <tr>
               <th></th>
@@ -43,7 +43,7 @@
               <td>{{repr.ratings.promise.nation}}</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
     </div>
   </div>

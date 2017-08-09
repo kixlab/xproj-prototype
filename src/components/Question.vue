@@ -169,7 +169,7 @@
         $('.ui.modal').modal('show')
       },
       stopIntro: function () {
-        this.$router.push('myReprs')
+        this.$router.push('personalizedPromises')
       },
       onOpinionSend: function () {
         this.isRequestActive = false

@@ -206,12 +206,7 @@
         isProgressModalVisible: false,
         purposeQuestion: '',
         planQuestion: '',
-        replies: [{
-          key: 0,
-          author: '정예인',
-          date: new Date(),
-          text: '과연 그럴까요?'
-        }],
+        replies: [],
         isReplyVisible: []
       }
     },

@@ -1,16 +1,18 @@
 <template>
   <div>
     <h1 class="ui header">대표자들</h1>
-    <repr-item v-for="repr in reprs" :repr="repr" :key="repr.name"></repr-item>
+    <div class="reprs">
+      <repr-item-horizontal v-for="repr in reprs" :repr="repr" :key="repr.name"></repr-item-horizontal>
+    </div>
   </div>
 </template>
 
 <script>
-  import reprItem from './ReprItem' 
+  import reprItemHorizontal from './ReprItemHorizontal' 
   export default {
     name: 'myReprs',
     components: {
-      reprItem
+      reprItemHorizontal
     },
     computed: {
       reprs: function () { 
@@ -25,4 +27,8 @@
 </script>
 
 <style scoped>
+ repr-item-horizontal {
+    display: inline-block;
+  width: 30%;
+}  
 </style>
