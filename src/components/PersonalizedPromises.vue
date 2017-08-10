@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="personalizedPromise">
     <h1 class="ui dividing header">내가 추천 받은 공약</h1>
     <p>입력하셨던 관심 분야에 따라 추천된 공약입니다</p>
     <div class="ui top attached tabular menu">
@@ -22,9 +22,10 @@
       </div>
     </div>
     <div class="ui bottom attached segment">
-      <div class="ui centered cards">
+      <div class="ui centered cards" v-if="filteredPromiseList.length != 0">
         <promise-item v-for="p in filteredPromiseList" :key="p.promise.title" :city="p.city" :district="p.district" :promise="p.promise" :isFav="true"></promise-item>
       </div>
+      <button class="ui fluid button" v-if="filteredPromiseList.length == 0">공약 요청하기</button>
     </div>
   </div>
 </template>
@@ -131,9 +132,16 @@ export default {
 }
 </script>
 
-<style>
-.ui .cards {
+<style scoped>
+/* .ui .cards {
   align-content: center;
+} */
+.personalizedPromise {
+  text-align: left;
+}
+
+.header {
+  padding-left: 2em;
 }
 </style>
 

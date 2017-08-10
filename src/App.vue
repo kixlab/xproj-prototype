@@ -20,7 +20,7 @@
             <a @click="goBack" v-if="backEnabled()"><i class="arrow left icon"></i></a>
           </div>
           <div class="ui item middle-item">
-            <router-link to="/myReprs" id="logo" >ProgressBook</router-link>
+            <router-link to="/personalizedPromises" id="logo" >ProgressBook</router-link>
           </div>
           <div class="right menu">
             <a class="item" @click="toggleSidebar"> <i class="sidebar icon"></i></a>

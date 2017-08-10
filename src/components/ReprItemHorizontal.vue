@@ -51,7 +51,7 @@ export default {
 }
 
 .district {
-  font-size: 1.1em;
+  font-size: 1em;
   text-align: center;
   margin-top: 0.2em;
   margin-bottom: 0.2em;

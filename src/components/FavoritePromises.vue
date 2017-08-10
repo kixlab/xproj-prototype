@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="favoritePromise">
     <h1 class="ui dividing header">내가 좋아한 공약</h1>
     <div class="ui cards">
       <promise-item v-for="fav in favoritePromises" :key="fav.promise.title" :city="fav.city" :district="fav.district" :promise="fav.promise" :isFav="true"></promise-item>
@@ -48,5 +48,7 @@ export default {
 </script>
 
 <style>
-
+.favoritePromise {
+  text-align: left;
+}
 </style>

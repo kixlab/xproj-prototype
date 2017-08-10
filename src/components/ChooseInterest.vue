@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="ui dimmer" :class="{active: isLoading}"><div class="ui big text loader">대표자들 찾기 중...</div></div>
+    <div class="ui dimmer" :class="{active: isLoading}"><div class="ui big text loader">대표자들 찾는 중...</div></div>
 
     <h1 class="ui dividing header">
       Select a few topics you are interested in

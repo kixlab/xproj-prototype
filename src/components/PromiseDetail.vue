@@ -117,9 +117,10 @@
                 </div>
               </div>
             </div>
-            <div class="actions">
+            <!-- <div class="actions">
+              <a class="reply" @click="setReplyFormVisible(comment.key)" v-if="replyFormVisible[comment.key]">답글 쓰기</a>
               <a class="reply" @click="setReplyVisible(comment.key)">{{isReplyVisible[comment.key] ? '답글 접기' : '답글 보기'}}</a>
-            </div>
+            </div> -->
           </div>
         </div>
         <form class="ui reply form">
