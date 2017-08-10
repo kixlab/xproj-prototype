@@ -10,6 +10,7 @@ import findReprs from '@/components/FindReprs'
 import chooseInterest from '@/components/ChooseInterest'
 import favoritePromises from '@/components/FavoritePromises'
 import personalizedPromises from '@/components/PersonalizedPromises'
+import flippedTagger from '@/components/FlippedTagger'
 Vue.use(Router)
 
 export default new Router({
@@ -23,6 +24,11 @@ export default new Router({
       path: '/walkThrough',
       name: 'walkThrough',
       component: walkThrough
+    },
+    {
+      path: '/flippedTagger/:keyword',
+      name: 'flippedTagger',
+      component: flippedTagger
     },
     {
       path: '/signup',
