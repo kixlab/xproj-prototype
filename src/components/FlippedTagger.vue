@@ -7,8 +7,8 @@
     <div class="ui attached segment">
       <p v-html="article.description"></p>
     </div>
-    <div class="ui two bottom attached buttons" v-for="i in 3" :key="i">
-      <div class="ui button" @click="curIdx +=1">{{promiseTitles[i-1]}}</div>
+    <div class="ui two bottom attached buttons" :class="i%2 == 0? 'basic': ''" v-for="i in 3" :key="i">
+      <div class="ui button" @click="generateRandomPromise">{{options[i-1].title}}</div>
       <div class="ui button" @click="showDetail(i-1)">더 알아보기</div>
     </div>
     <div class="ui bottom attached basic button" @click="curIdx += 1">해당 사항 없음</div>
@@ -43,10 +43,10 @@
           description: '',
           link: '',
         }],
-        curIdx: 0,
-        // newsURL: 'http://34.208.245.104:3000/article/',
-        promiseURL: 'http://34.208.245.104:3000/promise/seoul/37',
-        promiseTitles: [],
+        curIdx: -1,
+        // newsURL: 'http://34.208.245.104:3000/article/부동산',
+        promiseURL: 'http://34.208.245.104:3000/promise/seoul/0',
+        options: [{title: ''}, {title: ''}, {title: ''}],
         promises: [],
         promise: {
           title: '',
@@ -57,8 +57,25 @@
     },
     methods: {
       showDetail: function(i){
-        this.promise = this.promises[i]
+        this.promise = this.promises[this.options[i].key]
         $('.ui.modal').modal('show')
+      },
+      generateRandomPromise: function () {
+        const idxs = []
+        for(let i = 0; i< 3; i++){
+          let idx = 0
+          while(true){
+            idx = Math.floor(Math.random() * this.promises.length)
+            if(!idxs.includes(idx)){
+              idxs.push(idx)
+              break
+            }
+          }
+        }
+        this.options = idxs.map(function(i){
+          return this.promises[i]
+        }.bind(this))
+        this.curIdx += 1
       }
     },
     computed: {
@@ -76,13 +93,14 @@
       this.$http.get(this.promiseURL).then(function(res){
         console.log(res.body)
         this.promises = res.body.promises
-        this.promiseTitles = res.body.promises.slice(0, 3).map(function(a){ return a.title})
+        this.generateRandomPromise()
+        // this.promiseTitles = res.body.promises.slice(0, 3).map(function(a){ return a.title})
       }.bind(this))
     }
   }
 </script>
 <style scoped>
-p{
+p {
   text-align: left;
   padding-left: 1em;
 }
