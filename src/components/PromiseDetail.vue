@@ -4,10 +4,12 @@
     </h2>
     <div class="ui dividing medium header">
       공약 목적
-       <a @click="onPurposeQuestionClick" id="ppsQ"><i class="comment outline icon"></i> {{purposeCount}}</a>
+       <a @click="onPurposeQuestionClick" class="q"><i class="comment outline icon"></i> {{purposeCount}}</a>
     </div>
     <ul>
-      <li v-for="pps in promise.purpose" :key="pps">{{pps}}</li>
+      <li v-for="pps in promise.purpose" :key="pps">{{pps}}
+        <!-- <a><i class="question icon"></i></a> -->
+      </li>
     </ul>
     <div class="ui modal" :id="'purposeQuestion' + city + district + key">
       <i class="close icon"></i>
@@ -28,7 +30,7 @@
     </div>
     <div class="ui dividing medium header">
       이행 계획
-      <a @click="onPlanQuestionClick" id="plnQ"><i class="comment outline icon"></i> {{planCount}} </a>
+      <a @click="onPlanQuestionClick" class="q"><i class="comment outline icon"></i> {{planCount}} </a>
     </div>
     <ul>
     <li v-for="pln in promise.plan" :key="pln">{{pln}}</li>
@@ -50,7 +52,26 @@
         </div>
       </div>
     </div>
-    <div class="ui dividing medium header">이행 현황</div>
+    <div class="ui dividing medium header">이행 현황
+      <a @click="onProgressQuestionClick" class="q"><i class="comment outline icon"></i> {{progressCount}} </a>
+    </div>
+    <div class="ui modal" :id="'progressQuestion' + city + district + key">
+      <i class="close icon"></i>
+      <div class="ui header">공약 이행 현황 질문하기</div>
+      <div class="content">
+        <div class="ui form">
+          <div class="field">
+            <label>공약의 이행 현황에 대해 궁금하신 점을 남겨주세요.</label>
+            <textarea rows="3" placeholder="공약 이행 현황을 자세히 밝혀주세요." v-model="progressQuestion"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui positive right button" @click="onProgressQuestionLeft">
+          질문 남기기
+        </div>
+      </div>
+    </div>
     <div class="ui feed">
       <button class="ui button" @click="showAddProgressModal">이행 현황 추가</button>
       <add-progress v-if="isProgressModalVisible" @otherRefChecked="onOtherRefChecked" :otherRefs="otherRefs" :city="city" :district="district" :promiseKey="key" @progressUpdate="onProgressUpdate" :reprName="repr.name" :promiseTitle="promise.title"></add-progress>
@@ -116,16 +137,22 @@
                   <div class="text">{{reply.text}}</div>
                 </div>
               </div>
+              <form class="ui reply form">
+                <div class="field">
+                  <textarea rows="2" v-model="replyText"></textarea>
+                </div>
+                <button class="ui blue submit button" @click="addReply(comment.key)"></button>
+              </form>
             </div>
-            <!-- <div class="actions">
-              <a class="reply" @click="setReplyFormVisible(comment.key)" v-if="replyFormVisible[comment.key]">답글 쓰기</a>
+              <div class="actions">
+              <!-- <a class="reply" @click="setReplyFormVisible(comment.key)" v-if="replyFormVisible[comment.key]">답글 쓰기</a> -->
               <a class="reply" @click="setReplyVisible(comment.key)">{{isReplyVisible[comment.key] ? '답글 접기' : '답글 보기'}}</a>
-            </div> -->
+            </div>  
           </div>
         </div>
         <form class="ui reply form">
           <label class="ui tiny header">
-            공약에 대한 의견이나 궁금하신 점을 자유롭게 남겨주세요.
+            공약에 대한 의견이나 궁금하신 점을 자유롭게 남겨주세요. 남겨주신 의견은 1주일 단위로 관련인에게 전달됩니다.
           </label>
           <br>
           <br>
@@ -134,7 +161,7 @@
           </div>
         </form>
         <br>
-        <button class="ui blue submit button" @click="addReply">댓글 달기</button>
+        <button class="ui blue submit button" @click="addComment">댓글 달기</button>
       </div>
     </div>
   </div>
@@ -156,6 +183,11 @@
       planCount: function () {
         return this.comments.reduce(function(prev, cur){
           return (cur.type === 'plan') ? prev + 1 : prev
+        }, 0)
+      },
+      progressCount: function () {
+        return this.comments.reduce(function(prev, cur){
+          return (cur.type === 'progress') ? prev + 1 : prev
         }, 0)
       },
       city: function () {return this.$route.params.city},
@@ -192,7 +224,7 @@
           const aDate = new Date(a.date)
           const bDate = new Date(b.date)
           return aDate > bDate
-        })
+        }).slice(0, 3)
       }
     },
     data: function () {
@@ -200,6 +232,7 @@
         promise: {},
         score: 0,
         commentText: '',
+        replyText: '',
         newsURL: 'http://34.208.245.104:3000/article',
         docuURL: 'http://34.208.245.104:3000/seoul',
         promiseURL: 'http://34.208.245.104:3000/promise',
@@ -207,6 +240,7 @@
         isProgressModalVisible: false,
         purposeQuestion: '',
         planQuestion: '',
+        progressQuestion: '',
         replies: [],
         isReplyVisible: []
       }
@@ -233,7 +267,7 @@
       }.bind(this), 10000)
     },
     methods: {
-      addReply: function () {
+      addComment: function () {
         console.log('addReply')
         let comment =  {
           "author": this.$store.state.userName,
@@ -243,6 +277,14 @@
         }
         this.postReply(comment)
         this.commentText = ''
+      },
+      addReply: function (key) {
+        const reply = {
+          "author": this.$store.state.userName,
+          "date": new Date(),
+          "text": this.replyText,
+        }
+        this.replyText = ''
       },
       postReply: function(comment) {
         let url = this.promiseURL + '/' + this.city + '/' + this.district + '/' + this.key + '/comment'
@@ -271,6 +313,9 @@
       onPlanQuestionClick: function () {
         $('#planQuestion' + this.city + this.district + this.key).modal('show')
       },
+      onProgressQuestionClick: function () {
+        $('#progressQuestion' + this.city + this.district + this.key).modal('show')
+      },
       onPurposeQuestionLeft: function () {
         const comment =  {
           "author": this.$store.state.userName,
@@ -293,6 +338,19 @@
         }
         if(this.planQuestion.length == 0){
           comment.text = '공약의 이행 계획에 대해 자세한 설명을 요구합니다.'
+        }
+        this.postReply(comment)
+        this.planQuestion = ''
+      },
+      onProgressQuestionLeft: function () {
+        const comment =  {
+          "author": this.$store.state.userName,
+          "date": new Date(),
+          "text": this.progressQuestion,
+          "type": 'plan'
+        }
+        if(this.planQuestion.length == 0){
+          comment.text = '공약 이행 현황을 자세히 밝혀주세요.'
         }
         this.postReply(comment)
         this.planQuestion = ''
@@ -327,13 +385,9 @@ li {
   text-align: left;
   padding-left: 2em;
 }
-#ppsQ {
+.q {
   float: right;
   cursor: pointer;
 }
 
-#plnQ{
-  float: right;
-  cursor: pointer;
-}
 </style>
