@@ -37,7 +37,7 @@
         <button class="ui button">남기기</button>
       </div>
     </div> -->
-    <div class="ui bottom attached button" @click="showPromiseDetail">
+    <div class="ui bottom attached button" :class="!isAnswered ? '' : 'disabled'" @click="showPromiseDetail">
       의견 남기기
     </div>
     <div class="ui modal" :id="modalID">
@@ -49,28 +49,49 @@
           <li v-for="item in question.vueElements" :key="item">{{item}}</li>
         </ul>
         <a v-else-if="question.type === 'progress'" :href="question.progressLink">{{question.progressTitle}}</a>
+        <div v-else-if="question.type === 'categories'">
+          <div class="ui circular labels">
+            <a class="ui label interest" v-for="cat in question.categories" :key="cat"
+              :class="{teal: isSelected(cat)}"
+              @click="select(cat)">{{cat}}</a>
+          </div>
+        </div>
+        <ul v-else-if="question.type === 'comments'">
+          <li v-for="c in question.vueElements" :key="c">{{c}}</li>
+        </ul>
         <br>
         {{question.extraContent}}
         <div v-if="noButtonClicked == true">
           그렇게 생각하지 않으신다면, 그 이유는 무엇인가요?
         </div>
+        <div v-if="notSureButtonClicked == true">
+          판단을 위해 필요하신 다른 정보가 있다면 적어주세요.
+        </div>
       </div>
-      <div class="actions" v-if="question.type !== 'end' && !noButtonClicked">
+      <div class="actions" v-if="question.type === 'categories'">
+        <button class="ui positive button" @click="onModalButtonClick">
+          다음
+        </button>
+      </div>
+      <div class="actions" v-else-if="question.type === 'comments' || (question.type !== 'end' && (noButtonClicked || notSureButtonClicked))">
+        <div class="ui fluid action input">
+          <input placeholder="의견을 남겨주세요"></input>
+          <div class="ui positive button" @click="onSubmitButtonClick">의견 남기기</div>    
+          <div class="ui button" style="float: right;" @click="onSubmitButtonClick">넘어가기</div>
+
+        </div>
+      <br>
+      </div>
+      <div class="actions" v-else-if="question.type !== 'end' && !noButtonClicked && !notSureButtonClicked">
         <button class="ui positive button" @click="onModalButtonClick">
           예
         </button>
         <button class="ui negative button" @click="onNoButtonClick">
           아니오
         </button>
-        <button class="ui button" @click="onModalButtonClick">
+        <button class="ui button" @click="onNotSureButtonClick">
           잘 모르겠음
         </button>
-      </div>
-      <div class="actions" v-else-if="question.type !== 'end' && noButtonClicked">
-        <div class="ui fluid action input">
-          <input placeholder="의견을 남겨주세요"></input>
-          <button class="ui button" @click="onSubmitButtonClick">의견 남기기</button>
-        </div>
       </div>
       <div class="actions" v-else>
         <button class="ui positive button" @click="onModalButtonClick">
@@ -105,6 +126,9 @@ export default {
       liked: false,
       questionNum: 0,
       noButtonClicked: false,
+      notSureButtonClicked: false,
+      selected: [],
+      isAnswered: false,
       questions: [
         {
           content: '다음은 공직자가 밝힌 이 공약의 목적입니다.',
@@ -124,6 +148,18 @@ export default {
           progressLink: this.promise.progresses[0].reference ? this.promise.progresses[0].reference.link : '',
           extraContent: '이 자료는 이 공약의 이행현황과 관련이 있나요?',
           type: 'progress'
+        },
+        {
+          content: '다음 중 이 공약의 혜택을 볼 사람들을 골라주세요.',
+          categories: this.$store.state.targets,
+          extraContent: '',
+          type: 'categories'
+        },
+        {
+          content: '다음은 이 공약을 보고 다른 시민들이 남긴 의견입니다.',
+          vueElements: this.promise.comments.map((c) => {return c.text}),
+          extraContent: '혹시 추가하실 의견이 있으신가요?',
+          type: 'comments'
         },
         {
           content: '응답해주셔서 감사합니다. 남겨주신 의견은 1주일 단위로 공직자에게 전달됩니다. 공약 상세 페이지에서 다른 의견도 확인해보세요.',
@@ -158,14 +194,31 @@ export default {
       if(this.questionNum == this.questions.length){
         this.questionNum = 0
         $('#' + this.modalID).modal('hide')
+        this.isAnswered = true
       }
     },
     onNoButtonClick: function () {
       this.noButtonClicked = true
     },
+    onNotSureButtonClick: function () {
+      this.notSureButtonClicked = true
+    },
     onSubmitButtonClick: function () {
       this.questionNum += 1
       this.noButtonClicked = false
+      this.notSureButtonClicked = false
+    },
+    isSelected: function(cat) {
+      return this.selected.indexOf(cat) !== -1;
+    },
+    select: function(cat) {
+      if (this.selected.indexOf(cat) === -1) {
+        // Add item
+        this.selected.push(cat);
+      } else {
+        // Remove item
+        this.selected = this.selected.filter(item => item != cat);
+      }
     }
   }
 }
@@ -175,6 +228,11 @@ export default {
 .card {
   text-align: left;
   display: inline-block;
+}
+.ui.labels .label.interest {
+  font-size: 1.3em;
+  font-weight: normal;
+  cursor: pointer;
 }
 </style>
 

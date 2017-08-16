@@ -122,6 +122,12 @@
       <div class="header">점수가 기록되었습니다.</div>
     </div> -->
     <div class="ui dividing medium header">시민 의견</div>
+    <div class="ui buttons">
+      <button class="ui button" :class="commentCategory === '' ? 'blue' : ''" @click="commentCategory = ''">전체</button>
+      <button class="ui button" :class="commentCategory === 'purpose' ? 'blue' : ''" @click="commentCategory = 'purpose'">목적</button>
+      <button class="ui button" :class="commentCategory === 'plan' ? 'blue' : ''" @click="commentCategory = 'plan'">계획</button>
+      <button class="ui button" :class="commentCategory === 'progress' ? 'blue' : ''" @click="commentCategory = 'progress'">현황</button>
+    </div>
     <div class="ui basic segment">
       <div class="ui comments">
         <div class="comment" v-for="comment in comments" :key="comment.key">
@@ -194,7 +200,12 @@
       district: function () { return this.$route.params.district},
       key: function () { return this.$route.params.key },
       comments: function () {
-        return this.promise.comments
+        if(this.commentCategory === '')
+          return this.promise.comments
+        else
+          return this.promise.comments.filter(function(c){
+            return c.type === this.commentCategory
+          }.bind(this))
       },
       repr: function () {
         return this.$store.state.reprs.find(function(repr) {
@@ -242,7 +253,8 @@
         planQuestion: '',
         progressQuestion: '',
         replies: [],
-        isReplyVisible: []
+        isReplyVisible: [],
+        commentCategory: ''
       }
     },
     mounted: function () {
