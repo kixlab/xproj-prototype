@@ -45,7 +45,7 @@
       <div class="content">
         {{question.content}}
         <br>
-        <ul v-if="question.type === 'general'"> 
+        <ul v-if="question.type === 'purpose' || question.type === 'plan'"> 
           <li v-for="item in question.vueElements" :key="item">{{item}}</li>
         </ul>
         <a v-else-if="question.type === 'progress'" :href="question.progressLink">{{question.progressTitle}}</a>
@@ -75,9 +75,9 @@
       </div>
       <div class="actions" v-else-if="question.type === 'comments' || (question.type !== 'end' && (noButtonClicked || notSureButtonClicked))">
         <div class="ui fluid action input">
-          <input placeholder="의견을 남겨주세요"></input>
+          <input placeholder="의견을 남겨주세요" v-model="commentText"></input>
           <div class="ui positive button" @click="onSubmitButtonClick">의견 남기기</div>    
-          <div class="ui button" style="float: right;" @click="onSubmitButtonClick">넘어가기</div>
+          <div class="ui button" style="float: right;" @click="onPassButtonClick">넘어가기</div>
 
         </div>
       <br>
@@ -117,6 +117,9 @@ export default {
     },
     question: function () {
       return this.questions[this.questionNum]
+    },
+    promiseURL: function () {
+      return 'http://34.208.245.104:3000/promise/' + this.city + '/' + this.district + '/' + this.promise.key
     }
   },
   data: function () {
@@ -129,23 +132,25 @@ export default {
       notSureButtonClicked: false,
       selected: [],
       isAnswered: false,
+      commentText: '',
+      commentsTemp: [],  //comments are temporarily stored here
       questions: [
         {
           content: '다음은 공직자가 밝힌 이 공약의 목적입니다.',
           vueElements: this.promise.purpose,
           extraContent: '이 목적은 적절한가요?',
-          type: 'general'
+          type: 'purpose'
         },
         {
           content: '다음은 공직자가 밝힌 이 공약의 이행 계획입니다.',
           vueElements: this.promise.plan,
           extraContent: '이 이행 계획은 적절한가요?',
-          type: 'general'
+          type: 'plan'
         },
         {
           content: '다음은 이 공약과 연관된 자료입니다.',
-          progressTitle: this.promise.progresses ? this.promise.progresses[0].title : '',
-          progressLink: this.promise.progresses[0].reference ? this.promise.progresses[0].reference.link : '',
+          progressTitle: (this.promise.progresses.length != 0) ? this.promise.progresses[0].title : '',
+          progressLink: (this.promise.progresses.length != 0) ? ( this.promise.progresses[0].reference ? this.promise.progresses[0].reference.link : '' ) : '',
           extraContent: '이 자료는 이 공약의 이행현황과 관련이 있나요?',
           type: 'progress'
         },
@@ -195,6 +200,7 @@ export default {
         this.questionNum = 0
         $('#' + this.modalID).modal('hide')
         this.isAnswered = true
+        this.commentsTemp.forEach(this.postReply)
       }
     },
     onNoButtonClick: function () {
@@ -204,9 +210,40 @@ export default {
       this.notSureButtonClicked = true
     },
     onSubmitButtonClick: function () {
+      let commentType = ''
+      if(this.questionNum == 0){
+        commentType = 'purpose'
+      } else if (this.questionNum == 1) {
+        commentType = 'plan'
+      } else if (this.questionNum == 2) {
+        commentType = 'progress'
+      } else if (this.questionNum == 4) {
+        commentType = 'general'
+      }
       this.questionNum += 1
       this.noButtonClicked = false
       this.notSureButtonClicked = false
+      let comment = {
+        "author": this.$store.state.userName,
+        "date": new Date(),
+        "text": this.commentText,
+        "type": commentType
+      }
+      // this.postReply(comment)
+      this.commentsTemp.push(comment)
+      this.commentText = ''
+    },
+    onPassButtonClick: function () {
+      this.questionNum += 1
+      this.noButtonClicked = false
+      this.notSureButtonClicked = false
+    },
+    postReply: function(comment) {
+      let url = this.promiseURL + '/comment'
+      console.log(url)
+      this.$http.put(url, comment).then(function () {
+        console.log('done?')
+      })
     },
     isSelected: function(cat) {
       return this.selected.indexOf(cat) !== -1;

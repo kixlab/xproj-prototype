@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1 class="ui header">Flipped Tagger</h1>
-    <p>공약과 연관있는 기사를 선택해주세요.</p>
+    <p>기사와 연관있는 공약을 선택해주세요.</p>
     <div class="ui container">
     <h3 class="ui header"><a :href="article.link" v-html="article.title"></a></h3>
     <div class="ui attached segment">
       <p v-html="article.description"></p>
     </div>
-    <div class="ui two bottom attached buttons" :class="i%2 == 0? 'basic': ''" v-for="i in 3" :key="i">
+    <div class="ui two bottom attached buttons" v-for="i in 3" :key="i">
       <div class="ui button" @click="curIdx +=1">{{promiseTitles[i-1]}}</div>
       <div class="ui button" @click="showDetail(i-1)">더 알아보기</div>
     </div>
@@ -45,7 +45,7 @@
         }],
         curIdx: 0,
         // newsURL: 'http://34.208.245.104:3000/article/',
-        promiseURL: 'http://34.208.245.104:3000/promise/seoul/0',
+        promiseURL: 'http://34.208.245.104:3000/promise/seoul/37',
         promiseTitles: [],
         promises: [],
         promise: {
