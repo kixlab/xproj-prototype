@@ -108,7 +108,7 @@ export default {
           })
         }
       }
-      let promiseList = generatePromiseList(this.congressPersonPromises).concat(generatePromiseList(this.mayorPromises))
+      let promiseList = generatePromiseList(this.mayorPromises).concat(generatePromiseList(this.congressPersonPromises))
       return filterPromiseList(promiseList)
       //  generatePromiseList(this.presidentPromises) +
     },

@@ -52,7 +52,7 @@ export default {
       this.isLoading = true;
       this.$store.commit('setInterest', this.selected)
       setTimeout(() => {
-        this.$router.push('walkThrough');
+        this.$router.push('personalizedPromises');
       }, 2500);
     }
   }

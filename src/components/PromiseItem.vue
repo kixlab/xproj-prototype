@@ -31,14 +31,8 @@
       <div class="ui basic blue label" v-for="group in promise.popularGroup" :key="group">{{group}}</div>
       인 사람들이 좋아하는
     </div>
-    <!-- <div class="extra content">
-      <div class="ui fluid action input">
-        <input placeholder="의견을 남겨주세요."></input>
-        <button class="ui button">남기기</button>
-      </div>
-    </div> -->
     <div class="ui bottom attached button" :class="!isAnswered ? '' : 'disabled'" @click="showPromiseDetail">
-      의견 남기기
+      공약 평가하기
     </div>
     <div class="ui modal" :id="modalID">
       <div class="header">{{promise.title}}</div>
@@ -48,7 +42,9 @@
         <ul v-if="question.type === 'purpose' || question.type === 'plan'"> 
           <li v-for="item in question.vueElements" :key="item">{{item}}</li>
         </ul>
-        <a v-else-if="question.type === 'progress'" :href="question.progressLink">{{question.progressTitle}}</a>
+        <a v-else-if="question.type === 'progress'" :href="question.progressLink" target="_blank" style="font-weight: bold;">
+          <br>{{question.progressTitle}}<br>
+        </a>
         <div v-else-if="question.type === 'categories'">
           <div class="ui circular labels">
             <a class="ui label interest" v-for="cat in question.categories" :key="cat"
@@ -78,7 +74,6 @@
           <input placeholder="의견을 남겨주세요" v-model="commentText"></input>
           <div class="ui positive button" @click="onSubmitButtonClick">의견 남기기</div>    
           <div class="ui button" style="float: right;" @click="onPassButtonClick">넘어가기</div>
-
         </div>
       <br>
       </div>
