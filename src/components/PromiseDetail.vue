@@ -72,7 +72,60 @@
         </div>
       </div>
     </div>
+    다음은 공약 관련 사업과 예산 목록입니다.
     <div class="ui feed">
+      <div v-if="key == 14 || key == 10 || key == 258">
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th><a @click="showAllExpenses">관련 사업</a></th>
+              <th>예산 편성액</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="business in businesses" :key="business.budget">
+              <td><a @click="updateExpenses(business.business)">{{business.business}}</a></td>
+              <td>{{business.budget}}</td>
+            </tr>
+            <!-- <tr class="positive">
+              <td><a @click="getExpense('시민안전파수꾼')">시민안전파수꾼 양성</a></td>
+              <td>₩283,560,000</td>
+            </tr>
+            <tr>
+              <td><a @click="getExpense('재난관리시스템')"> 통합 재난관리시스템 유지관리</a></td>
+              <td>₩126,949,000</td>
+            </tr>
+            <tr class="negative">
+              <td><a @click="getExpense('소방 안전지도')">소방 안전지도 고도화</a></td>
+              <td>₩965,637,000</td>
+            </tr> -->
+          </tbody>
+        </table>
+        다음은 공약과 관련된 최근 예산 지출 항목 내역입니다. 윗 표의 사업 이름을 클릭하시면, 각 사업 별로 최근 예산 지출 내역을 보실 수 있습니다.
+        <button @click="expenseDetail = !expenseDetail" class="ui blue button">지출정보 자세히 보기</button>
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th>관련 사업</th>
+              <th v-if="expenseDetail">부문명</th>
+              <th v-if="expenseDetail">분야명</th>
+              <th v-if="expenseDetail">목세목명</th>
+              <th>예산 지출액</th>
+              <th>예산 지출일</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="expense in expenses" :key="expense.BIZ_CD">
+              <td>{{expense.BIZ_NM}}</td>
+              <td v-if="expenseDetail">{{expense.SECT_NM}}</td>
+              <td v-if="expenseDetail">{{expense.FLD_NM}}</td>
+              <td v-if="expenseDetail">{{expense.TE_MNG_MOK_NM}}</td>
+              <td>{{formatNumber(expense.PAY_AMT)}}</td>
+              <td>{{expense.PAY_YMD}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <button class="ui button" @click="showAddProgressModal">이행 현황 추가</button>
       <add-progress v-if="isProgressModalVisible" @otherRefChecked="onOtherRefChecked" :otherRefs="otherRefs" :city="city" :district="district" :promiseKey="key" @progressUpdate="onProgressUpdate" :reprName="repr.name" :promiseTitle="promise.title"></add-progress>
       <div class="event" v-for="progress in progresses" :key="progress.key">
@@ -236,6 +289,17 @@
           const bDate = new Date(b.date)
           return aDate > bDate
         }).slice(0, 3)
+      },
+      businesses: function () {
+        if(this.key == 14){
+          return this.totalBusinesses[0]
+        } else if (this.key == 10) {
+          return this.totalBusinesses[1]
+        } else if (this.key == 258) {
+          return this.totalBusinesses[2]
+        } else {
+          return []
+        }
       }
     },
     data: function () {
@@ -254,7 +318,86 @@
         progressQuestion: '',
         replies: [],
         isReplyVisible: [],
-        commentCategory: ''
+        commentCategory: '',
+        expenses: [],
+        totalExpenses: [],
+        totalBusinesses: [
+          [
+            {
+              business: 'G밸리 근로자 복합공간 조성',
+              budget: '₩4,321,765,000'
+            },
+            {
+              business: 'G밸리(서울디지털산업단지) 이미지개선 및 브랜딩 추진',
+              budget: '₩350,000,000'
+            },
+            {
+              business: 'G밸리(서울디지털산업단지) 활성화 추진',
+              budget: '₩1,439,000,000'
+            }
+          ],
+          [
+            {
+              business: '강남역 일대 침수방지(배수구역경계조정)',
+              budget: '₩4,000,000,000'
+            },
+            {
+              business: '마장동 우시장 주변 침수해소',
+              budget: '₩2,700,000,000'
+            },
+            {
+              business: '북가좌2동 저지대 침수해소',
+              budget: '₩1,300,000,000'
+            },
+            {
+              business: '암사역 주변 침수해소',
+              budget: '₩9,498,526,080'
+            },
+            {
+              business: '행당동 138~158번지 일대 침수방지',
+              budget: '₩3,400,000,000'
+            },
+            {
+              business: '강남역 일대 침수방지',
+              budget: '₩9,135,473,000'
+            },
+            {
+              business: '상도동 성대시장주변 침수해소',
+              budget: '₩192,667,730'
+            },
+            {
+              business: '우이천(노원) 침수취약지점 등 개선',
+              budget: '₩50,000,000'
+            }
+          ],
+          [
+            {
+              business: '황금시간 목표제 실행',
+              budget: '₩1,570,000,000'
+            },
+            {
+              business: '시민안전파수꾼 양성',
+              budget: '₩283,560,000'
+            },
+            {
+              business: '통합 재난관리시스템 유지관리',
+              budget: '₩126,949,000'
+            },
+            {
+              business: '소방안전지도 고도화',
+              budget: '₩965,637,000'
+            },
+            {
+              business: '긴급구조통제단 운영',
+              budget: '₩406,240,000'
+            },
+            {
+              business: '시민안전교육 강화',
+              budget: '₩783,325,000'
+            }
+          ]
+        ],
+        expenseDetail: false
       }
     },
     mounted: function () {
@@ -264,21 +407,63 @@
           console.log(response.body)
           this.isProgressModalVisible = true
           this.isReplyVisible = this.comments.map(function(c){ return false })
-        }.bind(this), function (response) {
         }.bind(this))
-      setInterval(function () {
-        console.log('polling...')
-        this.$http.get(url).then(function (response) {
-          this.promise = response.body
-          while(this.isReplyVisible.length < this.comments.length){
-            this.isReplyVisible.push(false)
-          }
-          console.log(response.body)
-        }.bind(this), function (response) {
-        }.bind(this))
-      }.bind(this), 10000)
+
+      if(this.key == 14 || this.key == 10 || this.key == 258) {
+        console.log(this.businesses)
+        let asdf = this.businesses.forEach((obj) => {
+          const query = encodeURIComponent(obj.business.split(' ')[0])
+          console.log(query)
+          console.log(obj)
+          this.$http.get('http://openapi.seoul.go.kr:8088/515855484c6b687731313966526a5a73/json/ListExpenditureInfo/1/999/2017/' + query).then(res => {
+            console.log(res.body)
+            if(res.body.ListExpenditureInfo) {
+              this.totalExpenses = this.totalExpenses.concat(res.body.ListExpenditureInfo.row)
+              this.totalExpenses.sort(function(a, b){
+                return a.PAY_YMD < b.PAY_YMD
+              })
+              this.showAllExpenses()
+            }
+          })
+        }, this)
+      }
+      //['시민안전파수꾼', '재난관리시스템', '소방안전지도']
+      // setInterval(function () {
+      //   console.log('polling...')
+      //   this.$http.get(url).then(function (response) {
+      //     this.promise = response.body
+      //     while(this.isReplyVisible.length < this.comments.length){
+      //       this.isReplyVisible.push(false)
+      //     }
+      //     console.log(response.body)
+      //   }.bind(this), function (response) {
+      //   }.bind(this))
+      // }.bind(this), 10000)
+
     },
     methods: {
+      getExpense: function (query) {
+        this.$http.get('http://openapi.seoul.go.kr:8088/515855484c6b687731313966526a5a73/json/ListExpenditureInfo/1/999/2017/' + encodeURIComponent(query)).then(res => {
+          console.log(res.body.ListExpenditureInfo.row)
+          this.expenses.concat(res.body.ListExpenditureInfo.row) 
+        })
+      },
+      showAllExpenses: function () {
+        this.expenses = this.totalExpenses.slice(0, 10)
+      },
+      updateExpenses: function (business) {
+        this.expenses = this.totalExpenses.filter(function (expense){
+          return expense.BIZ_NM === business
+        }).slice(0, 10)
+      },
+      formatNumber: function (num) {
+        const nf = new Intl.NumberFormat(["ko-KR"], {
+          style: 'currency',
+          currency: 'KRW',
+          currencyDisplay: 'symbol'
+        })
+        return nf.format(num)
+      },
       addComment: function () {
         console.log('addReply')
         let comment =  {
@@ -399,6 +584,10 @@ li {
 }
 .q {
   float: right;
+  cursor: pointer;
+}
+
+a {
   cursor: pointer;
 }
 

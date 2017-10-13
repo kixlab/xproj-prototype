@@ -11,6 +11,9 @@ import chooseInterest from '@/components/ChooseInterest'
 import favoritePromises from '@/components/FavoritePromises'
 import personalizedPromises from '@/components/PersonalizedPromises'
 import flippedTagger from '@/components/FlippedTagger'
+import logIn from '@/components/logIn'
+import newPromiseDetail from '@/components/newPromiseDetail'
+import showBudgets from '@/components/showBudgets'
 Vue.use(Router)
 
 export default new Router({
@@ -26,7 +29,7 @@ export default new Router({
       component: walkThrough
     },
     {
-      path: '/flippedTagger/:keyword',
+      path: '/flippedTagger/',
       name: 'flippedTagger',
       component: flippedTagger
     },
@@ -34,6 +37,11 @@ export default new Router({
       path: '/signup',
       name: 'signup',
       component: signUp
+    },
+    {
+      path: '/logIn',
+      name: 'logIn',
+      component: logIn
     },
     {
       path: '/myReprs',
@@ -49,6 +57,11 @@ export default new Router({
       path: '/promiseDetail/:city/:district/:key',
       name: 'promiseDetail',
       component: promiseDetail
+    },
+    {
+      path: '/newPromiseDetail/:city/:district/:key',
+      name: 'newPromiseDetail',
+      component: newPromiseDetail
     },
     {
       path: '/findReprs',
@@ -69,6 +82,11 @@ export default new Router({
       path: '/personalizedPromises',
       name: 'personalizedPromises',
       component: personalizedPromises
+    },
+    {
+      path: '/showBudgets',
+      name: 'showBudgets',
+      component: showBudgets
     }
 
   ]
