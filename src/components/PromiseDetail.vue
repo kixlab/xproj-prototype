@@ -72,7 +72,7 @@
         </div>
       </div>
     </div>
-    다음은 공약 관련 사업과 예산 목록입니다.
+    다음은 공약 관련 사업과 2016년 예산 목록입니다.
     <div class="ui feed">
       <div v-if="key == 14 || key == 10 || key == 258">
         <table class="ui celled table">
@@ -101,25 +101,25 @@
             </tr> -->
           </tbody>
         </table>
-        다음은 공약과 관련된 최근 예산 지출 항목 내역입니다. 윗 표의 사업 이름을 클릭하시면, 각 사업 별로 최근 예산 지출 내역을 보실 수 있습니다.
-        <button @click="expenseDetail = !expenseDetail" class="ui blue button">지출정보 자세히 보기</button>
+        다음은 공약과 관련된 2016년의 최신순 예산 지출 항목 내역입니다. 윗 표의 사업 이름을 클릭하시면, 각 사업 별로 최근 예산 지출 내역을 보실 수 있습니다.
+        <!-- <button @click="expenseDetail = !expenseDetail" class="ui blue button">지출정보 자세히 보기</button> -->
         <table class="ui celled table">
           <thead>
             <tr>
               <th>관련 사업</th>
-              <th v-if="expenseDetail">부문명</th>
-              <th v-if="expenseDetail">분야명</th>
-              <th v-if="expenseDetail">목세목명</th>
+              <th>부문명</th>
+              <th>분야명</th>
+              <th>목세목명</th>
               <th>예산 지출액</th>
               <th>예산 지출일</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="expense in expenses" :key="expense.BIZ_CD">
+            <tr v-for="expense in expenses" :key="expense.BIZ_CD + '' + expense.PAY_YMD">
               <td>{{expense.BIZ_NM}}</td>
-              <td v-if="expenseDetail">{{expense.SECT_NM}}</td>
-              <td v-if="expenseDetail">{{expense.FLD_NM}}</td>
-              <td v-if="expenseDetail">{{expense.TE_MNG_MOK_NM}}</td>
+              <td>{{expense.SECT_NM}}</td>
+              <td>{{expense.FLD_NM}}</td>
+              <td>{{expense.TE_MNG_MOK_NM}}</td>
               <td>{{formatNumber(expense.PAY_AMT)}}</td>
               <td>{{expense.PAY_YMD}}</td>
             </tr>
@@ -337,10 +337,10 @@
             }
           ],
           [
-            {
-              business: '강남역 일대 침수방지(배수구역경계조정)',
-              budget: '₩4,000,000,000'
-            },
+            // {
+            //   business: '강남역 일대 침수방지(배수구역경계조정)',
+            //   budget: '₩4,000,000,000'
+            // },
             {
               business: '마장동 우시장 주변 침수해소',
               budget: '₩2,700,000,000'
@@ -415,7 +415,7 @@
           const query = encodeURIComponent(obj.business.split(' ')[0])
           console.log(query)
           console.log(obj)
-          this.$http.get('http://openapi.seoul.go.kr:8088/515855484c6b687731313966526a5a73/json/ListExpenditureInfo/1/999/2017/' + query).then(res => {
+          this.$http.get('http://openapi.seoul.go.kr:8088/515855484c6b687731313966526a5a73/json/ListExpenditureInfo/1/999/2016/' + query).then(res => {
             console.log(res.body)
             if(res.body.ListExpenditureInfo) {
               this.totalExpenses = this.totalExpenses.concat(res.body.ListExpenditureInfo.row)
