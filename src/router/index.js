@@ -58,11 +58,11 @@ export default new Router({
       name: 'promiseDetail',
       component: promiseDetail
     },
-    {
-      path: '/newPromiseDetail/:city/:district/:key',
-      name: 'newPromiseDetail',
-      component: newPromiseDetail
-    },
+    // {
+    //   path: '/newPromiseDetail/:city/:district/:key',
+    //   name: 'newPromiseDetail',
+    //   component: newPromiseDetail
+    // },
     {
       path: '/findReprs',
       name: 'findReprs',
