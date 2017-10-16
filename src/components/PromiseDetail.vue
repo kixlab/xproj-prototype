@@ -32,6 +32,23 @@
       이행 계획
       <a @click="onPlanQuestionClick" class="q"><i class="comment outline icon"></i> {{planCount}} </a>
     </div>
+    다음은 공약 관련 사업과 2016년 예산 목록입니다.
+    <div v-if="key == 14 || key == 10 || key == 2">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th><a @click="showAllExpenses">관련 사업</a></th>
+            <th>예산 편성액</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="business in businesses" :key="business.budget">
+            <td><a @click="updateExpenses(business.business)">{{business.business}}</a></td>
+            <td>{{business.budget}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <ul>
     <li v-for="pln in promise.plan" :key="pln">{{pln}}</li>
     </ul>
@@ -72,35 +89,9 @@
         </div>
       </div>
     </div>
-    다음은 공약 관련 사업과 2016년 예산 목록입니다.
     <div class="ui feed">
-      <div v-if="key == 14 || key == 10 || key == 258">
-        <table class="ui celled table">
-          <thead>
-            <tr>
-              <th><a @click="showAllExpenses">관련 사업</a></th>
-              <th>예산 편성액</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="business in businesses" :key="business.budget">
-              <td><a @click="updateExpenses(business.business)">{{business.business}}</a></td>
-              <td>{{business.budget}}</td>
-            </tr>
-            <!-- <tr class="positive">
-              <td><a @click="getExpense('시민안전파수꾼')">시민안전파수꾼 양성</a></td>
-              <td>₩283,560,000</td>
-            </tr>
-            <tr>
-              <td><a @click="getExpense('재난관리시스템')"> 통합 재난관리시스템 유지관리</a></td>
-              <td>₩126,949,000</td>
-            </tr>
-            <tr class="negative">
-              <td><a @click="getExpense('소방 안전지도')">소방 안전지도 고도화</a></td>
-              <td>₩965,637,000</td>
-            </tr> -->
-          </tbody>
-        </table>
+      <div v-if="key == 14 || key == 10 || key == 2">
+        <expenditure-chart :chart-data="chartData"></expenditure-chart>
         다음은 공약과 관련된 2016년의 최신순 예산 지출 항목 내역입니다. 윗 표의 사업 이름을 클릭하시면, 각 사업 별로 최근 예산 지출 내역을 보실 수 있습니다.
         <!-- <button @click="expenseDetail = !expenseDetail" class="ui blue button">지출정보 자세히 보기</button> -->
         <table class="ui celled table">
@@ -115,7 +106,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="expense in expenses" :key="expense.BIZ_CD + '' + expense.PAY_YMD">
+            <tr v-for="expense in expenses" :key="expense.BIZ_CD + ' ' + expense.PAY_YMD">
               <td>{{expense.BIZ_NM}}</td>
               <td>{{expense.SECT_NM}}</td>
               <td>{{expense.FLD_NM}}</td>
@@ -151,30 +142,23 @@
         </div>
       </div>
     </div>
-    <!-- <div class="ui dividing medium header">공약 호감도</div>
-    지역구민: 3.7 / 5
-    <br>
-    전체시민: 3.4 / 5
-    <br>
-    <div class="ui small header">이 공약을 좋아하십니까 ?</div>
-      <div style="text-align: center">
-        <div style="display: inline-block;" v-for="i in 5" :key="i">
-	  <div v-if="i == 1">
-	  <b>좋아하지<br>않는다</b>
-	  </div>
-	  <div v-else-if="i == 5">
-	  <b>좋아한다</b>
-	  </div>
-
-          <button style="margin-left: 5px; margin-right: 5px;" class="ui button" :class="score == i ? 'active' : ''" @click="score = i">
-            {{i}}
-          </button>
-        </div>
-      </div>
-    <div class="ui positive message" v-if="score != 0">
-      <div class="header">점수가 기록되었습니다.</div>
-    </div> -->
     <div class="ui dividing medium header">시민 의견</div>
+    <div v-if="promise.scores">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th>질문</th>
+            <th>점수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="score in scores" :key="score.question">
+            <td>{{score.question}}</td>
+            <td>{{score.sumScore / score.numScore}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="ui buttons">
       <button class="ui button" :class="commentCategory === '' ? 'blue' : ''" @click="commentCategory = ''">전체</button>
       <button class="ui button" :class="commentCategory === 'purpose' ? 'blue' : ''" @click="commentCategory = 'purpose'">목적</button>
@@ -228,10 +212,12 @@
 
 <script>
   import addProgress from './AddProgress'
+  import expenditureChart from './ExpenditureChart'
   export default {
     name: 'promiseDetail', 
     components: {
-      addProgress
+      addProgress,
+      expenditureChart
     },
     computed: {
       purposeCount: function () {
@@ -295,17 +281,34 @@
           return this.totalBusinesses[0]
         } else if (this.key == 10) {
           return this.totalBusinesses[1]
-        } else if (this.key == 258) {
+        } else if (this.key == 2) {
           return this.totalBusinesses[2]
         } else {
           return []
+        }
+      },
+      chartData: function () {
+        return {
+          // labels: ['test002'],
+          datasets: [
+            {
+              label: '예산 집행액',
+              backgroundColor: '#f87979',
+              fill: false,
+              data: this.expenses.map(function(expense){
+                return {
+                  x: new Date([expense.PAY_YMD.slice(0, 4), expense.PAY_YMD.slice(4, 6), expense.PAY_YMD.slice(6)].join('-')),
+                  y: expense.PAY_AMT
+                }
+              })
+            }
+          ]
         }
       }
     },
     data: function () {
       return {
         promise: {},
-        score: 0,
         commentText: '',
         replyText: '',
         newsURL: 'http://34.208.245.104:3000/article',
@@ -397,26 +400,55 @@
             }
           ]
         ],
-        expenseDetail: false
+        scores: [], 
       }
     },
     mounted: function () {
       let url = this.promiseURL + '/' + this.city + '/' + this.district + '/' + this.key
       this.$http.get(url).then(function (response) {
           this.promise = response.body
-          console.log(response.body)
+          // console.log(response.body)
           this.isProgressModalVisible = true
           this.isReplyVisible = this.comments.map(function(c){ return false })
-        }.bind(this))
+        }.bind(this)).then(() => {
+          // console.log(this)
+          if(this.promise.scores) {
+            const questions = []
+            this.promise.scores.forEach((score) => {
+              if(!questions.includes(score.question)){
+                questions.push(score.question)
+              }
+            })
+            console.log(questions)
+            questions.forEach((question) => {
+              const newScore = this.promise.scores.filter((score) => (score.question === question)).reduce(
+                function(prevValue, curValue){
+                  return {
+                    question: prevValue.question,
+                    sumScore: prevValue.sumScore + curValue.score,
+                    numScore: prevValue.numScore + 1
+                  }
+                }, 
+                {
+                  question: question,
+                  sumScore: 0,
+                  numScore: 0
+                }
+              )
+              console.log(newScore)
+              this.scores.push(newScore)
+            })
+          }
+        })
 
-      if(this.key == 14 || this.key == 10 || this.key == 258) {
-        console.log(this.businesses)
+      if(this.key == 14 || this.key == 10 || this.key == 2) {
+        // console.log(this.businesses)
         let asdf = this.businesses.forEach((obj) => {
-          const query = encodeURIComponent(obj.business.split(' ')[0])
-          console.log(query)
-          console.log(obj)
-          this.$http.get('http://openapi.seoul.go.kr:8088/515855484c6b687731313966526a5a73/json/ListExpenditureInfo/1/999/2016/' + query).then(res => {
-            console.log(res.body)
+          const query = encodeURIComponent(obj.business)
+          // console.log(query)
+          // console.log(obj)
+          this.$http.get('http://openapi.seoul.go.kr:8088/515855484c6b687731313966526a5a73/json/ListExpenditureInfo/1/999/2017/' + query).then(res => {
+            // console.log(res.body)
             if(res.body.ListExpenditureInfo) {
               this.totalExpenses = this.totalExpenses.concat(res.body.ListExpenditureInfo.row)
               this.totalExpenses.sort(function(a, b){
@@ -427,6 +459,8 @@
           })
         }, this)
       }
+
+
       //['시민안전파수꾼', '재난관리시스템', '소방안전지도']
       // setInterval(function () {
       //   console.log('polling...')
