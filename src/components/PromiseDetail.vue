@@ -29,11 +29,11 @@
       </div>
     </div>
     <div class="ui dividing medium header">
-      이행 계획
+      관련 사업
       <a @click="onPlanQuestionClick" class="q"><i class="comment outline icon"></i> {{planCount}} </a>
     </div>
     다음은 공약 관련 사업과 2016년 예산 목록입니다.
-    <div v-if="key == 14 || key == 10 || key == 2">
+    <div v-if="key == 14 || key == 10 || key == 2 || key == 11">
       <table class="ui celled table">
         <thead>
           <tr>
@@ -90,7 +90,7 @@
       </div>
     </div>
     <div class="ui feed">
-      <div v-if="key == 14 || key == 10 || key == 2">
+      <div v-if="key == 14 || key == 10 || key == 2 || key == 11">
         <expenditure-chart :chart-data="chartData"></expenditure-chart>
         다음은 공약과 관련된 2016년의 최신순 예산 지출 항목 내역입니다. 윗 표의 사업 이름을 클릭하시면, 각 사업 별로 최근 예산 지출 내역을 보실 수 있습니다.
         <!-- <button @click="expenseDetail = !expenseDetail" class="ui blue button">지출정보 자세히 보기</button> -->
@@ -106,7 +106,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="expense in expenses" :key="expense.BIZ_CD + ' ' + expense.PAY_YMD">
+            <tr v-for="expense in expenses" :key="expense.BIZ_CD + ' ' + expense.PAY_YMD + ' ' + expense.PAY_AMT">
               <td>{{expense.BIZ_NM}}</td>
               <td>{{expense.SECT_NM}}</td>
               <td>{{expense.FLD_NM}}</td>
@@ -283,12 +283,15 @@
           return this.totalBusinesses[1]
         } else if (this.key == 2) {
           return this.totalBusinesses[2]
+        } else if (this.key == 11) {
+          return this.totalBusinesses[3]
         } else {
           return []
         }
       },
       chartData: function () {
         return {
+          //TODO: use stacks?
           // labels: ['test002'],
           datasets: [
             {
@@ -398,6 +401,16 @@
               business: '시민안전교육 강화',
               budget: '₩783,325,000'
             }
+          ],
+          [
+            {
+              business: '어린이보호구역 정비',
+              budget: '₩270,200,000'
+            },
+            {
+              business: '어린이 안전 영상정보 인프라 구축',
+              budget: '₩850,000,000'
+            }
           ]
         ],
         scores: [], 
@@ -441,7 +454,7 @@
           }
         })
 
-      if(this.key == 14 || this.key == 10 || this.key == 2) {
+      if(this.key == 14 || this.key == 10 || this.key == 2 || this.key == 11) {
         // console.log(this.businesses)
         let asdf = this.businesses.forEach((obj) => {
           const query = encodeURIComponent(obj.business)
@@ -483,7 +496,7 @@
         })
       },
       showAllExpenses: function () {
-        this.expenses = this.totalExpenses.slice(0, 10)
+        this.expenses = this.totalExpenses //.slice(0, 10)
       },
       updateExpenses: function (business) {
         this.expenses = this.totalExpenses.filter(function (expense){

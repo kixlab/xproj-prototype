@@ -32,7 +32,7 @@
     methods: {
       getBusiness: function (start) {
         const end = start + 999
-        this.$http.get('http://openapi.seoul.go.kr:8088/515855484c6b687731313966526a5a73/json/FiosTbmTecurramt/' + start + '/' + end + '/2016').then((res) => {
+        this.$http.get('http://openapi.seoul.go.kr:8088/515855484c6b687731313966526a5a73/json/FiosTbmTecurramt/' + start + '/' + end + '/2017').then((res) => {
           console.log(res)
           this.businesses = this.businesses.concat(res.body.FiosTbmTecurramt.row)
           if(res.body.FiosTbmTecurramt.list_total_count > end) {

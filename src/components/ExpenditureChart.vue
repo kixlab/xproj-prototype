@@ -10,6 +10,7 @@ export default {
       options: {
         scales: {
           xAxes: [{
+            stacked: true,
             barThickness: 10,
             categoryPercentage: 0.01,
             gridLines: {
@@ -28,6 +29,7 @@ export default {
             minRotation: 90
           }],
           yAxes: [{
+            stacked: true,
             ticks: {
               callback: function(value, index, values) {
                 const nf = new Intl.NumberFormat(["ko-KR"], {
