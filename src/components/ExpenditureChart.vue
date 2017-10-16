@@ -10,16 +10,22 @@ export default {
       options: {
         scales: {
           xAxes: [{
+            barThickness: 10,
+            categoryPercentage: 0.01,
+            gridLines: {
+              offsetGridLines: false
+            },
             id: 'first-x-axis',
             type: 'time',
             time: {
-              unit: 'week',
+              // unit: 'week',
               displayFormats: {
                 quarter: 'II'
               },
-              tooltipFormat: 'II',
               // min: new Date('2017-01-01')
-            }
+            },
+            distribution: 'linear',
+            minRotation: 90
           }],
           yAxes: [{
             ticks: {
