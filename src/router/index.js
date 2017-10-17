@@ -11,7 +11,7 @@ import chooseInterest from '@/components/ChooseInterest'
 import favoritePromises from '@/components/FavoritePromises'
 import personalizedPromises from '@/components/PersonalizedPromises'
 import flippedTagger from '@/components/FlippedTagger'
-import LogIn from '@/components/logIn'
+import LogIn from '@/components/LogIn'
 // import newPromiseDetail from '@/components/newPromiseDetail'
 import ShowBudgets from '@/components/ShowBudgets'
 Vue.use(Router)
