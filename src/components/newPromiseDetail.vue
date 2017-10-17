@@ -358,7 +358,7 @@
               pointBorderColor: "#fff",
               pointHoverBackgroundColor: "#fff",
               pointHoverBorderColor: "rgba(179,181,198,1)",
-              data: [3.76,4.06,1.85,2.58,3.2]
+              data: [4,2,5,3,2.6]
           },
           {
               label: "나의 평가",
@@ -368,7 +368,7 @@
               pointBorderColor: "#fff",
               pointHoverBackgroundColor: "#fff",
               pointHoverBorderColor: "rgba(255,99,132,1)",
-              data: [3,5,4,3,4]
+              data: [4,3,4,4,5]
           }],
         },
         evalChartOpts:{
@@ -380,7 +380,10 @@
               stepSize: 1},
             pointLabels: {
               fontSize: 18}
-           }
+           },
+          legend: {
+            position: "left"
+          }
         },
         liked: false,
         isProgressModalVisible: false,
