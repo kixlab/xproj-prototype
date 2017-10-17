@@ -1,17 +1,21 @@
 <template>
   <div>
     <h1 class="ui header">Flipped Tagger</h1>
+    <div class="ui fluid input">
+      <input type="text" v-model="keyword"></input>
+      <button class="ui green button" @click="setKeyword" @submit.prevent></button>
+    </div>
     <p>기사와 연관있는 공약을 선택해주세요.</p>
     <div class="ui container">
     <h3 class="ui header"><a :href="article.link" v-html="article.title"></a></h3>
     <div class="ui attached segment">
       <p v-html="article.description"></p>
     </div>
-    <div class="ui two bottom attached buttons" :class="i%2 == 0? 'basic': ''" v-for="i in 3" :key="i">
+    <div class="ui two bottom attached buttons" v-for="i in 3" :key="i">
       <div class="ui button" @click="generateRandomPromise">{{options[i-1].title}}</div>
       <div class="ui button" @click="showDetail(i-1)">더 알아보기</div>
     </div>
-    <div class="ui bottom attached basic button" @click="curIdx += 1">해당 사항 없음</div>
+    <div class="ui bottom attached basic button" @click="generateRandomPromise">해당 사항 없음</div>
     <div class="ui modal">
       <div class="header">{{promise.title}}</div>
       <div class="content">
@@ -45,14 +49,16 @@
         }],
         curIdx: -1,
         // newsURL: 'http://34.208.245.104:3000/article/부동산',
-        promiseURL: 'http://34.208.245.104:3000/promise/seoul/0',
+        promiseURL: 'http://34.208.245.104:3000/promise/seoul/1',
         options: [{title: ''}, {title: ''}, {title: ''}],
         promises: [],
         promise: {
           title: '',
           purpose: [],
           plan: []
-        }
+        },
+        keyword: '',
+        isKeywordSet: false
       }
     },
     methods: {
@@ -76,6 +82,17 @@
           return this.promises[i]
         }.bind(this))
         this.curIdx += 1
+      },
+      setKeyword: function () {
+        this.$http.get(this.newsURL).then(function(res){
+          this.articles = JSON.parse(res.body).items
+        }.bind(this))
+        this.$http.get(this.promiseURL).then(function(res){
+          console.log(res.body)
+          this.promises = res.body.promises
+          this.generateRandomPromise()
+          // this.promiseTitles = res.body.promises.slice(0, 3).map(function(a){ return a.title})
+        }.bind(this))
       }
     },
     computed: {
@@ -83,20 +100,20 @@
         return this.articles[this.curIdx]
       },
       newsURL: function () {
-        return 'http://34.208.245.104:3000/article/' +  this.$route.params.keyword
+        return 'http://34.208.245.104:3000/article/' +  this.keyword
       }
     },
-    mounted: function () {
-      this.$http.get(this.newsURL).then(function(res){
-        this.articles = JSON.parse(res.body).items
-      }.bind(this))
-      this.$http.get(this.promiseURL).then(function(res){
-        console.log(res.body)
-        this.promises = res.body.promises
-        this.generateRandomPromise()
-        // this.promiseTitles = res.body.promises.slice(0, 3).map(function(a){ return a.title})
-      }.bind(this))
-    }
+    // mounted: function () {
+    //   this.$http.get(this.newsURL).then(function(res){
+    //     this.articles = JSON.parse(res.body).items
+    //   }.bind(this))
+    //   this.$http.get(this.promiseURL).then(function(res){
+    //     console.log(res.body)
+    //     this.promises = res.body.promises
+    //     this.generateRandomPromise()
+    //     // this.promiseTitles = res.body.promises.slice(0, 3).map(function(a){ return a.title})
+    //   }.bind(this))
+    // }
   }
 </script>
 <style scoped>

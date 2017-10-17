@@ -91,7 +91,9 @@
     </div>
     <div class="ui feed">
       <div v-if="key == 14 || key == 10 || key == 2 || key == 11">
-        <expenditure-chart :chart-data="chartData"></expenditure-chart>
+        <div id="chart">
+          <expenditure-chart :chart-data="chartData"></expenditure-chart>
+        </div>
         다음은 공약과 관련된 2016년의 최신순 예산 지출 항목 내역입니다. 윗 표의 사업 이름을 클릭하시면, 각 사업 별로 최근 예산 지출 내역을 보실 수 있습니다.
         <!-- <button @click="expenseDetail = !expenseDetail" class="ui blue button">지출정보 자세히 보기</button> -->
         <table class="ui celled table">
@@ -662,4 +664,7 @@ a {
   cursor: pointer;
 }
 
+/* #chart {
+  max-height: 10em;
+} */
 </style>

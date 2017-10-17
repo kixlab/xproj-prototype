@@ -11,15 +11,15 @@
       </div>
       <div class="field">
         <label>E-mail</label>
-        <input name="email" placeholder="E-mail" type="email"></input>
+        <input name="email" placeholder="E-mail" type="email" v-model="email"></input>
       </div>
       <div class="field">
         <label>Password</label>
-        <input name="password" type="password"></input>
+        <input name="password" type="password" v-model="password1"></input>
       </div>
       <div class="field">
         <label>Confirm Password</label>
-        <input type="password"></input>
+        <input type="password" v-model="password2"></input>
       </div>
 
       <div class="ui dividing header">Additional Information</div>
@@ -84,7 +84,11 @@ export default {
   data: function () {
     return {
       gender: '',
-      userName: ''
+      userName: '',
+      email: '',
+      password1: '',
+      password2: '',
+      authURL: 'http://34.208.245.104:8000/api/auth/signup/'
     }
   },
   computed: {
@@ -98,8 +102,21 @@ export default {
     onSubmit: function () {
       console.log('onSubmit!!')
       this.$store.commit('setName', this.userName)
+      let formData = new FormData()
+      formData.append('email', this.email)
+      formData.append('username', this.userName)
+      formData.append('password1', this.password1)
+      formData.append('password2', this.password2)
       if(this.district != 0){
-        this.$router.push('chooseInterest')
+        this.$http.post(this.authURL, formData)
+        .then((res) => {
+          console.log(res.body)
+          this.$router.push('chooseInterest')
+          // this.$store.commit('setToken', res)
+        }, (res) => {
+          console.log('err')
+          console.log(res)
+        })
       }
     },
     onCityChanged: function (value) {
