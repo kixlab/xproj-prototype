@@ -38,7 +38,7 @@
     </div>
     다음은 공약 관련 사업과 2016년 예산 목록입니다.
     <div v-if="key == 14 || key == 10 || key == 2 || key == 11">
-      <table class="ui celled table">
+      <table class="ui unstackable celled table">
         <thead>
           <tr>
             <th><a @click="showAllExpenses">관련 사업</a></th>
@@ -97,7 +97,7 @@
       <div v-if="key == 14 || key == 10 || key == 2 || key == 11">
         이 공약과 관련된 사업 예산은 {{Math.round(totalExpenses[0].cumulative * 100) / 100}}% 집행되었습니다.
         <!-- <div id="chart"> -->
-          <expenditure-chart :chart-data="chartData" :height="400"></expenditure-chart>
+          <expenditure-chart :chart-data="chartData" :height="250"></expenditure-chart>
         <!-- </div> -->
         다음은 공약과 관련된 2016년의 최신순 예산 지출 항목 내역입니다. 윗 표의 사업 이름을 클릭하시면, 각 사업 별로 최근 예산 지출 내역을 보실 수 있습니다.
         <br><button @click="expenseDetail = !expenseDetail" class="ui blue button">지출정보 자세히 보기</button>

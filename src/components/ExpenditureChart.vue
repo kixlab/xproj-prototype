@@ -21,11 +21,11 @@ export default {
             id: 'first-x-axis',
             type: 'time',
             time: {
-              // unit: 'week',
+              unit: 'month',
               displayFormats: {
-                quarter: 'II'
+                quarter: 'MMM YYYY'
               },
-              // min: new Date('2017-01-01')
+              min: new Date('2017-01-01')
             },
             distribution: 'linear',
             minRotation: 90
@@ -36,12 +36,13 @@ export default {
             ticks: {
               beginAtZero: false,
               callback: function(value, index, values) {
-                const nf = new Intl.NumberFormat(["ko-KR"], {
-                  style: 'currency',
-                  currency: 'KRW',
-                  currencyDisplay: 'symbol'
-                })
-                return nf.format(value)
+                // const nf = new Intl.NumberFormat(["ko-KR"], {
+                //   style: 'currency',
+                //   currency: 'KRW',
+                //   currencyDisplay: 'symbol'
+                // })
+                // return nf.format(value / 10000) + '만'
+                return (value / 100000000.0) + '억'
               }
             }
           }, {
@@ -50,7 +51,10 @@ export default {
             position: 'right',
             ticks: {
               max: 100,
-              min: 0
+              min: 0,
+              callback: function (value, index, values) {
+                return value + '%'
+              }
             }
           }]
         }

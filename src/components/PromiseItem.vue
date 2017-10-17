@@ -133,7 +133,7 @@ export default {
         {
           content: '다음은 공직자가 밝힌 이 공약의 목적입니다.',
           vueElements: this.promise.purpose,
-          extraContent: '이 목적은 적절한가요?',
+          extraContent: '이 공약은 서울시의 중요한 문제를 해결한다고 생각하시나요?',
           type: 'purpose'
         },
         {
