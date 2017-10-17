@@ -8,6 +8,8 @@ export default {
   data: function () {
     return {
       options: {
+        maintainAspectRatio: false,
+        responsive: true,
         scales: {
           xAxes: [{
             // stacked: true,
@@ -32,6 +34,7 @@ export default {
             // stacked: true,
             id: 'money',
             ticks: {
+              beginAtZero: false,
               callback: function(value, index, values) {
                 const nf = new Intl.NumberFormat(["ko-KR"], {
                   style: 'currency',

@@ -95,12 +95,12 @@
     </div>
     <div class="ui feed">
       <div v-if="key == 14 || key == 10 || key == 2 || key == 11">
-        <div id="chart">
-          <expenditure-chart :chart-data="chartData"></expenditure-chart>
-        </div>
+        <!-- <div id="chart"> -->
+          <expenditure-chart :chart-data="chartData" :height="400"></expenditure-chart>
+        <!-- </div> -->
         다음은 공약과 관련된 2016년의 최신순 예산 지출 항목 내역입니다. 윗 표의 사업 이름을 클릭하시면, 각 사업 별로 최근 예산 지출 내역을 보실 수 있습니다.
-        <!-- <button @click="expenseDetail = !expenseDetail" class="ui blue button">지출정보 자세히 보기</button> -->
-        <table class="ui celled table">
+        <br><button @click="expenseDetail = !expenseDetail" class="ui blue button">지출정보 자세히 보기</button>
+        <table class="ui celled table" v-show="expenseDetail">
           <thead>
             <tr>
               <th>관련 사업</th>
@@ -123,7 +123,7 @@
           </tbody>
         </table>
       </div>
-      <button class="ui button" @click="showAddProgressModal">이행 현황 추가</button>
+      <!-- <button class="ui button" @click="showAddProgressModal">이행 현황 추가</button> -->
       <add-progress v-if="isProgressModalVisible" @otherRefChecked="onOtherRefChecked" :otherRefs="otherRefs" :city="city" :district="district" :promiseKey="key" @progressUpdate="onProgressUpdate" :reprName="repr.name" :promiseTitle="promise.title"></add-progress>
       <div class="event" v-for="progress in progresses" :key="progress.key">
         <div class="label">
@@ -313,19 +313,6 @@
           // labels: ['test002'],
           datasets: [
             {
-              label: '예산 집행액',
-              backgroundColor: '#f87979',
-              fill: false,
-              data: this.expenses.map(function(expense){
-                return {
-                  x: new Date([expense.PAY_YMD.slice(0, 4), expense.PAY_YMD.slice(4, 6), expense.PAY_YMD.slice(6)].join('-')),
-                  y: expense.PAY_AMT
-                }
-              }),
-              yAxisID: 'money',
-              type: 'bar'
-            }, 
-            {
               label: '예산 집행률',
               backgroundColor: '#1485cc',
               fill: false,
@@ -337,6 +324,19 @@
               }),
               type: 'line',
               yAxisID: 'percentile'
+            },
+            {
+              label: '예산 집행액',
+              backgroundColor: '#f87979',
+              fill: false,
+              data: this.expenses.map(function(expense){
+                return {
+                  x: new Date([expense.PAY_YMD.slice(0, 4), expense.PAY_YMD.slice(4, 6), expense.PAY_YMD.slice(6)].join('-')),
+                  y: expense.PAY_AMT
+                }
+              }),
+              yAxisID: 'money',
+              type: 'bar'
             }
           ]
         }
@@ -702,7 +702,8 @@ a {
   cursor: pointer;
 }
 
-/* #chart {
-  max-height: 10em;
-} */
+#chart {
+  height: 10em;
+  display: block;
+}
 </style>
