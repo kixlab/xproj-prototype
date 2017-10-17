@@ -54125,13 +54125,7 @@
     "district": 6
   },
   {
-    "city": "ulsan",
-    "name": "세종",
-    "promises": [],
-    "district": 7
-  },
-  {
-    "city": "ulsan",
+    "city": "sejong",
     "name": "세종특별자치시(이해찬 )",
     "promises": [
       {

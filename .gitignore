@@ -20,6 +20,6 @@ src/components/PersonalizedPromises - Copy.vue
 src/components/NewPromiseDetail.vue
 package-lock.json
 semantic.json
-promises/cong_tagged.json
 promises/congJSONFormatted.json
 promises/JSONConvert.py
+promises/cong_tagged.json
