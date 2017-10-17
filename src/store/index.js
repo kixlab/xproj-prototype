@@ -1272,13 +1272,13 @@ export default new Vuex.Store({
         }
       })
     },
-    presidentPromises: state => {
-      return state.promises.find(function (pp) {
-        if (pp.city === 'korea') {
-          return pp
-        }
-      })
-    },
+    // presidentPromises: state => {
+    //   return state.promises.find(function (pp) {
+    //     if (pp.city === 'korea') {
+    //       return pp
+    //     }
+    //   })
+    // },
     mayor: state => {
       return state.reprs.find(function (mayor) {
         if (mayor.city === state.city && mayor.district == 0) {
@@ -1293,20 +1293,20 @@ export default new Vuex.Store({
         }
       })
     },
-    mayorPromises: state => {
-      return state.promises.find(function (mp) {
-        if (mp.city === state.city && mp.district == 0) {
-          return mp
-        }
-      })
-    },
-    congressPersonPromises: state => {
-      return state.promises.find(function (cpp) {
-        if (cpp.city === state.city && cpp.district == state.district) {
-          return cpp
-        }
-      })
-    },
+    // mayorPromises: state => {
+    //   return state.promises.find(function (mp) {
+    //     if (mp.city === state.city && mp.district == 0) {
+    //       return mp
+    //     }
+    //   })
+    // },
+    // congressPersonPromises: state => {
+    //   return state.promises.find(function (cpp) {
+    //     if (cpp.city === state.city && cpp.district == state.district) {
+    //       return cpp
+    //     }
+    //   })
+    // },
     favoritePromises: state => {
       return state.favPromises.map(function (fp) {
         return {
