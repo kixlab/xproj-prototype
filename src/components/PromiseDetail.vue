@@ -105,21 +105,23 @@
           <thead>
             <tr>
               <th>관련 사업</th>
-              <th>부문명</th>
-              <th>분야명</th>
+              <!-- <th>부문명</th>
+              <th>분야명</th> -->
               <th>목세목명</th>
               <th>예산 지출액</th>
               <th>예산 지출일</th>
+              <th>신뢰도</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="expense in expenses" :key="expense.BIZ_CD + ' ' + expense.PAY_YMD + ' ' + expense.PAY_AMT">
+            <tr v-for="expense in expenses" :key="expense.BIZ_CD + ' ' + expense.PAY_YMD + ' ' + expense.PAY_AMT" :class="getClass(expense.PAY_YMD)">
               <td>{{expense.BIZ_NM}}</td>
-              <td>{{expense.SECT_NM}}</td>
-              <td>{{expense.FLD_NM}}</td>
+              <!-- <td>{{expense.SECT_NM}}</td>
+              <td>{{expense.FLD_NM}}</td> -->
               <td>{{expense.TE_MNG_MOK_NM}}</td>
               <td>{{formatNumber(expense.PAY_AMT)}}</td>
               <td>{{expense.PAY_YMD}}</td>
+              <td>{{expense.PAY_YMD.slice(3, 5)}}%</td>
             </tr>
           </tbody>
         </table>
@@ -544,6 +546,16 @@
 
     },
     methods: {
+      getClass: function (code){
+        const r = parseInt(code) % 3
+        if(r === 0){
+          return ''
+        } else if( r=== 1){
+          return 'positive'
+        } else if( r=== 2){
+          return 'negative'
+        }
+      },
       getExpense: function (query) {
         this.$http.get('http://openapi.seoul.go.kr:8088/515855484c6b687731313966526a5a73/json/ListExpenditureInfo/1/999/2017/' + encodeURIComponent(query)).then(res => {
           console.log(res.body.ListExpenditureInfo.row)
