@@ -149,7 +149,7 @@
       </div>
     </div>
     <div class="ui dividing medium header">시민 의견</div>
-    <div v-if="promise.scores">
+    <!-- <div v-if="promise.scores">
       <table class="ui celled table">
         <thead>
           <tr>
@@ -164,7 +164,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
     <div class="ui buttons">
       <button class="ui button" :class="commentCategory === '' ? 'blue' : ''" @click="commentCategory = ''">전체</button>
       <button class="ui button" :class="commentCategory === 'purpose' ? 'blue' : ''" @click="commentCategory = 'purpose'">목적</button>
