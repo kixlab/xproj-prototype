@@ -2,6 +2,10 @@
   <div>
     <h2 class="ui dividing header">{{promise.title}}
     </h2>
+    <div class=“ui dividing medium header”>
+      시민 평가
+      <chartjs-radar :labels=“evaldata.labels” :datasets=“evaldata.datasets” :option=“evalChartOpts”></chartjs-radar>
+    </div>
     <div class="ui dividing medium header">
       공약 목적
        <a @click="onPurposeQuestionClick" class="q"><i class="comment outline icon"></i> {{purposeCount}}</a>
@@ -344,6 +348,43 @@
         newsURL: 'http://34.208.245.104:3000/article',
         docuURL: 'http://34.208.245.104:3000/seoul',
         promiseURL: 'http://34.208.245.104:3000/promise',
+        evaldata:{
+          labels: [“중요도“,”선호도“,”인지도“,”관련도“,”달성도“],
+          datasets:[{
+              label: “전체“,
+              backgroundColor: “rgba(179,181,198,0.2)“,
+              borderColor: “rgba(179,181,198,1)“,
+              pointBackgroundColor: “rgba(179,181,198,1)“,
+              pointBorderColor: “#fff”,
+              pointHoverBackgroundColor: “#fff”,
+              pointHoverBorderColor: “rgba(179,181,198,1)“,
+              data: [4,2,5,3,2.6]
+          },
+          {
+              label: “나의 평가“,
+              backgroundColor: “rgba(255,99,132,0.2)“,
+              borderColor: “rgba(255,99,132,1)“,
+              pointBackgroundColor: “rgba(255,99,132,1)“,
+              pointBorderColor: “#fff”,
+              pointHoverBackgroundColor: “#fff”,
+              pointHoverBorderColor: “rgba(255,99,132,1)“,
+              data: [4,3,4,4,5]
+          }],
+        },
+        evalChartOpts:{
+          scale: {
+            ticks: {
+              beginAtZero: true,
+              min: 0,
+              max: 5,
+              stepSize: 1},
+            pointLabels: {
+              fontSize: 18}
+           },
+          legend: {
+            position: ‘left’
+          }
+        },
         liked: false,
         isProgressModalVisible: false,
         purposeQuestion: '',
