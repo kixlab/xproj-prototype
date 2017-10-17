@@ -95,6 +95,7 @@
     </div>
     <div class="ui feed">
       <div v-if="key == 14 || key == 10 || key == 2 || key == 11">
+        이 공약과 관련된 사업 예산은 {{Math.round(totalExpenses[0].cumulative * 100) / 100}}% 집행되었습니다.
         <!-- <div id="chart"> -->
           <expenditure-chart :chart-data="chartData" :height="400"></expenditure-chart>
         <!-- </div> -->
@@ -481,6 +482,7 @@
           ]
         ],
         scores: [], 
+        expenseDetail: false
       }
     },
     mounted: function () {
@@ -549,10 +551,23 @@
         })
       },
       showAllExpenses: function () {
+        this.expenses = []
+        const budget = this.businesses.reduce(function(prev, cur){
+          return prev + parseInt(cur.budget)
+        }, 0)
+        console.log('budget is ' + budget)
         this.totalExpenses.sort(function(a, b){
-          return (parseInt(b.PAY_YMD) - parseInt(a.PAY_YMD))
+          return (parseInt(a.PAY_YMD) - parseInt(b.PAY_YMD))
+        }).reduce(function(prevValue, curValue, curIndex, array) {
+          curValue.cumulative = (prevValue[prevValue.length - 1] ? prevValue[prevValue.length - 1].cumulative : 0) + curValue.PAY_AMT / budget * 100
+          prevValue.push(curValue)
+          return prevValue
+        }, this.expenses)
+        this.totalExpenses.reverse()
+        this.expenses.sort(function(a, b){
+          return b.cumulative - a.cumulative
         })
-        this.expenses = this.totalExpenses //.slice(0, 10)
+        // this.expenses = this.totalExpenses //.slice(0, 10)
       },
       updateExpenses: function (business, budget) {
         this.expenses = []
