@@ -44,6 +44,7 @@ export default {
           }, {
             // stacked: true,
             id: 'percentile',
+            position: 'right',
             ticks: {
               max: 100,
               min: 0

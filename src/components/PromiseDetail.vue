@@ -221,30 +221,42 @@
     },
     computed: {
       purposeCount: function () {
-        return this.comments.reduce(function(prev, cur){
-          return (cur.type === 'purpose') ? prev + 1 : prev
-        }, 0)
+        if(this.comments){
+          return this.comments.reduce(function(prev, cur){
+            return (cur.type === 'purpose') ? prev + 1 : prev
+          }, 0)
+        }
+        return 0
       },
       planCount: function () {
-        return this.comments.reduce(function(prev, cur){
-          return (cur.type === 'plan') ? prev + 1 : prev
-        }, 0)
+        if(this.comments){
+          return this.comments.reduce(function(prev, cur){
+            return (cur.type === 'plan') ? prev + 1 : prev
+          }, 0)
+        }
+        return 0
       },
       progressCount: function () {
-        return this.comments.reduce(function(prev, cur){
-          return (cur.type === 'progress') ? prev + 1 : prev
-        }, 0)
+        if(this.comments){
+          return this.comments.reduce(function(prev, cur){
+            return (cur.type === 'progress') ? prev + 1 : prev
+          }, 0)
+        }
+        return 0
       },
       city: function () {return this.$route.params.city},
       district: function () { return this.$route.params.district},
       key: function () { return this.$route.params.key },
       comments: function () {
-        if(this.commentCategory === '')
-          return this.promise.comments
-        else
-          return this.promise.comments.filter(function(c){
-            return c.type === this.commentCategory
-          }.bind(this))
+        if(this.promise.comments){
+          if(this.commentCategory === '')
+            return this.promise.comments
+          else
+            return this.promise.comments.filter(function(c){
+              return c.type === this.commentCategory
+            }.bind(this))
+        }
+        return []
       },
       repr: function () {
         return this.$store.state.reprs.find(function(repr) {
@@ -480,7 +492,7 @@
             if(res.body.ListExpenditureInfo) {
               this.totalExpenses = this.totalExpenses.concat(res.body.ListExpenditureInfo.row)
               this.totalExpenses.sort(function(a, b){
-                return a.PAY_YMD < b.PAY_YMD
+                return (parseInt(b.PAY_YMD) - parseInt(a.PAY_YMD))
               })
               this.showAllExpenses()
             }
@@ -497,18 +509,23 @@
         })
       },
       showAllExpenses: function () {
+        this.totalExpenses.sort(function(a, b){
+          return (parseInt(b.PAY_YMD) - parseInt(a.PAY_YMD))
+        })
         this.expenses = this.totalExpenses //.slice(0, 10)
       },
       updateExpenses: function (business, budget) {
         this.expenses = []
         this.totalExpenses.filter(function (expense){
           return expense.BIZ_NM === business
-        }).reverse().reduce(function(prevValue, curValue, curIndex, array) {
+        }).sort(function(a, b){return (parseInt(a.PAY_YMD) - parseInt(b.PAY_YMD))}).reduce(function(prevValue, curValue, curIndex, array) {
           curValue.cumulative = (prevValue[prevValue.length - 1] ? prevValue[prevValue.length - 1].cumulative : 0) + curValue.PAY_AMT / budget * 100
           prevValue.push(curValue)
           return prevValue
         }, this.expenses)
-        this.expenses.reverse()
+        this.expenses.sort(function(a, b){
+          return b.cumulative - a.cumulative
+        })
       },
       formatNumber: function (num) {
         const nf = new Intl.NumberFormat(["ko-KR"], {
