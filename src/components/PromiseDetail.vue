@@ -101,7 +101,7 @@
         <!-- </div> -->
         다음은 공약과 관련된 2016년의 최신순 예산 지출 항목 내역입니다. 윗 표의 사업 이름을 클릭하시면, 각 사업 별로 최근 예산 지출 내역을 보실 수 있습니다.
         <br><button @click="expenseDetail = !expenseDetail" class="ui blue button">지출정보 자세히 보기</button>
-        <table class="ui celled table" v-show="expenseDetail">
+        <table class="ui unstackable celled table" v-show="expenseDetail">
           <thead>
             <tr>
               <th>관련 사업</th>
@@ -121,7 +121,7 @@
               <td>{{expense.TE_MNG_MOK_NM}}</td>
               <td>{{formatNumber(expense.PAY_AMT)}}</td>
               <td>{{expense.PAY_YMD}}</td>
-              <td>{{expense.PAY_YMD.slice(3, 5)}}%</td>
+              <td>{{Math.round(parseInt(expense.PAY_YMD[7]+ expense.PAY_YMD[5]) /100 * 40) / 10 + 1}}</td>
             </tr>
           </tbody>
         </table>
@@ -546,14 +546,14 @@
 
     },
     methods: {
-      getClass: function (code){
-        const r = parseInt(code) % 3
-        if(r === 0){
-          return ''
-        } else if( r=== 1){
+      getClass: function (expense){
+        const score = Math.round(parseInt(expense[7]+ expense[5]) /100 * 40) / 10 + 1
+        if(score > 3.3){
           return 'positive'
-        } else if( r=== 2){
+        } else if (score < 2.3) {
           return 'negative'
+        } else {
+          return ''
         }
       },
       getExpense: function (query) {
