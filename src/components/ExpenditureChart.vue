@@ -10,7 +10,7 @@ export default {
       options: {
         scales: {
           xAxes: [{
-            stacked: true,
+            // stacked: true,
             barThickness: 10,
             categoryPercentage: 0.01,
             gridLines: {
@@ -29,7 +29,8 @@ export default {
             minRotation: 90
           }],
           yAxes: [{
-            stacked: true,
+            // stacked: true,
+            id: 'money',
             ticks: {
               callback: function(value, index, values) {
                 const nf = new Intl.NumberFormat(["ko-KR"], {
@@ -39,6 +40,13 @@ export default {
                 })
                 return nf.format(value)
               }
+            }
+          }, {
+            // stacked: true,
+            id: 'percentile',
+            ticks: {
+              max: 100,
+              min: 0
             }
           }]
         }

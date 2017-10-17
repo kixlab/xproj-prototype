@@ -43,8 +43,8 @@
         </thead>
         <tbody>
           <tr v-for="business in businesses" :key="business.budget">
-            <td><a @click="updateExpenses(business.business)">{{business.business}}</a></td>
-            <td>{{business.budget}}</td>
+            <td><a @click="updateExpenses(business.business, business.budget)">{{business.business}}</a></td>
+            <td>{{formatNumber(business.budget)}}</td>
           </tr>
         </tbody>
       </table>
@@ -303,7 +303,22 @@
                   x: new Date([expense.PAY_YMD.slice(0, 4), expense.PAY_YMD.slice(4, 6), expense.PAY_YMD.slice(6)].join('-')),
                   y: expense.PAY_AMT
                 }
-              })
+              }),
+              yAxisID: 'money',
+              type: 'bar'
+            }, 
+            {
+              label: '예산 집행률',
+              backgroundColor: '#1485cc',
+              fill: false,
+              data: this.expenses.map(function(expense){
+                return {
+                  x: new Date([expense.PAY_YMD.slice(0, 4), expense.PAY_YMD.slice(4, 6), expense.PAY_YMD.slice(6)].join('-')),
+                  y: expense.cumulative
+                }
+              }),
+              type: 'line',
+              yAxisID: 'percentile'
             }
           ]
         }
@@ -331,15 +346,15 @@
           [
             {
               business: 'G밸리 근로자 복합공간 조성',
-              budget: '₩4,321,765,000'
+              budget: '4321765000'
             },
             {
               business: 'G밸리(서울디지털산업단지) 이미지개선 및 브랜딩 추진',
-              budget: '₩350,000,000'
+              budget: '350000000'
             },
             {
               business: 'G밸리(서울디지털산업단지) 활성화 추진',
-              budget: '₩1,439,000,000'
+              budget: '1439000000'
             }
           ],
           [
@@ -349,67 +364,67 @@
             // },
             {
               business: '마장동 우시장 주변 침수해소',
-              budget: '₩2,700,000,000'
+              budget: '2700000000'
             },
             {
               business: '북가좌2동 저지대 침수해소',
-              budget: '₩1,300,000,000'
+              budget: '1300000000'
             },
             {
               business: '암사역 주변 침수해소',
-              budget: '₩9,498,526,080'
+              budget: '9498526080'
             },
             {
               business: '행당동 138~158번지 일대 침수방지',
-              budget: '₩3,400,000,000'
+              budget: '3400000000'
             },
             {
               business: '강남역 일대 침수방지',
-              budget: '₩9,135,473,000'
+              budget: '9135473000'
             },
             {
               business: '상도동 성대시장주변 침수해소',
-              budget: '₩192,667,730'
+              budget: '192667730'
             },
             {
               business: '우이천(노원) 침수취약지점 등 개선',
-              budget: '₩50,000,000'
+              budget: '50000000'
             }
           ],
           [
             {
               business: '황금시간 목표제 실행',
-              budget: '₩1,570,000,000'
+              budget: '1570000000'
             },
             {
               business: '시민안전파수꾼 양성',
-              budget: '₩283,560,000'
+              budget: '283560000'
             },
             {
               business: '통합 재난관리시스템 유지관리',
-              budget: '₩126,949,000'
+              budget: '126949000'
             },
             {
               business: '소방안전지도 고도화',
-              budget: '₩965,637,000'
+              budget: '965637000'
             },
             {
               business: '긴급구조통제단 운영',
-              budget: '₩406,240,000'
+              budget: '406240000'
             },
             {
               business: '시민안전교육 강화',
-              budget: '₩783,325,000'
+              budget: '783325000'
             }
           ],
           [
             {
               business: '어린이보호구역 정비',
-              budget: '₩270,200,000'
+              budget: '270200000'
             },
             {
               business: '어린이 안전 영상정보 인프라 구축',
-              budget: '₩850,000,000'
+              budget: '850000000'
             }
           ]
         ],
@@ -473,20 +488,6 @@
         }, this)
       }
 
-
-      //['시민안전파수꾼', '재난관리시스템', '소방안전지도']
-      // setInterval(function () {
-      //   console.log('polling...')
-      //   this.$http.get(url).then(function (response) {
-      //     this.promise = response.body
-      //     while(this.isReplyVisible.length < this.comments.length){
-      //       this.isReplyVisible.push(false)
-      //     }
-      //     console.log(response.body)
-      //   }.bind(this), function (response) {
-      //   }.bind(this))
-      // }.bind(this), 10000)
-
     },
     methods: {
       getExpense: function (query) {
@@ -498,10 +499,16 @@
       showAllExpenses: function () {
         this.expenses = this.totalExpenses //.slice(0, 10)
       },
-      updateExpenses: function (business) {
-        this.expenses = this.totalExpenses.filter(function (expense){
+      updateExpenses: function (business, budget) {
+        this.expenses = []
+        this.totalExpenses.filter(function (expense){
           return expense.BIZ_NM === business
-        }).slice(0, 10)
+        }).reverse().reduce(function(prevValue, curValue, curIndex, array) {
+          curValue.cumulative = (prevValue[prevValue.length - 1] ? prevValue[prevValue.length - 1].cumulative : 0) + curValue.PAY_AMT / budget * 100
+          prevValue.push(curValue)
+          return prevValue
+        }, this.expenses)
+        this.expenses.reverse()
       },
       formatNumber: function (num) {
         const nf = new Intl.NumberFormat(["ko-KR"], {
