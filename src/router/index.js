@@ -13,7 +13,7 @@ import personalizedPromises from '@/components/PersonalizedPromises'
 import flippedTagger from '@/components/FlippedTagger'
 import logIn from '@/components/LogIn'
 // import newPromiseDetail from '@/components/newPromiseDetail'
-import ShowBudgets from '@/components/ShowBudgets'
+import showBudgets from '@/components/ShowBudgets'
 Vue.use(Router)
 
 export default new Router({
