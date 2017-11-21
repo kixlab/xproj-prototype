@@ -24,13 +24,6 @@ export default {
         }
       }.bind(this))
     },
-    // promises: function () {
-    //   return this.$store.state.promises.find(function (p) {
-    //     if (p.city === this.$route.params.city && p.district == this.$route.params.district) {
-    //       return p
-    //     }
-    //   }.bind(this))
-    // },
     route: function () {
       return this.$route.params.city + ' ' + this.$route.params.district
     }

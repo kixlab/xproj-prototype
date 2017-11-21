@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import walkThrough from '@/components/WalkThrough'
 import myReprs from '@/components/MyReprs'
 import reprDetail from '@/components/ReprDetail'
 import signUp from '@/components/SignUp'
@@ -8,12 +7,11 @@ import promiseDetail from '@/components/PromiseDetail'
 import intro from '@/components/Intro'
 import findReprs from '@/components/FindReprs'
 import chooseInterest from '@/components/ChooseInterest'
-import favoritePromises from '@/components/FavoritePromises'
+// import favoritePromises from '@/components/FavoritePromises'
 import personalizedPromises from '@/components/PersonalizedPromises'
-import flippedTagger from '@/components/FlippedTagger'
+import flippedTagger from '@/components/Addons/FlippedTagger'
 import logIn from '@/components/LogIn'
-// import newPromiseDetail from '@/components/newPromiseDetail'
-import showBudgets from '@/components/ShowBudgets'
+import showBudgets from '@/components/Addons/ShowBudgets'
 Vue.use(Router)
 
 export default new Router({
@@ -22,11 +20,6 @@ export default new Router({
       path: '/',
       name: 'intro',
       component: intro
-    },
-    {
-      path: '/walkThrough',
-      name: 'walkThrough',
-      component: walkThrough
     },
     {
       path: '/flippedTagger/',
@@ -58,11 +51,6 @@ export default new Router({
       name: 'promiseDetail',
       component: promiseDetail
     },
-    // {
-    //   path: '/newPromiseDetail/:city/:district/:key',
-    //   name: 'newPromiseDetail',
-    //   component: newPromiseDetail
-    // },
     {
       path: '/findReprs',
       name: 'findReprs',
@@ -73,11 +61,11 @@ export default new Router({
       name: 'chooseInterest',
       component: chooseInterest
     },
-    {
-      path: '/favoritePromises',
-      name: 'favoritePromises',
-      component: favoritePromises
-    },
+    // {
+    //   path: '/favoritePromises',
+    //   name: 'favoritePromises',
+    //   component: favoritePromises
+    // },
     {
       path: '/personalizedPromises',
       name: 'personalizedPromises',

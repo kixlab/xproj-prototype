@@ -78,7 +78,8 @@
       <br>
       </div>
       <div class="actions" v-else-if="question.type !== 'end' && !noButtonClicked && !notSureButtonClicked">
-        <button class="ui positive button" @click="onModalButtonClick">
+        <button class="ui small blue button" v-for="i in 5" :key="i">{{i}}</button>
+        <!-- <button class="ui positive button" @click="onModalButtonClick">
           예
         </button>
         <button class="ui negative button" @click="onNoButtonClick">
@@ -86,7 +87,7 @@
         </button>
         <button class="ui button" @click="onNotSureButtonClick">
           잘 모르겠음
-        </button>
+        </button> -->
       </div>
       <div class="actions" v-else>
         <button class="ui positive button" @click="onModalButtonClick">
@@ -133,7 +134,7 @@ export default {
         {
           content: '다음은 공직자가 밝힌 이 공약의 목적입니다.',
           vueElements: this.promise.purpose,
-          extraContent: '이 공약은 서울시의 중요한 문제를 해결한다고 생각하시나요?',
+          extraContent: '이 공약은 서울시의 중요한 문제를 해결한다고 생각하시나요? 전혀 동의하지 않으시면 1점, 매우 동의하시면 5점으로 답변해주세요.',
           type: 'purpose'
         },
         {

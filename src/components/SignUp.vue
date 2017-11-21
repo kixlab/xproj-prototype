@@ -4,7 +4,7 @@
       가입
     </h1>
     <form class="ui form">
-      <div class="ui dividing header">Account Information</div>
+      <div class="ui dividing header">계정 정보</div>
       <div class="field">
         <label>사용자 이름</label>
         <input name="userName" placeholder="사이트에서 사용하실 이름을 적어주세요" type="text" v-model="userName"></input>
@@ -14,15 +14,15 @@
         <input name="email" placeholder="E-mail" type="email" v-model="email"></input>
       </div>
       <div class="field">
-        <label>Password</label>
+        <label>비밀번호</label>
         <input name="password" type="password" v-model="password1"></input>
       </div>
       <div class="field">
-        <label>Confirm Password</label>
+        <label>비밀번호 재입력</label>
         <input type="password" v-model="password2"></input>
       </div>
 
-      <div class="ui dividing header">Additional Information</div>
+      <div class="ui dividing header">추가 정보</div>
       <!--<div class="two fields">-->
       <div class="field">
         <label>나이</label>
@@ -30,15 +30,15 @@
       </div>
       <h5 class="ui header">성별</h5>
       <div class="ui fluid compact buttons">
-        <button class="ui button" :class="gender === 'M'?'secondary':''" @click.prevent="gender = 'M'">Male</button>
-        <button class="ui button" :class="gender === 'F'?'secondary':''" @click.prevent="gender = 'F'">Female</button>
-        <button class="ui button" :class="gender === 'O'?'secondary':''" @click.prevent="gender = 'O'">Other</button>
-        <button class="ui button" :class="gender === 'R'?'secondary':''" @click.prevent="gender = 'R'">Rather not say</button>
+        <button class="ui button" :class="gender === 'M'?'secondary':''" @click.prevent="gender = 'M'">남</button>
+        <button class="ui button" :class="gender === 'F'?'secondary':''" @click.prevent="gender = 'F'">여</button>
+        <button class="ui button" :class="gender === 'O'?'secondary':''" @click.prevent="gender = 'O'">그 외</button>
+        <button class="ui button" :class="gender === 'R'?'secondary':''" @click.prevent="gender = 'R'">무응답</button>
       </div>
       <h5 class="ui header">어디에 사십니까?</h5>
       <div class="two fields">
         <div class="field">
-          <label>도 / 시</label>
+          <label>시 / 도</label>
           <select class="ui fluid search selection dropdown" :value="city" @change="onCityChanged($event.target.value)">
             <option value="seoul">서울특별시</option>
             <option value="daejeon">대전광역시</option>
@@ -51,7 +51,7 @@
           </select>
         </div>
         <div class="field">
-          <label>시 / 구 / 군</label>
+          <label>시 / 군 / 구</label>
           <select class="ui fluid search selection dropdown" :value="district" @change="onDistrictChanged($event.target.value)">
             <option v-for="(dist, idx) in districts" :key="dist" :value="idx">{{dist}}</option>
             <!--<option value="dong">동구</option>

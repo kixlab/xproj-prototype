@@ -127,7 +127,7 @@
         </table>
       </div>
       <!-- <button class="ui button" @click="showAddProgressModal">이행 현황 추가</button> -->
-      <add-progress v-if="isProgressModalVisible" @otherRefChecked="onOtherRefChecked" :otherRefs="otherRefs" :city="city" :district="district" :promiseKey="key" @progressUpdate="onProgressUpdate" :reprName="repr.name" :promiseTitle="promise.title"></add-progress>
+      <!-- <add-progress v-if="isProgressModalVisible" @otherRefChecked="onOtherRefChecked" :otherRefs="otherRefs" :city="city" :district="district" :promiseKey="key" @progressUpdate="onProgressUpdate" :reprName="repr.name" :promiseTitle="promise.title"></add-progress> -->
       <div class="event" v-for="progress in progresses" :key="progress.key">
         <div class="label">
           <i class="checkmark box icon"></i>
@@ -220,12 +220,12 @@
 </template>
 
 <script>
-  import addProgress from './AddProgress'
+  // import addProgress from './AddProgress'
   import expenditureChart from './ExpenditureChart'
   export default {
     name: 'promiseDetail', 
     components: {
-      addProgress,
+      // addProgress,
       expenditureChart
     },
     computed: {

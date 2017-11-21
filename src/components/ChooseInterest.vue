@@ -3,7 +3,7 @@
     <div class="ui dimmer" :class="{active: isLoading}"><div class="ui big text loader">대표자들 찾는 중...</div></div>
 
     <h1 class="ui dividing header">
-      Select a few topics you are interested in
+      관심있는 주제를 선택하세요.
     </h1>
     <div class="ui circular labels">
       <a class="ui label interest" v-for="cat in categories" :key="cat"

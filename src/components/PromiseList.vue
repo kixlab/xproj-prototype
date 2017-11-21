@@ -46,12 +46,11 @@ export default {
   props:['repr', 'promises'],
   computed: {
     filteredPromises: function () {
-      // return this.promises.promises
       let promises = []
       if(this.curCategory.length === 0 || this.curCategory === '공약 분류'){
-        promises = this.promises.promises
+        promises = this.promises
       } else {
-        promises = this.promises.promises.filter((promise) => {
+        promises = this.promises.filter((promise) => {
           return promise.category.includes(this.curCategory)
         })
       }
@@ -88,9 +87,6 @@ export default {
     return {
       curCategory: '공약 분류',
       curTarget: '수혜 대상'
-      // categories: ['안전/환경', '일자리', '문화체육', '보건복지', '교통/건설', 
-      // '정치행정', '경제', '과학기술', '외교안보', '교육', '농축수산', '인권', '기타'],
-
     }
   }
 }

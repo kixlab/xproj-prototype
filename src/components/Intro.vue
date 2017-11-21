@@ -7,14 +7,21 @@
       </li>
       <li>Make your voice heard</li>
     </ul>
-    <button class="ui basic big green button" @click="$router.push('signUp')">Get Started</button>
+    <button class="ui basic big green button" @click="authenticate">Get Started</button>
 
   </div>
 </template>
 
 <script>
 export default {
-  name: 'intro'
+  name: 'intro',
+  methods: {
+    authenticate: function () {
+      this.$auth.authenticate('oauth2').then(() => {
+        this.$router.push('chooseInterest')
+      })
+    }
+  }
 }
 </script>
 
